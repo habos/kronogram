@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "889129378534",
+    "firebase_url": "https://kronogram.firebaseio.com",
+    "project_id": "kronogram",
+    "storage_bucket": "kronogram.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:889129378534:android:187ddc00f395e7ae0f9127",
+        "android_client_info": {
+          "package_name": "com.kronogram.kronogram"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "889129378534-13o6f13u190t308jbl40sjrbo9f8essh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kronogram.kronogram",
+            "certificate_hash": "20e5a12310cbb3f46895b00e82a16619f0ec1287"
+          }
+        },
+        {
+          "client_id": "889129378534-p21tqhj1s8n12lioe3nukgmf120ltqs3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRAQVCW9yZplW6XkqV26mJ1e4iBMnEzN8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "889129378534-p21tqhj1s8n12lioe3nukgmf120ltqs3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
