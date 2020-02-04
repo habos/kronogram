@@ -51,7 +51,8 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
           userId = authResult.user.uid;
           print('Signed in: $userId');
         } else {
-          userId = await widget.auth.signUp(_email, _password);
+          authResult = await widget.auth.signUp(_email, _password);
+          userId = authResult.user.uid;
           //widget.auth.sendEmailVerification();
           //_showVerifyEmailSentDialog();
           print('Signed up user: $userId');
@@ -62,6 +63,11 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
 
         if (userId.length > 0 && userId != null && _isLoginForm) {
           widget.loginCallback(authResult);
+        }
+        if(!_isLoginForm) {
+          setState(() {
+            _isLoginForm = true;
+          });
         }
       } catch (e) {
         print('Error: $e');
