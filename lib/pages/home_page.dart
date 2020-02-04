@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kronogram/services/authentication.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.auth, this.userId, this.logoutCallback})
