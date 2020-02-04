@@ -1,12 +1,15 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../services/authentication.dart';
+
+typedef void LoginCallback(AuthResult result);
 
 class LoginSignupPage extends StatefulWidget {
   LoginSignupPage({this.auth, this.loginCallback});
 
   final BaseAuth auth;
-  final VoidCallback loginCallback;
+  final LoginCallback loginCallback;
 
   @override
   State<StatefulWidget> createState() => new _LoginSignupPageState();
@@ -41,9 +44,11 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
     });
     if (validateAndSave()) {
       String userId = "";
+      AuthResult authResult;
       try {
         if (_isLoginForm) {
-          userId = await widget.auth.signIn(_email, _password);
+          authResult = await widget.auth.signIn(_email, _password);
+          userId = authResult.user.uid;
           print('Signed in: $userId');
         } else {
           userId = await widget.auth.signUp(_email, _password);
@@ -56,7 +61,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         });
 
         if (userId.length > 0 && userId != null && _isLoginForm) {
-          widget.loginCallback();
+          widget.loginCallback(authResult);
         }
       } catch (e) {
         print('Error: $e');

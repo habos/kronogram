@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:kronogram/pages/first_time_login.dart';
 import 'package:kronogram/pages/login_signup_page.dart';
 import 'package:kronogram/services/authentication.dart';
 import 'package:kronogram/pages/home_page.dart';
@@ -6,6 +8,7 @@ import 'package:kronogram/pages/home_page.dart';
 enum AuthStatus {
   NOT_DETERMINED,
   NOT_LOGGED_IN,
+  FIRST_LOGGED_IN,
   LOGGED_IN,
 }
 
@@ -21,6 +24,7 @@ class RootPage extends StatefulWidget {
 class _RootPageState extends State<RootPage> {
   AuthStatus authStatus = AuthStatus.NOT_DETERMINED;
   String _userId = "";
+  AuthResult result;
 
   @override
   void initState() {
@@ -36,14 +40,18 @@ class _RootPageState extends State<RootPage> {
     });
   }
 
-  void loginCallback() {
+  void loginCallback(AuthResult authResult) {
     widget.auth.getCurrentUser().then((user) {
       setState(() {
         _userId = user.uid.toString();
       });
     });
     setState(() {
-      authStatus = AuthStatus.LOGGED_IN;
+      if(authResult.additionalUserInfo.isNewUser){
+        authStatus = AuthStatus.FIRST_LOGGED_IN;
+      } else {
+        authStatus = AuthStatus.LOGGED_IN;
+      }
     });
   }
 
@@ -74,6 +82,15 @@ class _RootPageState extends State<RootPage> {
           auth: widget.auth,
           loginCallback: loginCallback,
         );
+        break;
+      case AuthStatus.FIRST_LOGGED_IN:
+        if (_userId.length > 0 && _userId != null) {
+          return new IntroPage(
+            userId: _userId,
+            auth: widget.auth,
+          );
+        } else
+          return buildWaitingScreen();
         break;
       case AuthStatus.LOGGED_IN:
         if (_userId.length > 0 && _userId != null) {
