@@ -4,6 +4,8 @@ import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:flutter_twitter_login/flutter_twitter_login.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as JSON;
+import 'dart:core';
+import 'dart:developer';
 
 
 class IntroPage extends StatefulWidget {
@@ -22,7 +24,7 @@ class _IntroPageState extends State<IntroPage> {
 
   //Facebook Login
 
-  bool _isLoggedIn = false;
+  bool _isLoggedInFacebook = false;
   Map userProfile;
   final facebookLogin = FacebookLogin();
 
@@ -39,15 +41,15 @@ class _IntroPageState extends State<IntroPage> {
         print(profile);
         setState(() {
           userProfile = profile;
-          _isLoggedIn = true;
+          _isLoggedInFacebook = true;
         });
         break;
 
       case FacebookLoginStatus.cancelledByUser:
-        setState(() => _isLoggedIn = false );
+        setState(() => _isLoggedInFacebook = false );
         break;
       case FacebookLoginStatus.error:
-        setState(() => _isLoggedIn = false );
+        setState(() => _isLoggedInFacebook = false );
         break;
     }
 
@@ -56,46 +58,135 @@ class _IntroPageState extends State<IntroPage> {
   _FacebookLogout(){
     facebookLogin.logOut();
     setState(() {
-      _isLoggedIn = false;
+      _isLoggedInFacebook = false;
     });
   }
 
+  Widget FacebookButton() {
+    return new Padding(
+        padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
+        child: _isLoggedInFacebook
+            ? SizedBox(
+          height: 40.0,
+          child: RaisedButton(
+            elevation: 5.0,
+            shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(30.0)),
+            color: Colors.blue,
+            child: new Text("Logout of Facebook",
+              style: new TextStyle(fontSize: 20.0, color: Colors.white)),
+            onPressed: () {
+              _FacebookLogout();
+            },
+          ),
+        )
+        : SizedBox(
+          height: 40.0,
+          child: RaisedButton(
+            elevation: 5.0,
+            shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(30.0)),
+            color: Colors.blue,
+            child: new Text("Login with Facebook",
+                style: new TextStyle(fontSize: 20.0, color: Colors.white)),
+            onPressed: () {
+              _loginWithFB();
+            },
+          ),
+        ));
+  }
 
 
 
   //Twitter Login
 
   static final TwitterLogin twitterLogin = new TwitterLogin(
-    consumerKey: 'kkOvaF1Mowy4JTvCxKTV5O1WF',
-    consumerSecret: 'ZECGsI6UUDBEUVGkJe4S5vd0FGqGxC3wMJCgsXgPRfjSwRFnyH',
+    consumerKey: 'JZScfVJ2TnkzVHy7lS7XHGU1z',
+    consumerSecret: 'fk9BSlBe6mDnioJeoIc7thAQeODgnbEBZAJoBsuPVGYG8PmMQW',
   );
 
+  bool _isLoggedInTwitter = false;
+
+  void _loginTwitter() async {
+    final TwitterLoginResult result = await twitterLogin.authorize();
+
+    switch (result.status) {
+      case TwitterLoginStatus.loggedIn:
+        log("Twitter Login Success");
+        setState(() => _isLoggedInTwitter = true );
+        break;
+      case TwitterLoginStatus.cancelledByUser:
+        log('Login cancelled by user.');
+        setState(() => _isLoggedInTwitter = false );
+        break;
+      case TwitterLoginStatus.error:
+        log('Login error: ${result.errorMessage}');
+        setState(() => _isLoggedInTwitter = false );
+        break;
+    }
+  }
+
+  void _logoutTwitter() async {
+    await twitterLogin.logOut();
+
+    setState(() {
+      _isLoggedInTwitter = false;
+    });
+  }
+
+  Widget twitterButton(){
+    return new Padding(
+        padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
+        child: _isLoggedInTwitter
+            ? SizedBox(
+          height: 40.0,
+          child: RaisedButton(
+            elevation: 5.0,
+            shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(30.0)),
+            color: Colors.blue,
+            child: new Text("Logout of Twitter",
+                style: new TextStyle(fontSize: 20.0, color: Colors.white)),
+            onPressed: () {
+              _logoutTwitter();
+            },
+          ),
+        )
+            : SizedBox(
+          height: 40.0,
+          child: RaisedButton(
+            elevation: 5.0,
+            shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(30.0)),
+            color: Colors.blue,
+            child: new Text("Login with Twitter",
+                style: new TextStyle(fontSize: 20.0, color: Colors.white)),
+            onPressed: () {
+              _loginTwitter();
+            },
+          ),
+        ));
+  }
+
+  //Build Components
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return MaterialApp(
       home: Scaffold(
-        body: Center(
-            child: _isLoggedIn
-                ? Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Image.network(userProfile["picture"]["data"]["url"], height: 50.0, width: 50.0,),
-                Text(userProfile["name"]),
-                OutlineButton( child: Text("Logout"), onPressed: (){
-                  _FacebookLogout();
-                },)
-              ],
-            )
-                : Center(
-              child: OutlineButton(
-                child: Text("Login with Facebook"),
-                onPressed: () {
-                  _loginWithFB();
-                },
-              ),
-            )),
-      ),
-    );
+        body:
+            new Container(
+                padding: EdgeInsets.all(16.0),
+                child: new Form(
+                  child: new ListView(
+                    shrinkWrap: true,
+                    children: <Widget>[
+                      FacebookButton(),
+                      twitterButton(),
+                    ],
+                  ),
+                ))
+        )
+      );
   }
 }
