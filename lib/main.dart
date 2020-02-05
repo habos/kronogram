@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:kronogram/pages/root_page.dart';
 import 'package:kronogram/services/authentication.dart';
 
-void main() => runApp(new MyApp());
+void main() => runApp(new KronogramApp());
 
-class MyApp extends StatelessWidget {
+class KronogramApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
