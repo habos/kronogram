@@ -10,6 +10,7 @@ abstract class BaseDatabase {
 class Database implements BaseDatabase {
   final Firestore _firestore = Firestore.instance;
   final String _usersCollectionName = "users";
+  final String _newUserStatusField = "is_new_user";
 
   @override
   Future <DocumentSnapshot> getUserData(String userID) {
@@ -20,7 +21,7 @@ class Database implements BaseDatabase {
   bool isNewUser(String userID) {
     bool isNewUser = false;
     _firestore.collection(_usersCollectionName).document(userID).get().then((DocumentSnapshot ds) {
-      isNewUser = ds.data.remove("is_new_user");
+      isNewUser = ds.data.remove(_newUserStatusField);
     });
     return isNewUser;
   }
@@ -28,7 +29,7 @@ class Database implements BaseDatabase {
   @override
   Future<void> setIsNewUser(String userID, bool status) {
     return _firestore.collection(_usersCollectionName).document(userID).setData({
-      "is_new_user" : status.toString()
+      _newUserStatusField : status.toString()
     });
   }
 
