@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kronogram/pages/root_page.dart';
 import 'package:kronogram/services/authentication.dart';
+import 'package:kronogram/services/database.dart';
 
 void main() => runApp(new KronogramApp());
 
@@ -13,6 +14,6 @@ class KronogramApp extends StatelessWidget {
         theme: new ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: new RootPage(auth: new Auth()));
+        home: new RootPage(auth: new Auth(), db: new Database()));
   }
 }
