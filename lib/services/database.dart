@@ -42,6 +42,11 @@ class Database implements BaseDatabase {
   }
 
   @override
+  Future<void> createNewUser(String userID){
+    //ToDO Create new user fucntion
+  }
+
+  @override
   bool isNewUser(String userID) {
     bool isNewUser = false;
     getUserData(userID).then((DocumentSnapshot ds) {

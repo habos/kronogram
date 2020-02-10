@@ -171,7 +171,6 @@ class _IntroPageState extends State<IntroPage> {
   //Build Components
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return MaterialApp(
       home: Scaffold(
         body:

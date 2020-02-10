@@ -3,13 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../services/authentication.dart';
 
-typedef void LoginCallback(AuthResult result);
-
 class LoginSignupPage extends StatefulWidget {
   LoginSignupPage({this.auth, this.loginCallback});
 
   final BaseAuth auth;
-  final LoginCallback loginCallback;
+  final VoidCallback loginCallback;
 
   @override
   State<StatefulWidget> createState() => new _LoginSignupPageState();
@@ -62,7 +60,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         });
 
         if (userId.length > 0 && userId != null && _isLoginForm) {
-          widget.loginCallback(authResult);
+          widget.loginCallback();
         }
         if(!_isLoginForm) {
           setState(() {

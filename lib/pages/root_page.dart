@@ -4,6 +4,7 @@ import 'package:kronogram/pages/first_time_login.dart';
 import 'package:kronogram/pages/login_signup_page.dart';
 import 'package:kronogram/services/authentication.dart';
 import 'package:kronogram/pages/home_page.dart';
+import 'package:kronogram/services/database.dart';
 
 enum AuthStatus {
   NOT_DETERMINED,
@@ -13,9 +14,10 @@ enum AuthStatus {
 }
 
 class RootPage extends StatefulWidget {
-  RootPage({this.auth});
+  RootPage({this.auth, this.db});
 
   final BaseAuth auth;
+  final Database db;
 
   @override
   State<StatefulWidget> createState() => new _RootPageState();
@@ -40,14 +42,14 @@ class _RootPageState extends State<RootPage> {
     });
   }
 
-  void loginCallback(AuthResult authResult) {
+  void loginCallback() {
     widget.auth.getCurrentUser().then((user) {
       setState(() {
         _userId = user.uid.toString();
       });
     });
     setState(() {
-      if(authResult.additionalUserInfo.isNewUser){
+      if(widget.db.isNewUser(_userId)){
         authStatus = AuthStatus.FIRST_LOGGED_IN;
       } else {
         authStatus = AuthStatus.LOGGED_IN;
@@ -94,9 +96,10 @@ class _RootPageState extends State<RootPage> {
         break;
       case AuthStatus.LOGGED_IN:
         if (_userId.length > 0 && _userId != null) {
-          return new IntroPage(
+          return new HomePage(
             userId: _userId,
             auth: widget.auth,
+            logoutCallback: logoutCallback,
           );
         } else
           return buildWaitingScreen();
