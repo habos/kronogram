@@ -42,8 +42,8 @@ class _RootPageState extends State<RootPage> {
     });
   }
 
-  void loginCallback() {
-    widget.auth.getCurrentUser().then((user) {
+  void loginCallback() async {
+    await widget.auth.getCurrentUser().then((user) {
       setState(() {
         _userId = user.uid.toString();
       });
