@@ -46,14 +46,13 @@ class _RootPageState extends State<RootPage> {
     await widget.auth.getCurrentUser().then((user) {
       setState(() {
         _userId = user.uid.toString();
+        print("This is the userID: " + _userId);
+        if(widget.db.isNewUser(_userId)){
+          authStatus = AuthStatus.FIRST_LOGGED_IN;
+        } else {
+          authStatus = AuthStatus.LOGGED_IN;
+        }
       });
-    });
-    setState(() {
-      if(widget.db.isNewUser(_userId)){
-        authStatus = AuthStatus.FIRST_LOGGED_IN;
-      } else {
-        authStatus = AuthStatus.LOGGED_IN;
-      }
     });
   }
 
