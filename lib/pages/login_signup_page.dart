@@ -126,8 +126,8 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
             children: <Widget>[
               showLogo(),
               showEmailInput(),
-              showPasswordInput(),
               _isLoginForm ?  new Container(width: 0, height: 0) : showUsernameInput(),
+              showPasswordInput(),
               showPrimaryButton(),
               showSecondaryButton(),
               showErrorMessage(),
@@ -207,7 +207,6 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
       padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
       child: new TextFormField(
         maxLines: 1,
-        obscureText: true,
         autofocus: false,
         decoration: new InputDecoration(
             hintText: 'Username',
