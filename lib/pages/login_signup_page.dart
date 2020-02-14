@@ -212,7 +212,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         decoration: new InputDecoration(
             hintText: 'Username',
             icon: new Icon(
-              Icons.lock,
+              Icons.account_circle,
               color: Colors.grey,
             )),
         validator: (value) => value.isEmpty ? 'Username can\'t be empty' : null,
