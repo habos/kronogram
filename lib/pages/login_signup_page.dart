@@ -1,12 +1,14 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import '../services/database.dart';
 import '../services/authentication.dart';
 
 class LoginSignupPage extends StatefulWidget {
-  LoginSignupPage({this.auth, this.loginCallback});
+  LoginSignupPage({this.auth, this.db, this.loginCallback});
 
   final BaseAuth auth;
+  final Database db;
   final VoidCallback loginCallback;
 
   @override
@@ -51,6 +53,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         } else {
           authResult = await widget.auth.signUp(_email, _password);
           userId = authResult.user.uid;
+          await widget.db.setIsNewUser(userId, true);
           //widget.auth.sendEmailVerification();
           //_showVerifyEmailSentDialog();
           print('Signed up user: $userId');

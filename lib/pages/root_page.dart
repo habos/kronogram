@@ -36,23 +36,24 @@ class _RootPageState extends State<RootPage> {
         if (user != null) {
           _userId = user?.uid;
         }
-        authStatus =
-        user?.uid == null ? AuthStatus.NOT_LOGGED_IN : AuthStatus.LOGGED_IN;
+        authStatus = user?.uid == null ? AuthStatus.NOT_LOGGED_IN : AuthStatus.LOGGED_IN;
       });
     });
   }
 
   void loginCallback() async {
-    await widget.auth.getCurrentUser().then((user) {
-      setState(() {
-        _userId = user.uid.toString();
-        print("This is the userID: " + _userId);
-        if(widget.db.isNewUser(_userId)){
-          authStatus = AuthStatus.FIRST_LOGGED_IN;
-        } else {
-          authStatus = AuthStatus.LOGGED_IN;
-        }
-      });
+    var user = await widget.auth.getCurrentUser();
+    _userId = user.uid.toString();
+    var isNew = await widget.db.isNewUser(_userId);
+    setState(() {
+      print("This is the userID: " + _userId);
+      print("Should say true:");
+      print(isNew);
+      if (isNew){
+        authStatus = AuthStatus.FIRST_LOGGED_IN;
+      } else {
+        authStatus = AuthStatus.LOGGED_IN;
+      }
     });
   }
 
@@ -81,6 +82,7 @@ class _RootPageState extends State<RootPage> {
       case AuthStatus.NOT_LOGGED_IN:
         return new LoginSignupPage(
           auth: widget.auth,
+          db: widget.db,
           loginCallback: loginCallback,
         );
         break;
@@ -89,6 +91,7 @@ class _RootPageState extends State<RootPage> {
           return new IntroPage(
             userId: _userId,
             auth: widget.auth,
+            logoutCallback: logoutCallback,
           );
         } else
           return buildWaitingScreen();

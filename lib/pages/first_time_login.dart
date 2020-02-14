@@ -9,11 +9,12 @@ import 'dart:developer';
 
 
 class IntroPage extends StatefulWidget {
-  IntroPage({Key key, this.auth, this.userId})
+  IntroPage({Key key, this.auth, this.userId, this.logoutCallback})
       : super(key: key);
 
   final BaseAuth auth;
   final String userId;
+  final VoidCallback logoutCallback;
 
   @override
   State<StatefulWidget> createState() => new _IntroPageState();
@@ -27,6 +28,32 @@ class _IntroPageState extends State<IntroPage> {
   bool _isLoggedInFacebook = false;
   Map userProfile;
   final facebookLogin = FacebookLogin();
+
+  signOut() async {
+    try {
+      await widget.auth.signOut();
+      widget.logoutCallback();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Widget showPrimaryButton() {
+    return new Padding(
+        padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
+        child: SizedBox(
+          height: 40.0,
+          child: new RaisedButton(
+            elevation: 5.0,
+            shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(30.0)),
+            color: Colors.blue,
+            child: new Text('Logout',
+                style: new TextStyle(fontSize: 20.0, color: Colors.white)),
+            onPressed: signOut,
+          ),
+        ));
+  }
 
   _loginWithFB() async{
 
@@ -182,6 +209,7 @@ class _IntroPageState extends State<IntroPage> {
                     children: <Widget>[
                       FacebookButton(),
                       twitterButton(),
+                      showPrimaryButton(),
                     ],
                   ),
                 ))
