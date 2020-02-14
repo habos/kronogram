@@ -16,10 +16,12 @@ class OSearchBarWidget extends StatelessWidget {
     return Scaffold(
       body: Container(
         constraints: BoxConstraints.expand(),
+        padding: const EdgeInsets.symmetric(vertical: 60.0),
         decoration: BoxDecoration(
           color: Color.fromARGB(255, 227, 228, 232),
           border: Border.all(
             width: 1,
+
             color: Color.fromARGB(255, 112, 112, 112),
           ),
           borderRadius: BorderRadius.all(Radius.circular(10)),

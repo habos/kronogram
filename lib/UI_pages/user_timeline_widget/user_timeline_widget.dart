@@ -143,7 +143,7 @@ class UserTimelineWidget extends StatelessWidget {
                         Align(
                           alignment: Alignment.topLeft,
                           child: Container(
-                            width: 115,
+                            width:235,
                             height: 35,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
@@ -152,21 +152,21 @@ class UserTimelineWidget extends StatelessWidget {
                                 Container(
                                   width: 52,
                                   height: 32,
-                                  margin: EdgeInsets.only(top: 3, right: 4),
+                                  margin: EdgeInsets.only(top: 18, right: 2),
                                   child: Switch.adaptive(
                                     value: false,
                                     inactiveTrackColor: Color.fromARGB(60, 0, 0, 0),
                                     onChanged: (value) {
-                                    
+
                                     },
                                     activeColor: Color.fromARGB(255, 184, 184, 184),
                                     activeTrackColor: AppColors.secondaryElement,
                                   ),
                                 ),
                                 Container(
-                                  margin: EdgeInsets.only(left: 4),
+                                  margin: EdgeInsets.only(top: 18, left:5, right: 4),
                                   child: Text(
-                                    "SHOW \nFREINDS",
+                                    "SHOW FREINDS",
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                       color: Color.fromARGB(255, 0, 0, 0),
