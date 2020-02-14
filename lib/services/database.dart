@@ -19,7 +19,7 @@ class Database implements BaseDatabase {
   Future<void> setField(String userID, String fieldName, String value) {
     return _firestore.collection(_usersCollectionName).document(userID).setData({
       fieldName : value
-    });
+    }, merge: true);
   }
 
   DocumentReference getUserDocumentRef(String userID) {
