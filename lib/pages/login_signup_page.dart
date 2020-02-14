@@ -24,6 +24,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
   bool _isLoginForm;
   String _password;
   String _email;
+  String _username;
   String _errorMessage;
 
   //Helper Functions
@@ -54,6 +55,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
           authResult = await widget.auth.signUp(_email, _password);
           userId = authResult.user.uid;
           await widget.db.setIsNewUser(userId, status: true);
+          await widget.db.setUsername(userId, _username);
           //widget.auth.sendEmailVerification();
           //_showVerifyEmailSentDialog();
           print('Signed up user: $userId');
@@ -125,6 +127,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
               showLogo(),
               showEmailInput(),
               showPasswordInput(),
+              _isLoginForm ?  new Container(width: 0, height: 0) : showUsernameInput(),
               showPrimaryButton(),
               showSecondaryButton(),
               showErrorMessage(),
@@ -194,6 +197,26 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
             )),
         validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
         onSaved: (value) => _password = value.trim(),
+      ),
+    );
+  }
+
+  Widget showUsernameInput() {
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
+      child: new TextFormField(
+        maxLines: 1,
+        obscureText: true,
+        autofocus: false,
+        decoration: new InputDecoration(
+            hintText: 'Username',
+            icon: new Icon(
+              Icons.lock,
+              color: Colors.grey,
+            )),
+        validator: (value) => value.isEmpty ? 'Username can\'t be empty' : null,
+        onSaved: (value) => _username = value.trim(),
       ),
     );
   }
