@@ -7,12 +7,15 @@ import 'dart:convert' as JSON;
 import 'dart:core';
 import 'dart:developer';
 
+import 'package:kronogram/services/database.dart';
+
 
 class IntroPage extends StatefulWidget {
-  IntroPage({Key key, this.auth, this.userId, this.logoutCallback})
+  IntroPage({Key key, this.auth, this.userId, this.logoutCallback, this.db})
       : super(key: key);
 
   final BaseAuth auth;
+  final Database db;
   final String userId;
   final VoidCallback logoutCallback;
 
@@ -26,7 +29,6 @@ class _IntroPageState extends State<IntroPage> {
   //Facebook Login
 
   bool _isLoggedInFacebook = false;
-  Map userProfile;
   final facebookLogin = FacebookLogin();
 
   signOut() async {
@@ -67,9 +69,10 @@ class _IntroPageState extends State<IntroPage> {
         final profile = JSON.jsonDecode(graphResponse.body);
         print(profile);
         setState(() {
-          userProfile = profile;
           _isLoggedInFacebook = true;
         });
+        //Add Facebook userId to database
+        widget.db.setFacebookId(widget.userId, profile['id']);
         break;
 
       case FacebookLoginStatus.cancelledByUser:
@@ -87,6 +90,8 @@ class _IntroPageState extends State<IntroPage> {
     setState(() {
       _isLoggedInFacebook = false;
     });
+    //Remove Facebook Id from database
+    widget.db.setFacebookId(widget.userId, null);
   }
 
   Widget FacebookButton() {
@@ -141,6 +146,8 @@ class _IntroPageState extends State<IntroPage> {
       case TwitterLoginStatus.loggedIn:
         log("Twitter Login Success");
         setState(() => _isLoggedInTwitter = true );
+        //Set twitter userId in database
+        widget.db.setTwitterId(widget.userId, result.session.userId);
         break;
       case TwitterLoginStatus.cancelledByUser:
         log('Login cancelled by user.');
@@ -159,6 +166,8 @@ class _IntroPageState extends State<IntroPage> {
     setState(() {
       _isLoggedInTwitter = false;
     });
+    //Remove twitter userId from database
+    widget.db.setTwitterId(widget.userId, null);
   }
 
   Widget twitterButton(){

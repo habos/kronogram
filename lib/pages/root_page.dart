@@ -48,7 +48,7 @@ class _RootPageState extends State<RootPage> {
     setState(() {
       print("This is the userID: " + _userId);
       print("Should say true:");
-      print(isNew);
+      print(isNew.toString());
       if (isNew){
         authStatus = AuthStatus.FIRST_LOGGED_IN;
       } else {
@@ -92,6 +92,7 @@ class _RootPageState extends State<RootPage> {
             userId: _userId,
             auth: widget.auth,
             logoutCallback: logoutCallback,
+            db: widget.db,
           );
         } else
           return buildWaitingScreen();

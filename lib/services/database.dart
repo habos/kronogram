@@ -24,7 +24,7 @@ class Database implements BaseDatabase {
   final String _facebookIdField = "facebook_id";
   final String _twitterIdField = "twitter_id";
 
-  Future<void> setField(String userID, String fieldName, String value) {
+  Future<void> setField(String userID, String fieldName, var value) {
     return _firestore.collection(_usersCollectionName).document(userID).setData({
       fieldName : value
     }, merge: true);
@@ -46,7 +46,7 @@ class Database implements BaseDatabase {
 
   @override
   Future<void> setIsNewUser(String userID, {bool status = true}) {
-    return setField(userID, _newUserStatusField, status.toString());
+    return setField(userID, _newUserStatusField, status);
   }
 
   Future<String> getUsername(String userID) async {
