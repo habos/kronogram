@@ -99,7 +99,7 @@ class UserCurrentDateWidget extends StatelessWidget {
               Row(
     //mainAxisAlignment: MainAxisAlignment.end,
     //crossAxisAlignment: CrossAxisAlignment.center,
-          height: 30,
+
           children: <Widget>[
           FlatButton(
           onPressed: () => this.onDATEPressed(context),
