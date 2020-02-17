@@ -6,6 +6,7 @@ import 'package:kronogram/UI_pages/values/values.dart';
 import 'package:kronogram/UI_pages/user_timeline_widget/user_timeline_widget.dart';
 import 'package:kronogram/UI_pages/user_map_widget/user_map_widget.dart';
 
+import 'package:kronogram/UI_pages/my_app_bar/my_app_bar.dart';
 
 class UserCurrentDateWidget extends StatelessWidget {
 
@@ -32,8 +33,10 @@ class UserCurrentDateWidget extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
+     /* extendBodyBehindAppBar: true,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(70.0),
+      child: AppBar(
         title: Column(
 
         children: [
@@ -69,7 +72,13 @@ class UserCurrentDateWidget extends StatelessWidget {
             ),
             FlatButton(
               onPressed: () => this.onSETTINGSPressed(context),
+              color: Color.fromARGB(255, 255, 255, 255),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
               textColor: Color.fromARGB(255, 112, 112, 112),
+              padding: EdgeInsets.all(0),
+
               child: Text(
               "SETTINGS",
               textAlign: TextAlign.left,
@@ -129,7 +138,12 @@ class UserCurrentDateWidget extends StatelessWidget {
           ),
         FlatButton(
           onPressed: () => this.onMAPSPressed(context),
+          color: Color.fromARGB(255, 255, 255, 255),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+          ),
           textColor: Color.fromARGB(255, 112, 112, 112),
+          padding: EdgeInsets.all(0),
           child: Text(
           "MAPS",
           textAlign: TextAlign.left,
@@ -182,6 +196,7 @@ class UserCurrentDateWidget extends StatelessWidget {
         automaticallyImplyLeading: false,
       ),
 
+      ),*/
 
 
 
@@ -190,9 +205,13 @@ class UserCurrentDateWidget extends StatelessWidget {
 
 
 
+appBar: PreferredSize(
+        preferredSize: Size.fromHeight(90.0),
+child: myAppBar(
+  //height: 100,
+),
 
-
-
+),
 
       body: Container(
         constraints: BoxConstraints.expand(),

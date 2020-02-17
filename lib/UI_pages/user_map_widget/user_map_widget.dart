@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:kronogram/UI_pages/osearch_bar_widget/osearch_bar_widget.dart';
 import 'package:kronogram/UI_pages/settings_add_accounts_widget/settings_add_accounts_widget.dart';
 import 'package:kronogram/UI_pages/values/values.dart';
+import 'package:kronogram/UI_pages/my_app_bar/my_app_bar.dart';
 
 // to use google maps plug in : https://pub.dev/packages/google_maps_flutter
 class UserMapWidget extends StatelessWidget {
@@ -28,65 +29,14 @@ class UserMapWidget extends StatelessWidget {
   Widget build(BuildContext context) {
   
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        leading: FlatButton(
-          onPressed: () => this.onnavigationBarItemPressed(context),
-          textColor: Color.fromARGB(255, 112, 112, 112),
-          child: Text(
-            "@",
-            textAlign: TextAlign.left,
-            style: TextStyle(
-              color: Color.fromARGB(255, 0, 0, 0),
-              fontWeight: FontWeight.w400,
-              fontSize: 12,
-            ),
-          ),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(90.0),
+        child: myAppBar(
+          //height: 100,
         ),
-        actions: [
-          FlatButton(
-            onPressed: () => this.onUsernamePressed(context),
-            textColor: Color.fromARGB(255, 112, 112, 112),
-            child: Text(
-              "username",
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                color: Color.fromARGB(255, 0, 0, 0),
-                fontWeight: FontWeight.w400,
-                fontSize: 12,
-              ),
-            ),
-          ),
-          FlatButton(
-            onPressed: () => this.onSETTINGSPressed(context),
-            textColor: Color.fromARGB(255, 112, 112, 112),
-            child: Text(
-              "SETTINGS",
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                color: Color.fromARGB(255, 0, 0, 0),
-                fontWeight: FontWeight.w400,
-                fontSize: 12,
-              ),
-            ),
-          ),
-          FlatButton(
-            onPressed: () => this.onSEARCHPressed(context),
-            textColor: Color.fromARGB(255, 112, 112, 112),
-            child: Text(
-              "SEARCH",
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                color: Color.fromARGB(255, 0, 0, 0),
-                fontWeight: FontWeight.w400,
-                fontSize: 12,
-              ),
-            ),
-          ),
-        ],
-        backgroundColor: Colors.transparent,
-        elevation: 0,
+
       ),
+
       body: Container(
         constraints: BoxConstraints.expand(),
         decoration: BoxDecoration(
