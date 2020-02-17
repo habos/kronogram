@@ -1,19 +1,34 @@
 
 import 'package:flutter/material.dart';
+import 'package:kronogram/UI_pages/login_page_widget/login_page_widget.dart';
 import 'package:kronogram/UI_pages/values/values.dart';
 
 
 class SettingsAddAccountsWidget extends StatelessWidget {
-  
+
   void onLoginPressed(BuildContext context) {
-  
+
   }
-  
+
   void onCancelPressed(BuildContext context) => Navigator.pop(context);
-  
+
+  void onCancelTwoPressed(BuildContext context) => Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPageWidget()));
+
+  void onTwitterSignInPressed(BuildContext context) {
+
+  }
+
+  void onInstagramSignInPressed(BuildContext context) {
+
+  }
+
+  void onFacebookSignInPressed(BuildContext context) {
+
+  }
+
   @override
   Widget build(BuildContext context) {
-  
+
     return Scaffold(
       body: Container(
         constraints: BoxConstraints.expand(),
@@ -24,209 +39,211 @@ class SettingsAddAccountsWidget extends StatelessWidget {
             color: Color.fromARGB(255, 112, 112, 112),
           ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: ListView(
           children: [
             Align(
               alignment: Alignment.topLeft,
               child: Container(
-                margin: EdgeInsets.only(left: 15, top: 60),
+                margin: EdgeInsets.only(left: 15, top: 70),
                 child: Text(
-                  "Add Accounts:",
-                  textAlign: TextAlign.center,
+                  "USERNAME",
+                  textAlign: TextAlign.left,
                   style: TextStyle(
                     color: Color.fromARGB(255, 3, 3, 3),
                     fontFamily: "Helvetica Neue",
                     fontWeight: FontWeight.w400,
                     fontSize: 20,
                   ),
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.topCenter,
-              child: Container(
-                width: 270,
-                height: 40,
-                margin: EdgeInsets.only(top: 11),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: "Facebook username",
-                    contentPadding: EdgeInsets.all(0),
-                    border: InputBorder.none,
-                  ),
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 112, 112, 112),
-                    fontFamily: "Helvetica Neue",
-                    fontWeight: FontWeight.w400,
-                    fontSize: 20,
-                  ),
-                  maxLines: 1,
-                  autocorrect: false,
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.topCenter,
-              child: Container(
-                width: 270,
-                height: 40,
-                margin: EdgeInsets.only(top: 15),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: "Instagram username",
-                    contentPadding: EdgeInsets.all(0),
-                    border: InputBorder.none,
-                  ),
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 112, 112, 112),
-                    fontFamily: "Helvetica Neue",
-                    fontWeight: FontWeight.w400,
-                    fontSize: 20,
-                  ),
-                  maxLines: 1,
-                  autocorrect: false,
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.topCenter,
-              child: Container(
-                width: 270,
-                height: 40,
-                margin: EdgeInsets.only(top: 15),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: "Twitter username",
-                    contentPadding: EdgeInsets.all(0),
-                    border: InputBorder.none,
-                  ),
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 112, 112, 112),
-                    fontFamily: "Helvetica Neue",
-                    fontWeight: FontWeight.w400,
-                    fontSize: 20,
-                  ),
-                  maxLines: 1,
-                  autocorrect: false,
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.topCenter,
-              child: Container(
-                width: 270,
-                height: 40,
-                margin: EdgeInsets.only(top: 15),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: "Email",
-                    contentPadding: EdgeInsets.all(0),
-                    border: InputBorder.none,
-                  ),
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 112, 112, 112),
-                    fontFamily: "Helvetica Neue",
-                    fontWeight: FontWeight.w400,
-                    fontSize: 20,
-                  ),
-                  maxLines: 1,
-                  autocorrect: false,
                 ),
               ),
             ),
             Align(
               alignment: Alignment.topLeft,
               child: Container(
-                margin: EdgeInsets.only(left: 15, top: 39),
-                child: Text(
-                  "Change Password:",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 3, 3, 3),
-                    fontFamily: "Helvetica Neue",
-                    fontWeight: FontWeight.w400,
-                    fontSize: 20,
-                  ),
+                width: 300,
+                height: 165,
+                margin: EdgeInsets.only(left: 15, top: 29),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Add Accounts:",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 3, 3, 3),
+                        fontFamily: "Helvetica Neue",
+                        fontWeight: FontWeight.w400,
+                        fontSize: 20,
+                      ),
+                    ),
+                    Container(
+                      width: 100,
+                      height: 30,
+                      margin: EdgeInsets.only(left: 60, top:15),
+                      child: FlatButton(
+                        onPressed: () => this.onFacebookSignInPressed(context),
+                        color: Color.fromARGB(0, 0, 0, 0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(0)),
+                        ),
+                        textColor: Color.fromARGB(255, 112, 112, 112),
+                        padding: EdgeInsets.all(0),
+                        child: Text(
+                          "Facebook",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 112, 112, 112),
+                            fontFamily: "Helvetica Neue",
+                            fontWeight: FontWeight.w400,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: 100,
+                      height: 30,
+                      margin: EdgeInsets.only(left: 60, top:15),
+                      child: FlatButton(
+                        onPressed: () => this.onInstagramSignInPressed(context),
+                        color: Color.fromARGB(0, 0, 0, 0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(0)),
+                        ),
+                        textColor: Color.fromARGB(255, 112, 112, 112),
+                        padding: EdgeInsets.all(0),
+                        child: Text(
+                          "Instagram",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 112, 112, 112),
+                            fontFamily: "Helvetica Neue",
+                            fontWeight: FontWeight.w400,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: 100,
+                      height: 30,
+                      margin: EdgeInsets.only(left: 60, top: 15),
+                      child: FlatButton(
+                        onPressed: () => this.onTwitterSignInPressed(context),
+                        color: Color.fromARGB(0, 0, 0, 0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(0)),
+                        ),
+                        textColor: Color.fromARGB(255, 112, 112, 112),
+                        padding: EdgeInsets.all(0),
+                        child: Text(
+                          "Twitter",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 112, 112, 112),
+                            fontFamily: "Helvetica Neue",
+                            fontWeight: FontWeight.w400,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
             Align(
-              alignment: Alignment.topCenter,
+              alignment: Alignment.topLeft,
               child: Container(
-                width: 270,
-                height: 40,
-                margin: EdgeInsets.only(top: 6),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: "current password",
-                    contentPadding: EdgeInsets.all(0),
-                    border: InputBorder.none,
-                  ),
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 112, 112, 112),
-                    fontFamily: "Helvetica Neue",
-                    fontWeight: FontWeight.w400,
-                    fontSize: 20,
-                  ),
-                  obscureText: true,
-                  maxLines: 1,
-                  autocorrect: false,
+                width: 300,
+                height: 185,
+                margin: EdgeInsets.only(left: 15, top: 32),
+                child: ListView(
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        "Change Password:",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 3, 3, 3),
+                          fontFamily: "Helvetica Neue",
+                          fontWeight: FontWeight.w400,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: 270,
+                      height: 25,
+                      margin: EdgeInsets.only(top: 5, left: 15),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: "current password",
+                          contentPadding: EdgeInsets.all(0),
+                          border: InputBorder.none,
+                        ),
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 112, 112, 112),
+                          fontFamily: "Helvetica Neue",
+                          fontWeight: FontWeight.w400,
+                          fontSize: 20,
+                        ),
+                        obscureText: true,
+                        maxLines: 1,
+                        autocorrect: false,
+                      ),
+                    ),
+                    Container(
+                      width: 270,
+                      height: 25,
+                      margin: EdgeInsets.only(top: 15, left: 60),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: "new password",
+                          contentPadding: EdgeInsets.all(0),
+                          border: InputBorder.none,
+                        ),
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 112, 112, 112),
+                          fontFamily: "Helvetica Neue",
+                          fontWeight: FontWeight.w400,
+                          fontSize: 20,
+                        ),
+                        obscureText: true,
+                        maxLines: 1,
+                        autocorrect: false,
+                      ),
+                    ),
+                    Container(
+                      width: 270,
+                      height: 40,
+                      margin: EdgeInsets.only(top: 15, left: 60),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: "confirm password",
+                          contentPadding: EdgeInsets.all(0),
+                          border: InputBorder.none,
+                        ),
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 112, 112, 112),
+                          fontFamily: "Helvetica Neue",
+                          fontWeight: FontWeight.w400,
+                          fontSize: 20,
+                        ),
+                        obscureText: true,
+                        maxLines: 1,
+                        autocorrect: false,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
-            Align(
-              alignment: Alignment.topCenter,
-              child: Container(
-                width: 270,
-                height: 40,
-                margin: EdgeInsets.only(top: 5),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: "new password",
-                    contentPadding: EdgeInsets.all(0),
-                    border: InputBorder.none,
-                  ),
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 112, 112, 112),
-                    fontFamily: "Helvetica Neue",
-                    fontWeight: FontWeight.w400,
-                    fontSize: 20,
-                  ),
-                  obscureText: true,
-                  maxLines: 1,
-                  autocorrect: false,
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.topCenter,
-              child: Container(
-                width: 278,
-                height: 40,
-                margin: EdgeInsets.only(top: 5),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: "confirm new password",
-                    contentPadding: EdgeInsets.all(0),
-                    border: InputBorder.none,
-                  ),
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 112, 112, 112),
-                    fontFamily: "Helvetica Neue",
-                    fontWeight: FontWeight.w400,
-                    fontSize: 20,
-                  ),
-                  obscureText: true,
-                  maxLines: 1,
-                  autocorrect: false,
-                ),
-              ),
-            ),
-            Spacer(),
+
             Container(
               height: 29,
-              margin: EdgeInsets.only(left: 67, right: 66, bottom: 86),
+              margin: EdgeInsets.only(left: 50, right: 50, bottom: 21),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -284,6 +301,33 @@ class SettingsAddAccountsWidget extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: Container(
+                width: 270,
+                height: 29,
+                margin: EdgeInsets.only( bottom: 36),
+                child: FlatButton(
+                  onPressed: () => this.onCancelTwoPressed(context),
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                  textColor: Color.fromARGB(255, 112, 112, 112),
+                  padding: EdgeInsets.all(0),
+                  child: Text(
+                    "LOG OUT",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 112, 112, 112),
+                      fontFamily: "Helvetica Neue",
+                      fontWeight: FontWeight.w400,
+                      fontSize: 15,
+                    ),
+                  ),
+                ),
               ),
             ),
           ],

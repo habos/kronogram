@@ -19,6 +19,7 @@ class LoginPageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
   
     return Scaffold(
+      //resizeToAvoidBottomPadding: false,
       body: Container(
         constraints: BoxConstraints.expand(),
         decoration: BoxDecoration(
@@ -28,15 +29,15 @@ class LoginPageWidget extends StatelessWidget {
             color: Color.fromARGB(255, 112, 112, 112),
           ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: ListView(
+          //crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Align(
               alignment: Alignment.topCenter,
               child: Container(
                 width: 201,
                 height: 203,
-                margin: EdgeInsets.only(top: 91),
+                margin: EdgeInsets.only(top: 101),
                 child: Stack(
                   alignment: Alignment.centerRight,
                   children: [
@@ -70,7 +71,7 @@ class LoginPageWidget extends StatelessWidget {
               child: Container(
                 width: 270,
                 height: 40,
-                margin: EdgeInsets.only(top: 36),
+                margin: EdgeInsets.only(top: 15),
                 child: TextField(
                   decoration: InputDecoration(
                     hintText: "username",
@@ -93,7 +94,7 @@ class LoginPageWidget extends StatelessWidget {
               child: Container(
                 width: 270,
                 height: 40,
-                margin: EdgeInsets.only(top: 35),
+                margin: EdgeInsets.only(top: 15),
                 child: TextField(
                   decoration: InputDecoration(
                     hintText: "password",
@@ -112,10 +113,10 @@ class LoginPageWidget extends StatelessWidget {
                 ),
               ),
             ),
-            Spacer(),
+
             Container(
               height: 29,
-              margin: EdgeInsets.only(left: 73, right: 60, bottom: 21),
+              margin: EdgeInsets.only(left: 73, right: 60, top: 60),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -180,6 +181,7 @@ class LoginPageWidget extends StatelessWidget {
               child: Container(
                 width: 348,
                 height: 44,
+                margin: EdgeInsets.only(top: 25, bottom: 25),
                 child: FlatButton(
                   onPressed: () => this.onButtonPressed(context),
                   color: Color.fromARGB(0, 0, 0, 0),

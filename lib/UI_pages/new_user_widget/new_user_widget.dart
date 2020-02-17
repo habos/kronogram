@@ -4,16 +4,20 @@ import 'package:kronogram/UI_pages/login_page_widget/login_page_widget.dart';
 import 'package:kronogram/UI_pages/values/values.dart';
 
 
+
 class NewUserWidget extends StatelessWidget {
-  
-  void onLoginPressed(BuildContext context) => Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPageWidget()));
-  
+
+  void onCreatePressed(BuildContext context) {
+
+  }
+
   void onCancelPressed(BuildContext context) => Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPageWidget()));
-  
+
   @override
   Widget build(BuildContext context) {
-  
+
     return Scaffold(
+      //resizeToAvoidBottomPadding: false,
       body: Container(
         constraints: BoxConstraints.expand(),
         decoration: BoxDecoration(
@@ -23,185 +27,204 @@ class NewUserWidget extends StatelessWidget {
             color: Color.fromARGB(255, 112, 112, 112),
           ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: ListView(
           children: [
             Align(
               alignment: Alignment.topLeft,
               child: Container(
-                margin: EdgeInsets.only(left: 15, top: 60),
-                child: Text(
-                  "Add Accounts:",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 3, 3, 3),
-                    fontFamily: "Helvetica Neue",
-                    fontWeight: FontWeight.w400,
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.topCenter,
-              child: Container(
-                width: 270,
-                height: 40,
-                margin: EdgeInsets.only(top: 11),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: "Facebook username",
-                    contentPadding: EdgeInsets.all(0),
-                    border: InputBorder.none,
-                  ),
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 112, 112, 112),
-                    fontFamily: "Helvetica Neue",
-                    fontWeight: FontWeight.w400,
-                    fontSize: 20,
-                  ),
-                  maxLines: 1,
-                  autocorrect: false,
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.topCenter,
-              child: Container(
-                width: 270,
-                height: 40,
-                margin: EdgeInsets.only(top: 15),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: "Instagram username",
-                    contentPadding: EdgeInsets.all(0),
-                    border: InputBorder.none,
-                  ),
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 112, 112, 112),
-                    fontFamily: "Helvetica Neue",
-                    fontWeight: FontWeight.w400,
-                    fontSize: 20,
-                  ),
-                  maxLines: 1,
-                  autocorrect: false,
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.topCenter,
-              child: Container(
-                width: 270,
-                height: 40,
-                margin: EdgeInsets.only(top: 15),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: "Twitter username",
-                    contentPadding: EdgeInsets.all(0),
-                    border: InputBorder.none,
-                  ),
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 112, 112, 112),
-                    fontFamily: "Helvetica Neue",
-                    fontWeight: FontWeight.w400,
-                    fontSize: 20,
-                  ),
-                  maxLines: 1,
-                  autocorrect: false,
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.topCenter,
-              child: Container(
-                width: 270,
-                height: 40,
-                margin: EdgeInsets.only(top: 15),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: "Email",
-                    contentPadding: EdgeInsets.all(0),
-                    border: InputBorder.none,
-                  ),
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 112, 112, 112),
-                    fontFamily: "Helvetica Neue",
-                    fontWeight: FontWeight.w400,
-                    fontSize: 20,
-                  ),
-                  maxLines: 1,
-                  autocorrect: false,
-                ),
-              ),
-            ),
+                width: 300,
+                height: 136,
+                margin: EdgeInsets.only(left: 14, top: 29),
+                child: ListView(
+                  children: [
+                    Text(
+                      "Enter Email",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 3, 3, 3),
+                        fontFamily: "Helvetica Neue",
+                        fontWeight: FontWeight.w400,
+                        fontSize: 20,
+                      ),
+                    ),
+                    Container(
+                        width: 272,
+                        height: 25,
+                        margin: EdgeInsets.only(top: 17, left: 20),
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  hintText: "Email",
+                                  contentPadding: EdgeInsets.all(0),
+                                  border: InputBorder.none,
+                                ),
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 112, 112, 112),
+                                  fontFamily: "Helvetica Neue",
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 20,
+                                ),
+                                maxLines: 1,
+                                autocorrect: false,
+                              ),
+                            ),
+                    Container(
+                      width: 272,
+                      height: 25,
+                      margin: EdgeInsets.only(top: 17, left: 20),
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  hintText: "Confirm Email",
+                                  contentPadding: EdgeInsets.all(0),
+                                  border: InputBorder.none,
+                                ),
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 112, 112, 112),
+                                  fontFamily: "Helvetica Neue",
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 20,
+                                ),
+                                maxLines: 1,
+                                autocorrect: false,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+
             Align(
               alignment: Alignment.topLeft,
               child: Container(
-                margin: EdgeInsets.only(left: 15, top: 49),
-                child: Text(
-                  "Create Password:",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 3, 3, 3),
-                    fontFamily: "Helvetica Neue",
-                    fontWeight: FontWeight.w400,
-                    fontSize: 20,
-                  ),
+                width: 300,
+                height: 136,
+                margin: EdgeInsets.only(left: 14, top: 29),
+                child: ListView(
+                  children: [
+                    Text(
+                      "Create Username",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 3, 3, 3),
+                        fontFamily: "Helvetica Neue",
+                        fontWeight: FontWeight.w400,
+                        fontSize: 20,
+                      ),
+                    ),
+                    Container(
+                      width: 272,
+                      height: 25,
+                      margin: EdgeInsets.only(top: 17, left: 20),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: "Username",
+                          contentPadding: EdgeInsets.all(0),
+                          border: InputBorder.none,
+                        ),
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 112, 112, 112),
+                          fontFamily: "Helvetica Neue",
+                          fontWeight: FontWeight.w400,
+                          fontSize: 20,
+                        ),
+                        maxLines: 1,
+                        autocorrect: false,
+                      ),
+                    ),
+                    Container(
+                      width: 272,
+                      height: 25,
+                      margin: EdgeInsets.only(top: 17, left: 20),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: "Confirm Username",
+                          contentPadding: EdgeInsets.all(0),
+                          border: InputBorder.none,
+                        ),
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 112, 112, 112),
+                          fontFamily: "Helvetica Neue",
+                          fontWeight: FontWeight.w400,
+                          fontSize: 20,
+                        ),
+                        maxLines: 1,
+                        autocorrect: false,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
+
             Align(
-              alignment: Alignment.topCenter,
+              alignment: Alignment.topLeft,
               child: Container(
-                width: 270,
-                height: 40,
-                margin: EdgeInsets.only(top: 11),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: "password",
-                    contentPadding: EdgeInsets.all(0),
-                    border: InputBorder.none,
-                  ),
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 112, 112, 112),
-                    fontFamily: "Helvetica Neue",
-                    fontWeight: FontWeight.w400,
-                    fontSize: 20,
-                  ),
-                  obscureText: true,
-                  maxLines: 1,
-                  autocorrect: false,
+                width: 300,
+                height: 175,
+                margin: EdgeInsets.only(left: 15, top: 29),
+                child: ListView(
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        "Create Password:",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 3, 3, 3),
+                          fontFamily: "Helvetica Neue",
+                          fontWeight: FontWeight.w400,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: 270,
+                      height: 25,
+                      margin: EdgeInsets.only(top: 15, left: 20),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: "password",
+                          contentPadding: EdgeInsets.all(0),
+                          border: InputBorder.none,
+                        ),
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 112, 112, 112),
+                          fontFamily: "Helvetica Neue",
+                          fontWeight: FontWeight.w400,
+                          fontSize: 20,
+                        ),
+                        obscureText: true,
+                        maxLines: 1,
+                        autocorrect: false,
+                      ),
+                    ),
+                    Container(
+                      width: 270,
+                      height: 35,
+                      margin: EdgeInsets.only(top: 15, left: 20),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: "confirm password",
+                          contentPadding: EdgeInsets.all(0),
+                          border: InputBorder.none,
+                        ),
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 112, 112, 112),
+                          fontFamily: "Helvetica Neue",
+                          fontWeight: FontWeight.w400,
+                          fontSize: 20,
+                        ),
+                        obscureText: true,
+                        maxLines: 1,
+                        autocorrect: false,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
-            Align(
-              alignment: Alignment.topCenter,
-              child: Container(
-                width: 270,
-                height: 40,
-                margin: EdgeInsets.only(top: 5),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: "password",
-                    contentPadding: EdgeInsets.all(0),
-                    border: InputBorder.none,
-                  ),
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 112, 112, 112),
-                    fontFamily: "Helvetica Neue",
-                    fontWeight: FontWeight.w400,
-                    fontSize: 20,
-                  ),
-                  obscureText: true,
-                  maxLines: 1,
-                  autocorrect: false,
-                ),
-              ),
-            ),
-            Spacer(),
             Container(
               height: 29,
-              margin: EdgeInsets.only(left: 73, right: 60, bottom: 113),
+              margin: EdgeInsets.only(left: 60, right: 60, bottom: 21),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -211,7 +234,7 @@ class NewUserWidget extends StatelessWidget {
                       width: 100,
                       height: 29,
                       child: FlatButton(
-                        onPressed: () => this.onLoginPressed(context),
+                        onPressed: () => this.onCreatePressed(context),
                         color: Color.fromARGB(255, 255, 255, 255),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
