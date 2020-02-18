@@ -12,8 +12,8 @@ abstract class BaseDatabase {
   Future<String> getFacebookId(String userID);
   Future<void> setFacebookId(String userID, String facebookId);
 
-  Future<String> getTwitterId(String userID);
-  Future<void> setTwitterId(String userID, String twitterId);
+  Future<String> getTwitterInfo(String userID);
+  Future<void> setTwitterInfo(String userID, Map info);
 }
 
 class Database implements BaseDatabase {
@@ -22,7 +22,7 @@ class Database implements BaseDatabase {
   final String _newUserStatusField = "is_new_user";
   final String _usernameField = "username";
   final String _facebookIdField = "facebook_id";
-  final String _twitterIdField = "twitter_id";
+  final String _twitterInfoField = "twitter_info";
 
   Future<void> setField(String userID, String fieldName, var value) {
     return _firestore.collection(_usersCollectionName).document(userID).setData({
@@ -67,12 +67,12 @@ class Database implements BaseDatabase {
     return setField(userID, _facebookIdField, facebookId);
   }
 
-  Future<String> getTwitterId(String userID) async {
+  Future<String> getTwitterInfo(String userID) async {
     var snapshot = await getDocumentSnapshot(userID);
-    return snapshot.data.remove(_twitterIdField);
+    return snapshot.data.remove(_twitterInfoField);
   }
 
-  Future<void> setTwitterId(String userID, String twitterId) async {
-    return setField(userID, _twitterIdField, twitterId);
+  Future<void> setTwitterInfo(String userID, Map info) async {
+    return setField(userID, _twitterInfoField, info);
   }
 }

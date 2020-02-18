@@ -149,7 +149,7 @@ class _IntroPageState extends State<IntroPage> {
         log("Twitter Login Success");
         setState(() => _isLoggedInTwitter = true );
         //Set twitter userId in database
-        widget.db.setTwitterId(widget.userId, result.session.userId);
+        widget.db.setTwitterInfo(widget.userId, result.session.toMap());
         break;
       case TwitterLoginStatus.cancelledByUser:
         log('Login cancelled by user.');
@@ -169,7 +169,7 @@ class _IntroPageState extends State<IntroPage> {
       _isLoggedInTwitter = false;
     });
     //Remove twitter userId from database
-    widget.db.setTwitterId(widget.userId, null);
+    widget.db.setTwitterInfo(widget.userId, null);
   }
 
   Widget twitterButton(){
