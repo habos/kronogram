@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert' as JSON;
 import 'dart:core';
 import 'dart:developer';
+import 'package:kronogram/pages/test_twitter_requests.dart';
 
 import 'package:kronogram/services/database.dart';
 
@@ -289,10 +290,38 @@ class _IntroPageState extends State<IntroPage> {
                       twitterButton(),
                       instagramButton(),
                       showPrimaryButton(),
+                      showTwitterTestButton(),
                     ],
                   ),
                 ))
         )
       );
+  }
+
+  Widget showTwitterTestButton() {
+    return new Padding(
+        padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
+        child: SizedBox(
+          height: 40.0,
+          child: new RaisedButton(
+              elevation: 5.0,
+              shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(30.0)),
+              color: Colors.blue,
+              child: new Text('Twitter test',
+                  style: new TextStyle(fontSize: 20.0, color: Colors.white)
+              ),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => TwitterPage(userId: widget.userId,
+                      auth: widget.auth,
+                      logoutCallback: widget.logoutCallback,
+                      db: widget.db,))
+                );
+              }
+          ),
+        )
+    );
   }
 }
