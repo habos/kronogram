@@ -15,7 +15,7 @@ Future<Token> getToken(String appId, String appSecret) async {
   final http.Response response = await http.post(
       "https://api.instagram.com/oauth/access_token",
       body: {"client_id": appId, "redirect_uri": "http://localhost:8585", "client_secret": appSecret,
-        "code": code, "grant_type": "authorization_code"});
+        "code": code, "grant_type": "authorization_code", "scope": "basic"});
   flutterWebviewPlugin.close();
   return new Token.fromMap(JSON.jsonDecode(response.body));
 }
