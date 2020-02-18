@@ -71,6 +71,17 @@ class Database implements BaseDatabase {
     var snapshot = await getDocumentSnapshot(userID);
     return snapshot.data.remove(_twitterInfoField);
   }
+  /*
+  Map that is stored in database
+  Map<String, dynamic> toMap() {
+    return {
+      'secret': secret,
+      'token': token,
+      'userId': userId,
+      'username': username,
+    };
+  }
+  */
 
   Future<void> setTwitterInfo(String userID, Map info) async {
     return setField(userID, _twitterInfoField, info);
