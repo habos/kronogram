@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kronogram/services/authentication.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:flutter_twitter_login/flutter_twitter_login.dart';
+import 'package:kronogram/services/instagram_login.dart' as insta;
 import 'package:http/http.dart' as http;
 import 'dart:convert' as JSON;
 import 'dart:core';
@@ -25,11 +26,7 @@ class IntroPage extends StatefulWidget {
 
 class _IntroPageState extends State<IntroPage> {
 
-
-  //Facebook Login
-
-  bool _isLoggedInFacebook = false;
-  final facebookLogin = FacebookLogin();
+  //Logout button
 
   signOut() async {
     try {
@@ -56,6 +53,11 @@ class _IntroPageState extends State<IntroPage> {
           ),
         ));
   }
+
+  //Facebook Login
+
+  bool _isLoggedInFacebook = false;
+  final facebookLogin = FacebookLogin();
 
   _loginWithFB() async{
 
@@ -204,6 +206,73 @@ class _IntroPageState extends State<IntroPage> {
         ));
   }
 
+  //Instagram login
+
+  static String APP_ID = "190520052359534";
+  static String APP_SECRET = "93ce3e33973fcbbe28baced8bf16080d";
+
+  bool _isLoggedInInstagram = false;
+
+  void _loginInstagram() async {
+    log("Trying to log into insta");
+    final insta.Token token = await insta.getToken(APP_ID,
+        APP_SECRET);
+    if(token != null){
+      setState(() {
+        _isLoggedInInstagram = true;
+      });
+      log(token.toString());
+    }
+    else{
+      log("Error");
+      setState(() {
+        _isLoggedInInstagram = false;
+      });
+    }
+  }
+
+  void _logoutInstagram() async {
+    setState(() {
+      _isLoggedInInstagram = false;
+    });
+  }
+
+  Widget instagramButton(){
+    return new Padding(
+        padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
+        child: _isLoggedInInstagram
+            ? SizedBox(
+          height: 40.0,
+          child: RaisedButton(
+            elevation: 5.0,
+            shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(30.0)),
+            color: Colors.blue,
+            child: new Text("Logout of Instagram",
+                style: new TextStyle(fontSize: 20.0, color: Colors.white)),
+            onPressed: () {
+              _logoutInstagram();
+            },
+          ),
+        )
+            : SizedBox(
+          height: 40.0,
+          child: RaisedButton(
+            elevation: 5.0,
+            shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(30.0)),
+            color: Colors.blue,
+            child: new Text("Login with Instagram",
+                style: new TextStyle(fontSize: 20.0, color: Colors.white)),
+            onPressed: () {
+              _loginInstagram();
+            },
+          ),
+        ));
+  }
+
+
+
   //Build Components
   @override
   Widget build(BuildContext context) {
@@ -218,6 +287,7 @@ class _IntroPageState extends State<IntroPage> {
                     children: <Widget>[
                       FacebookButton(),
                       twitterButton(),
+                      instagramButton(),
                       showPrimaryButton(),
                     ],
                   ),
