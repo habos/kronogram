@@ -12,7 +12,7 @@ abstract class BaseDatabase {
   Future<String> getFacebookId(String userID);
   Future<void> setFacebookId(String userID, String facebookId);
 
-  Future<String> getTwitterInfo(String userID);
+  Future<Map> getTwitterInfo(String userID);
   Future<void> setTwitterInfo(String userID, Map info);
 }
 
@@ -67,7 +67,7 @@ class Database implements BaseDatabase {
     return setField(userID, _facebookIdField, facebookId);
   }
 
-  Future<String> getTwitterInfo(String userID) async {
+  Future<Map> getTwitterInfo(String userID) async {
     var snapshot = await getDocumentSnapshot(userID);
     return snapshot.data.remove(_twitterInfoField);
   }
