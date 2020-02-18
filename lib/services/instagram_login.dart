@@ -8,14 +8,14 @@ import 'package:http/http.dart' as http;
 Future<Token> getToken(String appId, String appSecret) async {
   Stream<String> onCode = await _server();
   String url =
-      "https://api.instagram.com/oauth/authorize?client_id=$appId&redirect_uri=http://localhost:8585&response_type=code";
+      "https://api.instagram.com/oauth/authorize/?client_id=&appId&redirect_uri=http://localhost:8585&response_type=code&scope=basic";
   final flutterWebviewPlugin = new FlutterWebviewPlugin();
   flutterWebviewPlugin.launch(url);
   final String code = await onCode.first;
   final http.Response response = await http.post(
       "https://api.instagram.com/oauth/access_token",
       body: {"client_id": appId, "redirect_uri": "http://localhost:8585", "client_secret": appSecret,
-        "code": code, "grant_type": "authorization_code", "scope": "basic"});
+        "code": code, "grant_type": "authorization_code"});
   flutterWebviewPlugin.close();
   return new Token.fromMap(JSON.jsonDecode(response.body));
 }
