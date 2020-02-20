@@ -215,7 +215,6 @@ class _IntroPageState extends State<IntroPage> {
   bool _isLoggedInInstagram = false;
 
   void _loginInstagram() async {
-    log("Trying to log into insta");
     final insta.Token token = await insta.getToken(APP_ID,
         APP_SECRET);
     if(token != null){
@@ -223,6 +222,7 @@ class _IntroPageState extends State<IntroPage> {
         _isLoggedInInstagram = true;
       });
       log(token.toString());
+      widget.db.setInstagramInfo(widget.userId, token.toMap());
     }
     else{
       log("Error");
@@ -236,6 +236,7 @@ class _IntroPageState extends State<IntroPage> {
     setState(() {
       _isLoggedInInstagram = false;
     });
+    widget.db.setInstagramInfo(widget.userId, null);
   }
 
   Widget instagramButton(){
