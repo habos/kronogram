@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kronogram/pages/test_instagram.dart';
 import 'package:kronogram/services/authentication.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:flutter_twitter_login/flutter_twitter_login.dart';
@@ -292,6 +293,7 @@ class _IntroPageState extends State<IntroPage> {
                       instagramButton(),
                       showPrimaryButton(),
                       showTwitterTestButton(),
+                      showInstaTestButton(),
                     ],
                   ),
                 ))
@@ -316,6 +318,33 @@ class _IntroPageState extends State<IntroPage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => TwitterPage(userId: widget.userId,
+                      auth: widget.auth,
+                      logoutCallback: widget.logoutCallback,
+                      db: widget.db,))
+                );
+              }
+          ),
+        )
+    );
+  }
+
+  Widget showInstaTestButton() {
+    return new Padding(
+        padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
+        child: SizedBox(
+          height: 40.0,
+          child: new RaisedButton(
+              elevation: 5.0,
+              shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(30.0)),
+              color: Colors.blue,
+              child: new Text('Insta test',
+                  style: new TextStyle(fontSize: 20.0, color: Colors.white)
+              ),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => InstagramPage(userId: widget.userId,
                       auth: widget.auth,
                       logoutCallback: widget.logoutCallback,
                       db: widget.db,))

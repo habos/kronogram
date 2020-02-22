@@ -3,6 +3,9 @@ import 'package:kronogram/services/location.dart';
 
 class Post {
   String userId;
+  DateTime createdAt;
+  String caption;
+  String id;
 
   String getUserId() {
     return userId;
@@ -15,20 +18,15 @@ class Post {
 
 class Tweet extends Post {
 
-  String id;
-  DateTime createdAt;
-  String caption;           //can this be null?
   String screenname;
   TwitterLocation location; //can be null
   List<TwitterMedia> media = new List(); //photo, video, animated_gif
-  List links = new List();
-
-  Tweet();
+  List links = new List();  //attached urls
 
 
   Tweet.fromJson(Map<String, dynamic> json, String userId) {
     id = json['id_str'];
-    String dateStr = parseDate(json['created_at']);
+    String dateStr = _parseDate(json['created_at']);
     DateTime date = DateTime.parse(dateStr);
     this.createdAt = new DateTime.utc(date.year,date.month,date.day,date.hour,date.minute,date.second);
     //FIXME
@@ -58,7 +56,7 @@ class Tweet extends Post {
 //
 //      };
 
-  String parseDate(String date) {
+  String _parseDate(String date) {
     List dateList = date.split(" ");
     var year = dateList[5];
     var day = dateList[2];
@@ -89,8 +87,13 @@ class Tweet extends Post {
     return media;
   }
 
+  bool hasSubTweet() {
+    return false;
+  }
+
 }
 
+//Should it just be it's own tweet but with retweeted username added, etc. ?
 class ReTweet extends Tweet {
   Tweet subTweet;
 
@@ -100,7 +103,11 @@ class ReTweet extends Tweet {
   }
 
   List<TwitterMedia> getMedia() {
-    return media + subTweet.media;
+    return subTweet.media;
+  }
+
+  bool hasSubTweet() {
+    return true;
   }
 }
 
@@ -114,5 +121,30 @@ class QuoteTweet extends Tweet {
 
   List<TwitterMedia> getMedia() {
     return media + subTweet.media;
+  }
+
+  bool hasSubTweet() {
+    return true;
+  }
+}
+
+class InstaPost extends Post {
+  List<InstaMedia> media = new List();  //make InstaMedia
+
+  InstaPost.fromJson(Map<String,dynamic> json, String userId) {
+    this.userId = userId;
+
+    this.id = json['id'];
+    this.caption = json['caption'];
+    DateTime date = DateTime.parse(json['timestamp']);
+    this.createdAt = new DateTime.utc(date.year,date.month,date.day,date.hour,date.minute,date.second);
+    String type = json['media_type'];
+    if (type!='CAROUSEL_ALBUM') {
+      this.media.add(new InstaMedia(type, json['media_url']));
+    }
+  }
+
+  void addMedia(String type, String url) {
+    this.media.add(new InstaMedia(type, url));
   }
 }

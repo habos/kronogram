@@ -1,6 +1,9 @@
-class TwitterMedia {
+class Media {
   String type;
   String url;
+}
+
+class TwitterMedia extends Media{
   Map<String,Map<String,dynamic>> sizes;
 
   TwitterMedia.fromJson(Map<String,dynamic> json) {
@@ -28,5 +31,12 @@ class TwitterMedia {
         'resize' : json['sizes']['large']['resize']
       }
     };
+  }
+}
+
+class InstaMedia extends Media {
+  InstaMedia(String type, String url) {
+    this.type=type;
+    this.url=url;
   }
 }

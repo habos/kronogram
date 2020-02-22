@@ -23,7 +23,7 @@ Future<Token> getToken(String appId, String appSecret) async {
   String redirectURI = "https://habos.github.io/kronogram/";
   String code = '';
   String url =
-      "https://api.instagram.com/oauth/authorize?client_id=$appId&redirect_uri=$redirectURI&scope=user_profile&response_type=code";
+      "https://api.instagram.com/oauth/authorize?client_id=$appId&redirect_uri=$redirectURI&scope=user_profile,user_media&response_type=code";
   final flutterWebviewPlugin = new FlutterWebviewPlugin();
   flutterWebviewPlugin.launch(url);
   flutterWebviewPlugin.onUrlChanged.listen((String url){
