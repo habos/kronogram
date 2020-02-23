@@ -9,8 +9,8 @@ abstract class BaseDatabase {
   Future<String> getUsername(String userID);
   Future<void> setUsername(String userID, String username);
 
-  Future<String> getFacebookId(String userID);
-  Future<void> setFacebookId(String userID, String facebookId);
+  Future<String> getFacebookInfo(String userID);
+  Future<void> setFacebookInfo(String userID, Map facebookId);
 
   Future<Map> getTwitterInfo(String userID);
   Future<void> setTwitterInfo(String userID, Map info);
@@ -24,7 +24,7 @@ class Database implements BaseDatabase {
   final String _usersCollectionName = "users";
   final String _newUserStatusField = "is_new_user";
   final String _usernameField = "username";
-  final String _facebookIdField = "facebook_id";
+  final String _facebookInfoField = "facebook_info";
   final String _twitterInfoField = "twitter_info";
   final String _instagramInfoField = "instagram_info";
 
@@ -62,13 +62,25 @@ class Database implements BaseDatabase {
     return setField(userID, _usernameField, username);
   }
 
-  Future<String> getFacebookId(String userID) async {
+  Future<String> getFacebookInfo(String userID) async {
     var snapshot = await getDocumentSnapshot(userID);
-    return snapshot.data.remove(_facebookIdField);
+    return snapshot.data.remove(_facebookInfoField);
   }
 
-  Future<void> setFacebookId(String userID, String facebookId) async {
-    return setField(userID, _facebookIdField, facebookId);
+  /*
+    Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'token': token,
+      'userId': userId,
+      'expires': expires.millisecondsSinceEpoch,
+      'permissions': permissions,
+      'declinedPermissions': declinedPermissions,
+    };
+  }
+   */
+
+  Future<void> setFacebookInfo(String userID, Map facebookId) async {
+    return setField(userID, _facebookInfoField, facebookId);
   }
 
   Future<Map> getTwitterInfo(String userID) async {
@@ -95,6 +107,15 @@ class Database implements BaseDatabase {
     var snapshot = await getDocumentSnapshot(userID);
     return snapshot.data.remove(_instagramInfoField);
   }
+
+/*
+  Map<String, dynamic> toMap(){
+    return {
+      'token': access,
+      'userId': id,
+    };
+  }
+ */
 
   Future<void> setInstagramInfo(String userID, Map info) async {
     return setField(userID, _instagramInfoField, info);

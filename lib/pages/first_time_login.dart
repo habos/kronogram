@@ -64,19 +64,17 @@ class _IntroPageState extends State<IntroPage> {
   _loginWithFB() async{
 
 
-    final result = await facebookLogin.logInWithReadPermissions(['email']);
-
+    final result = await facebookLogin.logInWithReadPermissions(['user_posts', 'user_likes']);
+    if(result.accessToken == null){
+      facebookLogin.logOut();
+    }
     switch (result.status) {
       case FacebookLoginStatus.loggedIn:
-        final token = result.accessToken.token;
-        final graphResponse = await http.get('https://graph.facebook.com/v2.12/me?fields=name,picture,email&access_token=${token}');
-        final profile = JSON.jsonDecode(graphResponse.body);
-        print(profile);
         setState(() {
           _isLoggedInFacebook = true;
         });
         //Add Facebook userId to database
-        widget.db.setFacebookId(widget.userId, profile['id']);
+        widget.db.setFacebookInfo(widget.userId, result.accessToken.toMap());
         break;
 
       case FacebookLoginStatus.cancelledByUser:
@@ -84,6 +82,7 @@ class _IntroPageState extends State<IntroPage> {
         break;
       case FacebookLoginStatus.error:
         setState(() => _isLoggedInFacebook = false );
+        print(result.errorMessage);
         break;
     }
 
@@ -95,7 +94,7 @@ class _IntroPageState extends State<IntroPage> {
       _isLoggedInFacebook = false;
     });
     //Remove Facebook Id from database
-    widget.db.setFacebookId(widget.userId, null);
+    widget.db.setFacebookInfo(widget.userId, null);
   }
 
   Widget FacebookButton() {
