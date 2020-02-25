@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:convert' as JSON;
 import 'dart:core';
-import 'package:twitter_api/twitter_api.dart';
 import 'package:kronogram/services/database.dart';
 import 'package:kronogram/services/authentication.dart';
 import 'package:kronogram/services/post.dart';
@@ -29,7 +28,6 @@ class _InstagramPageState extends State<InstagramPage> {
     final graphResponse = await http.get('https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,timestamp&access_token=${token}');
     final profile = JSON.jsonDecode(graphResponse.body);
     print(profile);
-    //FIXME: when creating insta post objects, if type is carousel then need to query the id for children
     for(var x in profile['data']) {
       InstaPost p = new InstaPost.fromJson(x, widget.userId);
       if(x['media_type']=='CAROUSEL_ALBUM') {
