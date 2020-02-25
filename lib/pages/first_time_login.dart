@@ -132,11 +132,6 @@ class _IntroPageState extends State<IntroPage> {
         ));
   }
 
-
-  void checkSecret() async{
-    String secret = await getValue('twitter_key');
-    print(secret);
-  }
   //Twitter Login
 
   static final Future<TwitterLogin> twitterLoginFuture = getTwitterLogin();
