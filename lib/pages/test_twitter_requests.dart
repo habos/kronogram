@@ -44,7 +44,7 @@ class _TwitterPageState extends State<TwitterPage> {
     var res = await twitterRequest;
 
 //    print(res.statusCode);
-//    print(res.body);  // the response in json
+    print(res.body);  // the response in json
 
     var tweetResponse = JSON.jsonDecode(res.body); // decode json tweet object
 //    print(tweets.length);
