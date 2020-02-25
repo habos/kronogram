@@ -43,7 +43,7 @@ class Database implements BaseDatabase {
 
   @override
   Future<void> createNewUser(String userID){
-    //ToDO Create new user fucntion
+    //ToDO Create new user function
   }
 
   @override
