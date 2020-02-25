@@ -5,6 +5,7 @@ import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:kronogram/services/remote_config.dart';
 
 Future waitWhile(bool test(), [Duration pollInterval = const Duration(microseconds: 1)]) {
   var completer = new Completer();
@@ -19,7 +20,9 @@ Future waitWhile(bool test(), [Duration pollInterval = const Duration(microsecon
   return completer.future;
 }
 
-Future<Token> getToken(String appId, String appSecret) async {
+Future<Token> getToken() async {
+  String appId = await getValue('instagram_id');
+  String appSecret = await getValue('instagram_secret');
   String redirectURI = "https://habos.github.io/kronogram/";
   String code = '';
   String url =

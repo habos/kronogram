@@ -9,7 +9,7 @@ import 'dart:convert' as JSON;
 import 'dart:core';
 import 'dart:developer';
 import 'package:kronogram/pages/test_twitter_requests.dart';
-
+import 'package:kronogram/services/remote_config.dart';
 import 'package:kronogram/services/database.dart';
 
 
@@ -132,17 +132,18 @@ class _IntroPageState extends State<IntroPage> {
   }
 
 
-
+  void checkSecret() async{
+    String secret = await getValue('twitter_key');
+    print(secret);
+  }
   //Twitter Login
 
-  static final TwitterLogin twitterLogin = new TwitterLogin(
-    consumerKey: 'JZScfVJ2TnkzVHy7lS7XHGU1z',
-    consumerSecret: 'fk9BSlBe6mDnioJeoIc7thAQeODgnbEBZAJoBsuPVGYG8PmMQW',
-  );
+  static final Future<TwitterLogin> twitterLoginFuture = getTwitterLogin();
 
   bool _isLoggedInTwitter = false;
 
   void _loginTwitter() async {
+    TwitterLogin twitterLogin = await twitterLoginFuture;
     final TwitterLoginResult result = await twitterLogin.authorize();
 
     switch (result.status) {
@@ -164,6 +165,7 @@ class _IntroPageState extends State<IntroPage> {
   }
 
   void _logoutTwitter() async {
+    TwitterLogin twitterLogin = await twitterLoginFuture;
     await twitterLogin.logOut();
 
     setState(() {
@@ -209,14 +211,10 @@ class _IntroPageState extends State<IntroPage> {
 
   //Instagram login
 
-  static String APP_ID = "190520052359534";
-  static String APP_SECRET = "93ce3e33973fcbbe28baced8bf16080d";
-
   bool _isLoggedInInstagram = false;
 
   void _loginInstagram() async {
-    final insta.Token token = await insta.getToken(APP_ID,
-        APP_SECRET);
+    final insta.Token token = await insta.getToken();
     if(token != null){
       setState(() {
         _isLoggedInInstagram = true;
