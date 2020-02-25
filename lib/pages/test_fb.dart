@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:convert' as JSON;
 import 'dart:core';
-import 'package:twitter_api/twitter_api.dart';
 import 'package:kronogram/services/database.dart';
 import 'package:kronogram/services/authentication.dart';
 import 'package:kronogram/services/post.dart';
+import 'package:http/http.dart' as http;
 
 class FacebookPage extends StatefulWidget {
   FacebookPage({Key key, this.auth, this.userId, this.logoutCallback, this.db})
@@ -21,8 +21,12 @@ class FacebookPage extends StatefulWidget {
 
 class _FacebookPageState extends State<FacebookPage> {
 
-  Future getPosts() {
-
+  Future getPosts() async{
+    var fbUser = await widget.db.getFacebookInfo(widget.userId);
+    final token = fbUser['token'];
+    final graphResponse = await http.get('https://graph.facebook.com/me/posts?fields=id,created_time,message,place&access_token=${token}');
+    final profile = JSON.jsonDecode(graphResponse.body);
+    print(profile);
   }
 
   @override
@@ -35,6 +39,7 @@ class _FacebookPageState extends State<FacebookPage> {
         children: <Widget>[
           RaisedButton(
             onPressed: () {
+              getPosts();
             },
             color: Colors.blue,
             child: new Text('Request Posts'),

@@ -9,7 +9,7 @@ abstract class BaseDatabase {
   Future<String> getUsername(String userID);
   Future<void> setUsername(String userID, String username);
 
-  Future<String> getFacebookInfo(String userID);
+  Future<Map> getFacebookInfo(String userID);
   Future<void> setFacebookInfo(String userID, Map facebookId);
 
   Future<Map> getTwitterInfo(String userID);
@@ -62,7 +62,7 @@ class Database implements BaseDatabase {
     return setField(userID, _usernameField, username);
   }
 
-  Future<String> getFacebookInfo(String userID) async {
+  Future<Map> getFacebookInfo(String userID) async {
     var snapshot = await getDocumentSnapshot(userID);
     return snapshot.data.remove(_facebookInfoField);
   }
