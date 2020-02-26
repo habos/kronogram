@@ -5,13 +5,13 @@ import 'package:kronogram/UI_pages/values/values.dart';
 
 class SettingsAddAccountsWidget extends StatelessWidget {
 
-  void onLoginPressed(BuildContext context) {
+  void onConfirmPressed(BuildContext context) {
 
   }
 
   void onCancelPressed(BuildContext context) => Navigator.pop(context);
 
-  void onCancelTwoPressed(BuildContext context) =>
+  void onLogoutPressed(BuildContext context) =>
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => LoginPageWidget()));
 
@@ -19,6 +19,9 @@ class SettingsAddAccountsWidget extends StatelessWidget {
 
   }
 
+  void onEditBirthDatePressed(BuildContext context) {
+
+  }
   void onInstagramSignInPressed(BuildContext context) {
 
   }
@@ -45,7 +48,7 @@ class SettingsAddAccountsWidget extends StatelessWidget {
           alignment: Alignment.topLeft,
           child: Container(
             height: 40,
-            margin: EdgeInsets.only(left: 15, top:15),
+            margin: EdgeInsets.only(left: 15, top:25),
             child: Row(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -150,7 +153,7 @@ class SettingsAddAccountsWidget extends StatelessWidget {
                           height: 15,
                           margin: EdgeInsets.only(left: 10),
                           child:FlatButton(
-                            onPressed: () => this.onCancelPressed(context),
+                            onPressed: () => this.onEditBirthDatePressed(context),
                             color: Color.fromARGB(255, 255, 255, 255),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -597,7 +600,7 @@ class SettingsAddAccountsWidget extends StatelessWidget {
                 width: 100,
                 height: 29,
                 child: FlatButton(
-                  onPressed: () => this.onLoginPressed(context),
+                  onPressed: () => this.onConfirmPressed(context),
                   color: Color.fromARGB(255, 255, 255, 255),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -654,7 +657,7 @@ class SettingsAddAccountsWidget extends StatelessWidget {
           height: 29,
           margin: EdgeInsets.only(bottom: 36),
           child: FlatButton(
-            onPressed: () => this.onCancelTwoPressed(context),
+            onPressed: () => this.onLogoutPressed(context),
             color: Color.fromARGB(255, 255, 255, 255),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10)),
