@@ -46,8 +46,8 @@ class UserMapWidget extends StatelessWidget {
             color: Color.fromARGB(255, 112, 112, 112),
           ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: ListView(
+          //crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Align(
               alignment: Alignment.topLeft,
@@ -58,32 +58,8 @@ class UserMapWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      width: 52,
-                      height: 32,
-                      margin: EdgeInsets.only(top: 18, right: 2),
-                      child: Switch.adaptive(
-                        value: false,
-                        inactiveTrackColor: Color.fromARGB(60, 0, 0, 0),
-                        onChanged: (value) {
 
-                        },
-                        activeColor: Color.fromARGB(255, 184, 184, 184),
-                        activeTrackColor: AppColors.secondaryElement,
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 18, left:5, right: 4),
-                      child: Text(
-                        "SHOW FREINDS",
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 0, 0, 0),
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14,
-                        ),
-                      ),
-                    ),
+
                   ],
                 ),
               ),

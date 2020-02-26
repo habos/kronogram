@@ -13,6 +13,7 @@ class UserCurrentDateWidget extends StatelessWidget {
   void onButtonValueChanged(BuildContext context) {
 
   }
+/*
 
   void onnavigationBarItemPressed(BuildContext context) {
 
@@ -28,12 +29,13 @@ class UserCurrentDateWidget extends StatelessWidget {
   void onMAPSPressed(BuildContext context) => Navigator.push(context, MaterialPageRoute(builder: (context) => UserMapWidget()));
   void onTIMELINEPressed(BuildContext context) => Navigator.push(context, MaterialPageRoute(builder: (context) => UserTimelineWidget()));
   void onDATEPressed(BuildContext context) => Navigator.push(context, MaterialPageRoute(builder: (context) => UserCurrentDateWidget()));
+*/
 
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
-     /* extendBodyBehindAppBar: true,
+     /*extendBodyBehindAppBar: true,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(70.0),
       child: AppBar(
@@ -196,8 +198,8 @@ class UserCurrentDateWidget extends StatelessWidget {
         automaticallyImplyLeading: false,
       ),
 
-      ),*/
-
+      ),
+*/
 
 
 
@@ -227,7 +229,7 @@ child: myAppBar(
           children: [
             Positioned(
               left: 10,
-              top: 38,
+              top: 0,
               right: 11,
               child: Container(
                 height: 594,
@@ -240,75 +242,25 @@ child: myAppBar(
             ),
             Positioned(
               left: 10,
-              top: 42,
+              top: 0,
               right: 10,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Container(
-                    height: 35,
-                    margin: EdgeInsets.only(left: 11),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: Container(
-                            margin: EdgeInsets.only(top: 18),
-                            child: Text(
-                              "TODAY…",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 0, 0, 0),
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Spacer(),
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: Container(
-                            width:235,
-                            height: 35,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  width: 52,
-                                  height: 32,
-                                  margin: EdgeInsets.only(top: 18, right: 2),
-                                  child: Switch.adaptive(
-                                    value: false,
-                                    inactiveTrackColor: Color.fromARGB(60, 0, 0, 0),
-                                    onChanged: (value) {
-
-                                    },
-                                    activeColor: Color.fromARGB(255, 184, 184, 184),
-                                    activeTrackColor: AppColors.secondaryElement,
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 18, left:5, right: 4),
-                                  child: Text(
-                                    "SHOW FREINDS",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: Color.fromARGB(255, 0, 0, 0),
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
+                    height: 20,
+                    margin: EdgeInsets.only(left: 10, top: 10),
+                    child: Text(
+                      "TODAY…",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14,
+                      ),
                     ),
                   ),
+
                   Container(
                     height: 628,
                     child: Stack(

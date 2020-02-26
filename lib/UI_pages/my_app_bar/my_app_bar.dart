@@ -36,6 +36,12 @@ Widget build(BuildContext context) {
   return Container(
     height: 150,
     margin: EdgeInsets.only(top: 15),
+      /*
+      decoration: BoxDecoration(
+      color: Color.fromARGB(255, 225, 226, 230),
+
+      ),
+*/
     child:  Column(
 
         children: [
@@ -58,7 +64,12 @@ Widget build(BuildContext context) {
           ),
           FlatButton(
             onPressed: () => this.onUsernamePressed(context),
+            color: Color.fromARGB(255, 255, 255, 255),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
             textColor: Color.fromARGB(255, 112, 112, 112),
+            padding: EdgeInsets.all(0),
             child: Text(
               "username",
               textAlign: TextAlign.left,
@@ -90,7 +101,12 @@ Widget build(BuildContext context) {
           ),
           FlatButton(
             onPressed: () => this.onSEARCHPressed(context),
+            color: Color.fromARGB(255, 255, 255, 255),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
             textColor: Color.fromARGB(255, 112, 112, 112),
+            padding: EdgeInsets.all(0),
             child: Text(
               "SEARCH",
               textAlign: TextAlign.left,
@@ -111,7 +127,12 @@ Widget build(BuildContext context) {
         children: <Widget>[
           FlatButton(
             onPressed: () => this.onDATEPressed(context),
+            color: Color.fromARGB(255, 255, 255, 255),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
             textColor: Color.fromARGB(255, 112, 112, 112),
+            padding: EdgeInsets.all(0),
             child: Text(
               "TODAY",
               textAlign: TextAlign.left,
@@ -124,7 +145,12 @@ Widget build(BuildContext context) {
           ),
           FlatButton(
             onPressed: () => this.onTIMELINEPressed(context),
+            color: Color.fromARGB(255, 255, 255, 255),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
             textColor: Color.fromARGB(255, 112, 112, 112),
+            padding: EdgeInsets.all(0),
             child: Text(
               "TIMELINE",
               textAlign: TextAlign.left,

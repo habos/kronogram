@@ -4,6 +4,7 @@ import 'package:kronogram/UI_pages/osearch_bar_widget/osearch_bar_widget.dart';
 import 'package:kronogram/UI_pages/settings_add_accounts_widget/settings_add_accounts_widget.dart';
 import 'package:kronogram/UI_pages/values/values.dart';
 
+
 import 'package:kronogram/UI_pages/my_app_bar/my_app_bar.dart';
 
 class UserTimelineWidget extends StatelessWidget {
@@ -12,29 +13,37 @@ class UserTimelineWidget extends StatelessWidget {
   
   }
   
-  void onnavigationBarItemPressed(BuildContext context) {
+  /*void onnavigationBarItemPressed(BuildContext context) {
   
   }
   
   void onUsernamePressed(BuildContext context) {
   
   }
-  
+
   void onSETTINGSPressed(BuildContext context) => Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsAddAccountsWidget()));
   
   void onSEARCHPressed(BuildContext context) => Navigator.push(context, MaterialPageRoute(builder: (context) => OSearchBarWidget()));
-  
+
+
+  void onMAPSPressed(BuildContext context) => Navigator.push(context, MaterialPageRoute(builder: (context) => UserMapWidget()));
+  void onTIMELINEPressed(BuildContext context) => Navigator.push(context, MaterialPageRoute(builder: (context) => UserTimelineWidget()));
+  void onDATEPressed(BuildContext context) => Navigator.push(context, MaterialPageRoute(builder: (context) => UserCurrentDateWidget()));
+
+*/
+
   @override
   Widget build(BuildContext context) {
   
     return Scaffold(
-      appBar: PreferredSize(
+        appBar: PreferredSize(
         preferredSize: Size.fromHeight(90.0),
         child: myAppBar(
           //height: 100,
         ),
 
       ),
+
       body: Container(
         constraints: BoxConstraints.expand(),
         decoration: BoxDecoration(
@@ -48,9 +57,9 @@ class UserTimelineWidget extends StatelessWidget {
           alignment: Alignment.topCenter,
           children: [
             Positioned(
-              left: 12,
-              top: 38,
-              right: 9,
+              left: 10,
+              top: 0,
+              right: 11,
               child: Container(
                 height: 594,
                 decoration: BoxDecoration(
@@ -62,22 +71,15 @@ class UserTimelineWidget extends StatelessWidget {
             ),
             Positioned(
               left: 10,
-              top: 42,
+              top: 0,
               right: 10,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Container(
-                    height: 35,
-                    margin: EdgeInsets.only(left: 5),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: Container(
-                            margin: EdgeInsets.only(top: 18),
-                            child: Text(
+                    height: 20,
+                    margin: EdgeInsets.only(left: 10, top: 10),
+                    child: Text(
                               "ALL POSTS!!",
                               textAlign: TextAlign.left,
                               style: TextStyle(
@@ -87,50 +89,9 @@ class UserTimelineWidget extends StatelessWidget {
                               ),
                             ),
                           ),
-                        ),
-                        Spacer(),
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: Container(
-                            width:235,
-                            height: 35,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  width: 52,
-                                  height: 32,
-                                  margin: EdgeInsets.only(top: 18, right: 2),
-                                  child: Switch.adaptive(
-                                    value: false,
-                                    inactiveTrackColor: Color.fromARGB(60, 0, 0, 0),
-                                    onChanged: (value) {
 
-                                    },
-                                    activeColor: Color.fromARGB(255, 184, 184, 184),
-                                    activeTrackColor: AppColors.secondaryElement,
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 18, left:5, right: 4),
-                                  child: Text(
-                                    "SHOW FREINDS",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: Color.fromARGB(255, 0, 0, 0),
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+
+
                   Container(
                     height: 628,
                     child: Stack(
