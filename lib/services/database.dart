@@ -1,104 +1,124 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+// All default parameters are the defaults for a new user.
+
 abstract class BaseDatabase {
-  Future<DocumentSnapshot> getUserData(String userID);
-  Future<void> setField(String userID, String fieldName, String value);
+  Future<bool> isNewUser(String userID);
+  Future<void> setIsNewUser(String userID, {bool status});
 
-  bool isNewUser(String userID);
-  Future<void> setIsNewUser(String userID, bool status);
+  Future<String> getUsername(String userID);
+  Future<void> setUsername(String userID, String username);
 
-  String getFacebookID(String userID);
-  Future<void> setFacebookID(String userID, String facebookID);
+  Future<Map> getFacebookInfo(String userID);
+  Future<void> setFacebookInfo(String userID, Map facebookId);
 
-  String getInstagramID(String userID);
-  Future<void> setInstagramID(String userID, String instagramID);
+  Future<Map> getTwitterInfo(String userID);
+  Future<void> setTwitterInfo(String userID, Map info);
 
-  String getTwitterID(String userID);
-  Future<void> setTwitterID(String userID, String twitterID);
+  Future<Map> getInstagramInfo(String userID);
+  Future<void> setInstagramInfo(String userID, Map info);
 }
 
 class Database implements BaseDatabase {
   final Firestore _firestore = Firestore.instance;
   final String _usersCollectionName = "users";
   final String _newUserStatusField = "is_new_user";
-  final String _fbIDStatusField = "facebook_id";
-  final String _igIDStatusField = "instagram_id";
-  final String _twitterIDStatusField = "twitter_id";
+  final String _usernameField = "username";
+  final String _facebookInfoField = "facebook_info";
+  final String _twitterInfoField = "twitter_info";
+  final String _instagramInfoField = "instagram_info";
+
+  Future<void> setField(String userID, String fieldName, var value) {
+    return _firestore.collection(_usersCollectionName).document(userID).setData({
+      fieldName : value
+    }, merge: true);
+  }
 
   DocumentReference getUserDocumentRef(String userID) {
     return _firestore.collection(_usersCollectionName).document(userID);
   }
 
-  @override
-  Future <DocumentSnapshot> getUserData(String userID) {
+  Future <DocumentSnapshot> getDocumentSnapshot(String userID) {
     return getUserDocumentRef(userID).get();
   }
 
   @override
-  Future<void> setField(String userID, String fieldName, String value) {
-    return _firestore.collection(_usersCollectionName).document(userID).setData({
-      fieldName : value
-    });
+  Future<bool> isNewUser(String userID) async {
+    var snapshot = await getDocumentSnapshot(userID);
+    return snapshot.data.remove(_newUserStatusField);
   }
 
   @override
-  Future<void> createNewUser(String userID){
-    //ToDO Create new user function
+  Future<void> setIsNewUser(String userID, {bool status = true}) {
+    return setField(userID, _newUserStatusField, status);
   }
 
-  @override
-  bool isNewUser(String userID) {
-    bool isNewUser = false;
-    getUserData(userID).then((DocumentSnapshot ds) {
-      isNewUser = ds.data.remove(_newUserStatusField);
-    });
-    return isNewUser;
+  Future<String> getUsername(String userID) async {
+    var snapshot = await getDocumentSnapshot(userID);
+    return snapshot.data.remove(_usernameField);
   }
 
-  @override
-  Future<void> setIsNewUser(String userID, bool status) {
-    return setField(userID, _newUserStatusField, status.toString());
+  Future<void> setUsername(String userID, String username) async {
+    return setField(userID, _usernameField, username);
   }
 
-  @override
-  String getFacebookID(String userID) {
-    String fbID = "";
-    getUserData(userID).then((DocumentSnapshot ds) {
-      fbID = ds.data.remove(_fbIDStatusField);
-    });
-    return fbID;
+  Future<Map> getFacebookInfo(String userID) async {
+    var snapshot = await getDocumentSnapshot(userID);
+    return snapshot.data.remove(_facebookInfoField);
   }
 
-  @override
-  Future<void> setFacebookID(String userID, String facebookID) {
-    return setField(userID, _fbIDStatusField, facebookID);
+  /*
+    Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'token': token,
+      'userId': userId,
+      'expires': expires.millisecondsSinceEpoch,
+      'permissions': permissions,
+      'declinedPermissions': declinedPermissions,
+    };
+  }
+   */
+
+  Future<void> setFacebookInfo(String userID, Map facebookId) async {
+    return setField(userID, _facebookInfoField, facebookId);
   }
 
-  @override
-  String getInstagramID(String userID) {
-    String igID = "";
-    getUserData(userID).then((DocumentSnapshot ds) {
-      igID = ds.data.remove(_igIDStatusField);
-    });
-    return igID;
+  Future<Map> getTwitterInfo(String userID) async {
+    var snapshot = await getDocumentSnapshot(userID);
+    return snapshot.data.remove(_twitterInfoField);
+  }
+  /*
+  Map that is stored in database
+  Map<String, dynamic> toMap() {
+    return {
+      'secret': secret,
+      'token': token,
+      'userId': userId,
+      'username': username,
+    };
+  }
+  */
+
+  Future<void> setTwitterInfo(String userID, Map info) async {
+    return setField(userID, _twitterInfoField, info);
   }
 
-  @override
-  Future<void> setInstagramID(String userID, String instagramID) {
-    return setField(userID, _igIDStatusField, instagramID);
+  Future<Map> getInstagramInfo(String userID) async {
+    var snapshot = await getDocumentSnapshot(userID);
+    return snapshot.data.remove(_instagramInfoField);
   }
 
-  @override
-  String getTwitterID(String userID) {
-    String twitterID = "";
-    getUserData(userID).then((DocumentSnapshot ds) {
-      twitterID = ds.data.remove(_twitterIDStatusField);
-    });
-    return twitterID;
+/*
+  Map<String, dynamic> toMap(){
+    return {
+      'token': access,
+      'userId': id,
+    };
+  }
+ */
+
+  Future<void> setInstagramInfo(String userID, Map info) async {
+    return setField(userID, _instagramInfoField, info);
   }
 
-  @override
-  Future<void> setTwitterID(String userID, String twitterID) {
-    return setField(userID, _twitterIDStatusField, twitterID);
-  }
 }

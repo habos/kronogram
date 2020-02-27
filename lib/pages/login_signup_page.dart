@@ -1,12 +1,14 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import '../services/database.dart';
 import '../services/authentication.dart';
 
 class LoginSignupPage extends StatefulWidget {
-  LoginSignupPage({this.auth, this.loginCallback});
+  LoginSignupPage({this.auth, this.db, this.loginCallback});
 
   final BaseAuth auth;
+  final Database db;
   final VoidCallback loginCallback;
 
   @override
@@ -22,6 +24,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
   bool _isLoginForm;
   String _password;
   String _email;
+  String _username;
   String _errorMessage;
 
   //Helper Functions
@@ -51,6 +54,8 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         } else {
           authResult = await widget.auth.signUp(_email, _password);
           userId = authResult.user.uid;
+          await widget.db.setUsername(userId, _username);
+          await widget.db.setIsNewUser(userId);
           //widget.auth.sendEmailVerification();
           //_showVerifyEmailSentDialog();
           print('Signed up user: $userId');
@@ -121,6 +126,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
             children: <Widget>[
               showLogo(),
               showEmailInput(),
+              _isLoginForm ?  new Container(width: 0, height: 0) : showUsernameInput(),
               showPasswordInput(),
               showPrimaryButton(),
               showSecondaryButton(),
@@ -191,6 +197,25 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
             )),
         validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
         onSaved: (value) => _password = value.trim(),
+      ),
+    );
+  }
+
+  Widget showUsernameInput() {
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
+      child: new TextFormField(
+        maxLines: 1,
+        autofocus: false,
+        decoration: new InputDecoration(
+            hintText: 'Username',
+            icon: new Icon(
+              Icons.account_circle,
+              color: Colors.grey,
+            )),
+        validator: (value) => value.isEmpty ? 'Username can\'t be empty' : null,
+        onSaved: (value) => _username = value.trim(),
       ),
     );
   }
