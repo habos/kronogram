@@ -16,7 +16,7 @@ class Post {
   }
 }
 
-class Tweet extends Post {
+class OldTweet extends Post {
 
   String screenname;
   TwitterLocation location; //can be null
@@ -24,7 +24,7 @@ class Tweet extends Post {
   List links = new List();  //attached urls
 
 
-  Tweet.fromJson(Map<String, dynamic> json, String userId) {
+  OldTweet.fromJson(Map<String, dynamic> json, String userId) {
     id = json['id_str'];
     String dateStr = _parseDate(json['created_at']);
     DateTime date = DateTime.parse(dateStr);
@@ -94,12 +94,12 @@ class Tweet extends Post {
 }
 
 //Should it just be it's own tweet but with retweeted username added, etc. ?
-class ReTweet extends Tweet {
-  Tweet subTweet;
+class ReTweet extends OldTweet {
+  OldTweet subTweet;
 
   ReTweet.fromJson(Map<String, dynamic> json, String userId) : super.fromJson(json, userId) {
     if(json['retweeted_status']['quoted_status'] != null) subTweet = new QuoteTweet.fromJson(json, userId);
-    else subTweet = new Tweet.fromJson(json['retweeted_status'], userId);
+    else subTweet = new OldTweet.fromJson(json['retweeted_status'], userId);
   }
 
   List<TwitterMedia> getMedia() {
@@ -111,12 +111,12 @@ class ReTweet extends Tweet {
   }
 }
 
-class QuoteTweet extends Tweet {
-  Tweet subTweet;
+class QuoteTweet extends OldTweet {
+  OldTweet subTweet;
 
   QuoteTweet.fromJson(Map<String,dynamic> json, String userId) : super.fromJson(json, userId) {
     if(json['quoted_status']['quoted_status'] != null) subTweet = new QuoteTweet.fromJson(json, userId);
-    subTweet = new Tweet.fromJson(json['quoted_status'], userId);
+    subTweet = new OldTweet.fromJson(json['quoted_status'], userId);
   }
 
   List<TwitterMedia> getMedia() {

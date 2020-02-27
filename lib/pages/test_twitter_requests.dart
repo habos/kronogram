@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:kronogram/models/KronoTweet.dart';
+import 'package:tweet_ui/models/api/tweet.dart';
 import 'dart:convert' as JSON;
 import 'dart:core';
 import 'package:twitter_api/twitter_api.dart';
@@ -41,6 +43,7 @@ class _TwitterPageState extends State<TwitterPage> {
       },
     );
 
+
     var res = await twitterRequest;
 
 //    print(res.statusCode);
@@ -48,6 +51,8 @@ class _TwitterPageState extends State<TwitterPage> {
 
     var tweetResponse = JSON.jsonDecode(res.body); // decode json tweet object
 //    print(tweets.length);
+
+    KronoTweet kronoTweet = new KronoTweet(Tweet.fromJson(tweetResponse[0]));
 
 
     for(int i =0; i<tweetResponse.length; i++) {
@@ -58,7 +63,7 @@ class _TwitterPageState extends State<TwitterPage> {
         tweets.add(new QuoteTweet.fromJson(tweetResponse[i], widget.userId.toString()));
       }
       else {
-        tweets.add(new Tweet.fromJson(tweetResponse[i], widget.userId.toString()));
+        tweets.add(new OldTweet.fromJson(tweetResponse[i], widget.userId.toString()));
       }
     }
   }
