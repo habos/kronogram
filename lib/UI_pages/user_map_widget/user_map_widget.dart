@@ -23,7 +23,7 @@ class UserMapWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(90.0),
+        preferredSize: Size.fromHeight(110.0),
         child: myAppBar(
             //height: 100,
             ),
