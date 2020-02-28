@@ -34,22 +34,24 @@ Key key,
 @override
 Widget build(BuildContext context) {
   return Container(
-    height: 150,
-    margin: EdgeInsets.only(top: 15),
-      /*
+    height: 120,
+    margin: EdgeInsets.only(top: 25),
+
       decoration: BoxDecoration(
-      color: Color.fromARGB(255, 225, 226, 230),
+      color:AppColors.blackBackground,
 
       ),
-*/
+
     child:  Column(
 
         children: [
         Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        //mainAxisAlignment: MainAxisAlignment.end,
+        //crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          FlatButton(
+          Container(
+          height: 15,
+            child: FlatButton(
             onPressed: () => this.onnavigationBarItemPressed(context),
             textColor: Color.fromARGB(255, 112, 112, 112),
             child: Text(
@@ -62,6 +64,12 @@ Widget build(BuildContext context) {
               ),
             ),
           ),
+            ),
+          Container(height: 15, width: 3, color: Colors.black,
+            margin: const EdgeInsets.only(),
+          ),
+
+
           FlatButton(
             onPressed: () => this.onUsernamePressed(context),
             color: Color.fromARGB(255, 255, 255, 255),
@@ -80,6 +88,8 @@ Widget build(BuildContext context) {
               ),
             ),
           ),
+
+
           FlatButton(
             onPressed: () => this.onSETTINGSPressed(context),
             color: Color.fromARGB(255, 255, 255, 255),
@@ -99,6 +109,8 @@ Widget build(BuildContext context) {
               ),
             ),
           ),
+
+
           FlatButton(
             onPressed: () => this.onSEARCHPressed(context),
             color: Color.fromARGB(255, 255, 255, 255),
@@ -106,7 +118,7 @@ Widget build(BuildContext context) {
               borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
             textColor: Color.fromARGB(255, 112, 112, 112),
-            padding: EdgeInsets.all(0),
+            padding: EdgeInsets.all(1),
             child: Text(
               "SEARCH",
               textAlign: TextAlign.left,
