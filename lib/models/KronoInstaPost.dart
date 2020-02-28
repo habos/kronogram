@@ -20,6 +20,8 @@ class KronoInstaPost implements KronoPost {
     }
   }
 
+  /// Returns a [Widget] that displays the post.
+  /// Still needs to be implemented.
   @override
   Widget createPostWidget() {
     // TODO: implement createPostWidget
