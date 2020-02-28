@@ -7,23 +7,22 @@ import 'package:kronogram/UI_pages/user_map_widget/user_map_widget.dart';
 import 'package:kronogram/UI_pages/user_current_date_widget/user_current_date_widget.dart';
 
 class myAppBar extends StatelessWidget {
-
 //final double height;
 
-  void onnavigationBarItemPressed(BuildContext context) {
+  void onnavigationBarItemPressed(BuildContext context) {}
 
-  }
+  void onUsernamePressed(BuildContext context) {}
 
-  void onUsernamePressed(BuildContext context) {
-
-  }
-
-  void onSETTINGSPressed(BuildContext context) => Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsAddAccountsWidget()));
-  void onSEARCHPressed(BuildContext context) => Navigator.push(context, MaterialPageRoute(builder: (context) => OSearchBarWidget()));
-  void onMAPSPressed(BuildContext context) => Navigator.push(context, MaterialPageRoute(builder: (context) => UserMapWidget()));
-  void onTIMELINEPressed(BuildContext context) => Navigator.push(context, MaterialPageRoute(builder: (context) => UserTimelineWidget()));
-  void onDATEPressed(BuildContext context) => Navigator.push(context, MaterialPageRoute(builder: (context) => UserCurrentDateWidget()));
-
+  void onSETTINGSPressed(BuildContext context) => Navigator.push(context,
+      MaterialPageRoute(builder: (context) => SettingsAddAccountsWidget()));
+  void onSEARCHPressed(BuildContext context) => Navigator.push(
+      context, MaterialPageRoute(builder: (context) => OSearchBarWidget()));
+  void onMAPSPressed(BuildContext context) => Navigator.push(
+      context, MaterialPageRoute(builder: (context) => UserMapWidget()));
+  void onTIMELINEPressed(BuildContext context) => Navigator.push(
+      context, MaterialPageRoute(builder: (context) => UserTimelineWidget()));
+  void onDATEPressed(BuildContext context) => Navigator.push(context,
+      MaterialPageRoute(builder: (context) => UserCurrentDateWidget()));
 
 //class myAppBar extends PreferredSize {
   const myAppBar({
@@ -38,12 +37,10 @@ class myAppBar extends StatelessWidget {
       margin: EdgeInsets.only(top: 25),
 
       decoration: BoxDecoration(
-        color:AppColors.blackBackground,
-
+        color: AppColors.blackBackground,
       ),
 
-      child:  Column(
-
+      child: Column(
         children: [
           Row(
             //mainAxisAlignment: MainAxisAlignment.end,
@@ -65,11 +62,12 @@ class myAppBar extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(height: 15, width: 3, color: Colors.black,
+              Container(
+                height: 15,
+                width: 3,
+                color: Colors.black,
                 margin: const EdgeInsets.only(),
               ),
-
-
               FlatButton(
                 onPressed: () => this.onUsernamePressed(context),
                 color: Color.fromARGB(255, 255, 255, 255),
@@ -88,8 +86,6 @@ class myAppBar extends StatelessWidget {
                   ),
                 ),
               ),
-
-
               FlatButton(
                 onPressed: () => this.onSETTINGSPressed(context),
                 color: Color.fromARGB(255, 255, 255, 255),
@@ -98,7 +94,6 @@ class myAppBar extends StatelessWidget {
                 ),
                 textColor: Color.fromARGB(255, 112, 112, 112),
                 padding: EdgeInsets.all(0),
-
                 child: Text(
                   "SETTINGS",
                   textAlign: TextAlign.left,
@@ -109,8 +104,6 @@ class myAppBar extends StatelessWidget {
                   ),
                 ),
               ),
-
-
               FlatButton(
                 onPressed: () => this.onSEARCHPressed(context),
                 color: Color.fromARGB(255, 255, 255, 255),
@@ -130,7 +123,6 @@ class myAppBar extends StatelessWidget {
                 ),
               ),
             ],
-
           ),
           Row(
             //mainAxisAlignment: MainAxisAlignment.end,
@@ -200,9 +192,7 @@ class myAppBar extends StatelessWidget {
                     child: Switch.adaptive(
                       value: false,
                       inactiveTrackColor: Color.fromARGB(60, 0, 0, 0),
-                      onChanged: (value) {
-
-                      },
+                      onChanged: (value) {},
                       activeColor: Color.fromARGB(255, 184, 184, 184),
                       activeTrackColor: AppColors.secondaryElement,
                     ),
@@ -224,7 +214,6 @@ class myAppBar extends StatelessWidget {
             ],
           ),
         ],
-
       ),
       // maybe other AppBar properties
       //backgroundColor: Color.fromARGB(255, 240, 247, 250),
@@ -232,13 +221,11 @@ class myAppBar extends StatelessWidget {
       //automaticallyImplyLeading: false,
       // ),
       //),
-
     );
   }
 //@override
 //Size get preferredSize => Size.fromHeight(height);
 }
-
 
 /*
 class myAppBar extends PreferredSizeWidget {
