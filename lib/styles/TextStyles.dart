@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
+/// TextStyle for the 'message' of a Tweet.
 const defaultTweetTextStyle = const TextStyle(
   fontSize: 17.0,
   fontFamily: 'Helvetica',
