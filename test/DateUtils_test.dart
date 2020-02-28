@@ -24,9 +24,9 @@ void main() {
       String createdAtA = "Thu Feb 27 22:20:44 +0000 2020";
       String createdAtB = "Sat Dec 22 10:24:12 +0700 2010";
       DateTime actualA = parseTwitterCreationTime(createdAtA);
-      DateTime expectedA = new DateTime(2020, 2, 27, 22, 20, 44);
+      DateTime expectedA = new DateTime.utc(2020, 2, 27, 22, 20, 44);
       DateTime actualB = parseTwitterCreationTime(createdAtB);
-      DateTime expectedB = new DateTime(2010, 12, 22, 10, 24, 12);
+      DateTime expectedB = new DateTime.utc(2010, 12, 22, 10, 24, 12);
 
       expect(actualA.isAtSameMomentAs(expectedA), isTrue);
       expect(actualB.isAtSameMomentAs(expectedB), isTrue);
