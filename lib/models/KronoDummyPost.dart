@@ -20,11 +20,10 @@ class KronoDummyPost implements KronoPost {
     return DateTime.now();
   }
 
-  /// Returns [SMPlatform.facebook]
+  /// Returns [SMPlatform.facebook].
+  /// This value is arbitrary since this is just a dummy class.
   @override
   SMPlatform getPlatform() {
-    // Just returning an arbitrary value, this could be instagram or twitter
-    //     as well.
     return SMPlatform.facebook;
   }
 }
