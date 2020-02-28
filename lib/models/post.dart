@@ -1,5 +1,5 @@
-import 'package:kronogram/services/media.dart';
-import 'package:kronogram/services/location.dart';
+import 'package:kronogram/models/media.dart';
+import 'package:kronogram/models/location.dart';
 
 class Post {
   String userId;

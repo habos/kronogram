@@ -1,0 +1,45 @@
+const _monthToNumberMap = {
+  'Jan' : '01',
+  'Feb' : '02',
+  'Mar' : '03',
+  'Apr' : '04',
+  'May' : '05',
+  'Jun' : '06',
+  'Jul' : '07',
+  'Aug' : '08',
+  'Sep' : '09',
+  'Oct' : '10',
+  'Nov' : '11',
+  'Dec' : '12'
+};
+
+String monthToNumber(String month) {
+  return _monthToNumberMap[month];
+}
+
+// Takes in a twitter timestamp in the format "Thu Feb 27 22:20:44 +0000 2020"
+//     and returns a DateTime object.
+DateTime parseTwitterCreationTime(String createdAt) {
+  // Should give us a list of size 6.
+  List<String> splitted = createdAt.split(" ");
+
+  // splitted[0] gives the weekday, while splitted[4] gives us a timezone difference.
+  // We don't need the weekday, and since twitter always gives a UTC timestamp,
+  // we don't need the timezone either.
+
+  String month = monthToNumber(splitted[1]);
+  String day = splitted[2];
+  String time = splitted[3];
+  String year = splitted[5];
+
+
+  var buffer = new StringBuffer();
+  buffer.write(year);
+  buffer.write('-');
+  buffer.write(month);
+  buffer.write('-');
+  buffer.write(day);
+  buffer.write(' ');
+  buffer.write(time);
+  return DateTime.parse(buffer.toString());
+}

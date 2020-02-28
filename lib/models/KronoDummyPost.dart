@@ -6,10 +6,16 @@ import 'package:kronogram/models/KronoPost.dart';
 
 class KronoDummyPost extends KronoPost {
 
+
   @override
   Widget createPostWidget() {
     return Container(
       color: Colors.white
     );
+  }
+
+  @override
+  DateTime getCreationTime() {
+    return DateTime.now();
   }
 }
