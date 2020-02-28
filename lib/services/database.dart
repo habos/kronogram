@@ -28,7 +28,7 @@ class Database implements BaseDatabase {
   final String _twitterInfoField = "twitter_info";
   final String _instagramInfoField = "instagram_info";
 
-  Future<void> setField(String userID, String fieldName, var value) {
+  Future<void> setFieldInUsers(String userID, String fieldName, var value) {
     return _firestore
         .collection(_usersCollectionName)
         .document(userID)
@@ -39,32 +39,32 @@ class Database implements BaseDatabase {
     return _firestore.collection(_usersCollectionName).document(userID);
   }
 
-  Future<DocumentSnapshot> getDocumentSnapshot(String userID) {
+  Future<DocumentSnapshot> getUserDocumentSnapshot(String userID) {
     return getUserDocumentRef(userID).get();
   }
 
   @override
   Future<bool> isNewUser(String userID) async {
-    var snapshot = await getDocumentSnapshot(userID);
+    var snapshot = await getUserDocumentSnapshot(userID);
     return snapshot.data.remove(_newUserStatusField);
   }
 
   @override
   Future<void> setIsNewUser(String userID, {bool status = true}) {
-    return setField(userID, _newUserStatusField, status);
+    return setFieldInUsers(userID, _newUserStatusField, status);
   }
 
   Future<String> getUsername(String userID) async {
-    var snapshot = await getDocumentSnapshot(userID);
+    var snapshot = await getUserDocumentSnapshot(userID);
     return snapshot.data.remove(_usernameField);
   }
 
   Future<void> setUsername(String userID, String username) async {
-    return setField(userID, _usernameField, username);
+    return setFieldInUsers(userID, _usernameField, username);
   }
 
   Future<Map> getFacebookInfo(String userID) async {
-    var snapshot = await getDocumentSnapshot(userID);
+    var snapshot = await getUserDocumentSnapshot(userID);
     return snapshot.data.remove(_facebookInfoField);
   }
 
@@ -81,11 +81,11 @@ class Database implements BaseDatabase {
    */
 
   Future<void> setFacebookInfo(String userID, Map facebookId) async {
-    return setField(userID, _facebookInfoField, facebookId);
+    return setFieldInUsers(userID, _facebookInfoField, facebookId);
   }
 
   Future<Map> getTwitterInfo(String userID) async {
-    var snapshot = await getDocumentSnapshot(userID);
+    var snapshot = await getUserDocumentSnapshot(userID);
     return snapshot.data.remove(_twitterInfoField);
   }
   /*
@@ -101,11 +101,11 @@ class Database implements BaseDatabase {
   */
 
   Future<void> setTwitterInfo(String userID, Map info) async {
-    return setField(userID, _twitterInfoField, info);
+    return setFieldInUsers(userID, _twitterInfoField, info);
   }
 
   Future<Map> getInstagramInfo(String userID) async {
-    var snapshot = await getDocumentSnapshot(userID);
+    var snapshot = await getUserDocumentSnapshot(userID);
     return snapshot.data.remove(_instagramInfoField);
   }
 
@@ -119,6 +119,6 @@ class Database implements BaseDatabase {
  */
 
   Future<void> setInstagramInfo(String userID, Map info) async {
-    return setField(userID, _instagramInfoField, info);
+    return setFieldInUsers(userID, _instagramInfoField, info);
   }
 }
