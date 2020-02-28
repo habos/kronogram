@@ -22,6 +22,7 @@ class TwitterPage extends StatefulWidget {
 
 class _TwitterPageState extends State<TwitterPage> {
   List tweets = new List();
+  Widget tweetExample = Container(color: Colors.white);
 
   Future getTweets() async {
     var twitterUser = await widget.db.getTwitterInfo(widget.userId);
@@ -52,7 +53,9 @@ class _TwitterPageState extends State<TwitterPage> {
       tweets.add(new KronoTweet(Tweet.fromJson(tweetResponse[i])));
     }
 
-    print(tweets);
+    setState(() {
+      tweetExample = tweets[0].createPostWidget();
+    });
   }
 
   @override
@@ -61,7 +64,7 @@ class _TwitterPageState extends State<TwitterPage> {
       appBar: new AppBar(
         title: new Text('Twitter Request'),
       ),
-      body: Stack(
+      body: Column(
         children: <Widget>[
           RaisedButton(
             onPressed: () {
@@ -69,7 +72,7 @@ class _TwitterPageState extends State<TwitterPage> {
             },
             color: Colors.blue,
             child: new Text('Request Tweets'),
-          ),
+          ), tweetExample
         ],
       ),
     );
