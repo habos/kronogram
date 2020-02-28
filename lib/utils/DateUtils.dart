@@ -40,7 +40,9 @@ DateTime parseTwitterCreationTime(String createdAt) {
   buffer.write(day);
   buffer.write(' ');
   buffer.write(time);
-  return DateTime.parse(buffer.toString());
+  DateTime date = DateTime.parse(buffer.toString());
+  return new DateTime.utc(
+      date.year, date.month, date.day, date.hour, date.minute, date.second);
 }
 
 /// Takes in an Instagram creation time [String] and returns
