@@ -47,7 +47,7 @@ class _TwitterPageState extends State<TwitterPage> {
 
     var tweetResponse = JSON.jsonDecode(res.body); // decode json tweet object
 
-    for (int i = 0; i < tweetResponse.length; i++) {
+    for (var i = 0; i < tweetResponse.length; i++) {
       tweets.add(new KronoTweet(Tweet.fromJson(tweetResponse[i])));
     }
 
