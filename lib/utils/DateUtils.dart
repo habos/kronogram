@@ -17,7 +17,7 @@ String monthToNumber(String month) {
   return _monthToNumberMap[month];
 }
 
-/// Takes in a twitter creation time [String] in the format
+/// Takes in a Twitter creation time [String] in the format
 /// "Thu Feb 27 22:20:44 +0000 2020" and returns a [DateTime] object.
 DateTime parseTwitterCreationTime(String createdAt) {
   // Should give us a list of size 6.
@@ -41,4 +41,12 @@ DateTime parseTwitterCreationTime(String createdAt) {
   buffer.write(' ');
   buffer.write(time);
   return DateTime.parse(buffer.toString());
+}
+
+/// Takes in an Instagram creation time [String] and returns
+/// a [DateTime] object.
+DateTime parseInstagramCreationTime(String createdAt) {
+  DateTime date = DateTime.parse(createdAt);
+  return new DateTime.utc(date.year, date.month, date.day, date.hour,
+      date.minute, date.second);
 }

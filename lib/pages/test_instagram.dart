@@ -3,7 +3,7 @@ import 'dart:convert' as JSON;
 import 'dart:core';
 import 'package:kronogram/services/database.dart';
 import 'package:kronogram/services/authentication.dart';
-import 'package:kronogram/models/post.dart';
+import 'package:kronogram/models/InstaPost.dart';
 import 'package:http/http.dart' as http;
 
 class InstagramPage extends StatefulWidget {
@@ -26,21 +26,21 @@ class _InstagramPageState extends State<InstagramPage> {
     var instaUser = await widget.db.getInstagramInfo(widget.userId);
     final token = instaUser['token'];
     final graphResponse = await http.get(
-        'https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,timestamp&access_token=${token}');
-    final profile = JSON.jsonDecode(graphResponse.body);
-    print(profile);
-    for (var x in profile['data']) {
-      InstaPost p = new InstaPost.fromJson(x, widget.userId);
-      if (x['media_type'] == 'CAROUSEL_ALBUM') {
-        var id = p.id;
+        'https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,timestamp&access_token=$token');
+    final jsonPostHistory = JSON.jsonDecode(graphResponse.body);
+    print(jsonPostHistory);
+    for (var jsonPost in jsonPostHistory['data']) {
+      InstaPost instaPost = new InstaPost.fromJson(jsonPost);
+      if (jsonPost['media_type'] == 'CAROUSEL_ALBUM') {
+        var id = instaPost.id;
         var albumResponse = await http.get(
-            'https://graph.instagram.com/${id}/children?fields=media_type,media_url&access_token=${token}');
+            'https://graph.instagram.com/$id/children?fields=media_type,media_url&access_token=$token');
         var res = JSON.jsonDecode(albumResponse.body);
         for (var y in res['data']) {
-          p.addMedia(y['media_type'], y['media_url']);
+          instaPost.addMedia(y['media_type'], y['media_url']);
         }
       }
-      posts.add(p);
+      posts.add(instaPost);
     }
   }
 
