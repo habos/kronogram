@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kronogram/models/KronoInstaPost.dart';
 import 'dart:convert' as JSON;
 import 'dart:core';
 import 'package:kronogram/services/database.dart';
@@ -20,7 +21,8 @@ class InstagramPage extends StatefulWidget {
 }
 
 class _InstagramPageState extends State<InstagramPage> {
-  List<InstaPost> posts = new List();
+  List<KronoInstaPost> posts = new List();
+  Widget instagramExample = new Container();
 
   Future getPosts() async {
     var instaUser = await widget.db.getInstagramInfo(widget.userId);
@@ -40,8 +42,12 @@ class _InstagramPageState extends State<InstagramPage> {
           instaPost.addMedia(y['media_type'], y['media_url']);
         }
       }
-      posts.add(instaPost);
+      posts.add(new KronoInstaPost(instaPost));
     }
+
+    setState(() {
+      instagramExample = posts[0].createPostWidget();
+    });
   }
 
   @override
@@ -50,7 +56,7 @@ class _InstagramPageState extends State<InstagramPage> {
       appBar: new AppBar(
         title: new Text('Instagram Request'),
       ),
-      body: Stack(
+      body: Column(
         children: <Widget>[
           RaisedButton(
             onPressed: () {
@@ -59,6 +65,7 @@ class _InstagramPageState extends State<InstagramPage> {
             color: Colors.blue,
             child: new Text('Request Posts'),
           ),
+          instagramExample
         ],
       ),
     );
