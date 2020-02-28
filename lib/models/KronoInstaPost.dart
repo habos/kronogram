@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kronogram/models/InstaPost.dart';
+import 'package:kronogram/models/InstaPostData.dart';
 import 'package:kronogram/models/KronoPost.dart';
 import 'package:kronogram/models/SMPlatform.dart';
 import 'package:kronogram/widgets/InstagramPostView.dart';
@@ -30,5 +30,10 @@ class KronoInstaPost implements KronoPost {
   @override
   SMPlatform getPlatform() {
     return SMPlatform.instagram;
+  }
+
+  @override
+  int getPostID() {
+    return _instaPost.getID();
   }
 }

@@ -36,4 +36,9 @@ class KronoTweet implements KronoPost {
   SMPlatform getPlatform() {
     return SMPlatform.twitter;
   }
+
+  @override
+  int getPostID() {
+    return int.parse(_tweet.idStr);
+  }
 }

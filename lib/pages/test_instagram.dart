@@ -4,7 +4,7 @@ import 'dart:convert' as JSON;
 import 'dart:core';
 import 'package:kronogram/services/database.dart';
 import 'package:kronogram/services/authentication.dart';
-import 'package:kronogram/models/InstaPost.dart';
+import 'package:kronogram/models/InstaPostData.dart';
 import 'package:http/http.dart' as http;
 
 class InstagramPage extends StatefulWidget {

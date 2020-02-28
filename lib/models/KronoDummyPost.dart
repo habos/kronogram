@@ -22,4 +22,9 @@ class KronoDummyPost implements KronoPost {
   SMPlatform getPlatform() {
     return SMPlatform.facebook;
   }
+
+  @override
+  int getPostID() {
+    return 1;
+  }
 }
