@@ -10,7 +10,7 @@ abstract class KronoPost {
   /// was made.
   DateTime getCreationTime();
 
-  /// Returns an [SMPlatform] value corresponding to the platform on which
+  /// Returns an [SMPlatform] enum value corresponding to the platform on which
   /// the original post was made.
   SMPlatform getPlatform();
 }
