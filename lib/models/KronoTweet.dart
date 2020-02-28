@@ -13,7 +13,7 @@ class KronoTweet implements KronoPost {
   DateTime creationTime;
 
   static const _defaultTextStyle = const TextStyle(
-    fontSize: 18.0,
+    fontSize: 17.0,
     fontFamily: 'Helvetica',
     fontWeight: FontWeight.w300,
     height: 1.1,
