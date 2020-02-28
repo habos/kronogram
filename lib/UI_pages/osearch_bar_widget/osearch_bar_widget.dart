@@ -1,18 +1,15 @@
-
 import 'package:flutter/material.dart';
 import 'package:kronogram/UI_pages/search_results_widget/search_results_widget.dart';
 import 'package:kronogram/UI_pages/values/values.dart';
 
-
 class OSearchBarWidget extends StatelessWidget {
-  
   void onCancelButtonPressed(BuildContext context) => Navigator.pop(context);
-  
-  void onSearchButtonPressed(BuildContext context) => Navigator.push(context, MaterialPageRoute(builder: (context) => SearchResultsWidget()));
-  
+
+  void onSearchButtonPressed(BuildContext context) => Navigator.push(
+      context, MaterialPageRoute(builder: (context) => SearchResultsWidget()));
+
   @override
   Widget build(BuildContext context) {
-  
     return Scaffold(
       body: Container(
         constraints: BoxConstraints.expand(),
@@ -21,7 +18,6 @@ class OSearchBarWidget extends StatelessWidget {
           color: Color.fromARGB(255, 227, 228, 232),
           border: Border.all(
             width: 1,
-
             color: Color.fromARGB(255, 112, 112, 112),
           ),
           borderRadius: BorderRadius.all(Radius.circular(10)),

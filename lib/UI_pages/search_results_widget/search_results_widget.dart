@@ -1,21 +1,17 @@
-
 import 'package:flutter/material.dart';
 import 'package:kronogram/UI_pages/user_current_date_widget/user_current_date_widget.dart';
 import 'package:kronogram/UI_pages/values/values.dart';
 
 class SearchResultsWidget extends StatelessWidget {
-
   void onCancelButtonPressed(BuildContext context) => Navigator.pop(context);
 
-  void onSearchButtonPressed(BuildContext context) {
+  void onSearchButtonPressed(BuildContext context) {}
 
-  }
-
-  void onSymbolPressed(BuildContext context) => Navigator.push(context, MaterialPageRoute(builder: (context) => UserCurrentDateWidget()));
+  void onSymbolPressed(BuildContext context) => Navigator.push(context,
+      MaterialPageRoute(builder: (context) => UserCurrentDateWidget()));
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Container(
         constraints: BoxConstraints.expand(),

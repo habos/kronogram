@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:kronogram/UI_pages/osearch_bar_widget/osearch_bar_widget.dart';
 import 'package:kronogram/UI_pages/settings_add_accounts_widget/settings_add_accounts_widget.dart';
@@ -10,10 +9,7 @@ import 'package:kronogram/UI_pages/my_app_bar/my_app_bar.dart';
 import 'package:kronogram/UI_pages/display_posts/display_posts.dart';
 
 class UserCurrentDateWidget extends StatelessWidget {
-
-  void onButtonValueChanged(BuildContext context) {
-
-  }
+  void onButtonValueChanged(BuildContext context) {}
 /*
 
   void onnavigationBarItemPressed(BuildContext context) {
@@ -35,12 +31,10 @@ class UserCurrentDateWidget extends StatelessWidget {
   final List<String> entries = <String>['A', 'B', 'C'];
   final List<int> colorCodes = <int>[600, 500, 100];
 
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-     /*extendBodyBehindAppBar: true,
+      /*extendBodyBehindAppBar: true,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(70.0),
       child: AppBar(
@@ -206,20 +200,12 @@ class UserCurrentDateWidget extends StatelessWidget {
       ),
 */
 
-
-
-
-
-
-
-appBar: PreferredSize(
+      appBar: PreferredSize(
         preferredSize: Size.fromHeight(110.0),
-child: myAppBar(
-  //height: 100,
-),
-
-),
-
+        child: myAppBar(
+            //height: 100,
+            ),
+      ),
       body: Container(
         constraints: BoxConstraints.expand(),
         decoration: BoxDecoration(
@@ -230,67 +216,67 @@ child: myAppBar(
           ),
         ),
 
-
-
 //***************************************************************************
 //NEW CODE - START **********************************************************
-    child: Container(
-    margin: EdgeInsets.only(left: 10, right:10),
-    decoration: BoxDecoration(
-    //color: AppColors.ternaryBackground,
-    borderRadius: Radii.k10pxRadius,
-    ),
+        child: Container(
+          margin: EdgeInsets.only(left: 10, right: 10),
+          decoration: BoxDecoration(
+            //color: AppColors.ternaryBackground,
+            borderRadius: Radii.k10pxRadius,
+          ),
+          child: ListView.separated(
+            padding: const EdgeInsets.all(8),
+            itemCount: entries.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Container(
+                //height: 50,
+                //color: Colors.amber[colorCodes[index]],
+                //child: Center(child: Text('Entry ${entries[index]}')),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        //crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Text(
+                            "X years ago today",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 0, 0, 0),
+                              fontWeight: FontWeight.w400,
+                              fontSize: 14,
+                            ),
+                          ),
+                          Container(
+                            height: 1,
+                            width: 240,
+                            color: Colors.black,
+                            margin:
+                                const EdgeInsets.only(left: 10.0, right: 10.0),
+                          ),
+                        ],
+                      ),
+                      testPost(
+                        plat: "facebook",
+                        username: "userX",
+                        action: "posted...",
+                      )
+                    ]),
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) => Divider(
+              color: Colors.black,
+            ),
 
-    child: ListView.separated(
-    padding: const EdgeInsets.all(8),
-    itemCount: entries.length,
-    itemBuilder: (BuildContext context, int index) {
-    return Container(
-    //height: 50,
-    //color: Colors.amber[colorCodes[index]],
-    //child: Center(child: Text('Entry ${entries[index]}')),
-    child: Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children:[
-    Row(
-    //crossAxisAlignment: CrossAxisAlignment.stretch,
-    children: [
-    Text(
-    "X years ago today",
-    textAlign: TextAlign.left,
-    style: TextStyle(
-    color: Color.fromARGB(255, 0, 0, 0),
-    fontWeight: FontWeight.w400,
-    fontSize: 14,),
-    ),
-    Container(height: 1, width: 240, color: Colors.black,
-    margin: const EdgeInsets.only(left: 10.0, right: 10.0),),
-    ],
-    ),
-
-    testPost(
-    plat: "facebook",
-    username: "userX",
-    action: "posted...",
-    )
-    ]
-    ),
-    );
-    },
-    separatorBuilder: (BuildContext context, int index) => Divider(color: Colors.black,),
-
-    //Divider(color: Colors.black,),
-
-    ),
-
-    ),
+            //Divider(color: Colors.black,),
+          ),
+        ),
 
 //NEW CODE - END ************************************************************
 
-
 //***************************************************************************
 //OLD CODE - START **********************************************************
-    /*
+        /*
 
 
 
@@ -480,8 +466,6 @@ child: myAppBar(
         */
 //OLD CODE - END ************************************************************
 //***************************************************************************
-
-
       ),
     );
   }

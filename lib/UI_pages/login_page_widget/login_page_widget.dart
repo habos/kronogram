@@ -1,23 +1,19 @@
-
 import 'package:flutter/material.dart';
 import 'package:kronogram/UI_pages/new_user_widget/new_user_widget.dart';
 import 'package:kronogram/UI_pages/user_current_date_widget/user_current_date_widget.dart';
 import 'package:kronogram/UI_pages/values/values.dart';
 
-
 class LoginPageWidget extends StatelessWidget {
-  
-  void onLoginPressed(BuildContext context) => Navigator.push(context, MaterialPageRoute(builder: (context) => UserCurrentDateWidget()));
-  
-  void onButtonPressed(BuildContext context) => Navigator.push(context, MaterialPageRoute(builder: (context) => NewUserWidget()));
-  
-  void onCancelPressed(BuildContext context) {
-  
-  }
-  
+  void onLoginPressed(BuildContext context) => Navigator.push(context,
+      MaterialPageRoute(builder: (context) => UserCurrentDateWidget()));
+
+  void onButtonPressed(BuildContext context) => Navigator.push(
+      context, MaterialPageRoute(builder: (context) => NewUserWidget()));
+
+  void onCancelPressed(BuildContext context) {}
+
   @override
   Widget build(BuildContext context) {
-  
     return Scaffold(
       //resizeToAvoidBottomPadding: false,
       body: Container(
@@ -113,7 +109,6 @@ class LoginPageWidget extends StatelessWidget {
                 ),
               ),
             ),
-
             Container(
               height: 29,
               margin: EdgeInsets.only(left: 73, right: 60, top: 60),

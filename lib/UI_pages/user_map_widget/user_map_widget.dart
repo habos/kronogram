@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 //import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:kronogram/UI_pages/osearch_bar_widget/osearch_bar_widget.dart';
@@ -8,35 +7,27 @@ import 'package:kronogram/UI_pages/my_app_bar/my_app_bar.dart';
 
 // to use google maps plug in : https://pub.dev/packages/google_maps_flutter
 class UserMapWidget extends StatelessWidget {
-  
-  void onFriendsValueChanged(BuildContext context) {
-  
-  }
-  
-  void onnavigationBarItemPressed(BuildContext context) {
-  
-  }
-  
-  void onUsernamePressed(BuildContext context) {
-  
-  }
-  
-  void onSETTINGSPressed(BuildContext context) => Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsAddAccountsWidget()));
-  
-  void onSEARCHPressed(BuildContext context) => Navigator.push(context, MaterialPageRoute(builder: (context) => OSearchBarWidget()));
-  
+  void onFriendsValueChanged(BuildContext context) {}
+
+  void onnavigationBarItemPressed(BuildContext context) {}
+
+  void onUsernamePressed(BuildContext context) {}
+
+  void onSETTINGSPressed(BuildContext context) => Navigator.push(context,
+      MaterialPageRoute(builder: (context) => SettingsAddAccountsWidget()));
+
+  void onSEARCHPressed(BuildContext context) => Navigator.push(
+      context, MaterialPageRoute(builder: (context) => OSearchBarWidget()));
+
   @override
   Widget build(BuildContext context) {
-  
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(110.0),
         child: myAppBar(
-          //height: 100,
-        ),
-
+            //height: 100,
+            ),
       ),
-
       body: Container(
         constraints: BoxConstraints.expand(),
         decoration: BoxDecoration(
@@ -52,19 +43,15 @@ class UserMapWidget extends StatelessWidget {
             Align(
               alignment: Alignment.topLeft,
               child: Container(
-                width:235,
+                width: 235,
                 height: 35,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-
-
-                  ],
+                  children: [],
                 ),
               ),
             ),
-
             Container(
               height: 555,
               child: Stack(
@@ -73,11 +60,9 @@ class UserMapWidget extends StatelessWidget {
                   Positioned(
                     left: 0,
                     right: 0,
-                    child: Image.asset(
-                      "asset/images/map-image.png"
-                    ),
+                    child: Image.asset("asset/images/map-image.png"),
                   ),
-                    /*child: GoogleMap(
+                  /*child: GoogleMap(
                       onMapCreated: (controller) {
                       
                       },

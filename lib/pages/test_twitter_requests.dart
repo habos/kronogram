@@ -22,43 +22,42 @@ class TwitterPage extends StatefulWidget {
 class _TwitterPageState extends State<TwitterPage> {
   List tweets = new List();
 
-  Future getTweets() async{
-      var twitterUser = await widget.db.getTwitterInfo(widget.userId);
+  Future getTweets() async {
+    var twitterUser = await widget.db.getTwitterInfo(widget.userId);
 
     final _twitterOauth = new twitterApi(
         consumerKey: 'JZScfVJ2TnkzVHy7lS7XHGU1z',
         consumerSecret: 'fk9BSlBe6mDnioJeoIc7thAQeODgnbEBZAJoBsuPVGYG8PmMQW',
         token: twitterUser['token'],
-        tokenSecret: twitterUser['secret']
-    );
+        tokenSecret: twitterUser['secret']);
 
     Future twitterRequest = _twitterOauth.getTwitterRequest(
       "GET",
       "statuses/user_timeline.json",
       options: {
         "screen_name": twitterUser['username'],
-        "count":"3",
+        "count": "3",
       },
     );
 
     var res = await twitterRequest;
 
 //    print(res.statusCode);
-    print(res.body);  // the response in json
+    print(res.body); // the response in json
 
     var tweetResponse = JSON.jsonDecode(res.body); // decode json tweet object
 //    print(tweets.length);
 
-
-    for(int i =0; i<tweetResponse.length; i++) {
+    for (int i = 0; i < tweetResponse.length; i++) {
       if (tweetResponse[i]['retweeted_status'] != null) {
-        tweets.add(new ReTweet.fromJson(tweetResponse[i], widget.userId.toString()));
-      }
-      else if (tweetResponse[i]['quoted_status'] != null) {
-        tweets.add(new QuoteTweet.fromJson(tweetResponse[i], widget.userId.toString()));
-      }
-      else {
-        tweets.add(new Tweet.fromJson(tweetResponse[i], widget.userId.toString()));
+        tweets.add(
+            new ReTweet.fromJson(tweetResponse[i], widget.userId.toString()));
+      } else if (tweetResponse[i]['quoted_status'] != null) {
+        tweets.add(new QuoteTweet.fromJson(
+            tweetResponse[i], widget.userId.toString()));
+      } else {
+        tweets.add(
+            new Tweet.fromJson(tweetResponse[i], widget.userId.toString()));
       }
     }
   }
