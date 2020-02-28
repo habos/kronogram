@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kronogram/models/KronoPost.dart';
 import 'package:kronogram/models/SMPlatform.dart';
+import 'package:kronogram/styles/TextStyles.dart';
 import 'package:kronogram/utils/DateUtils.dart';
 import 'package:tweet_ui/models/api/tweet.dart';
 import 'package:tweet_ui/tweet_ui.dart';
@@ -11,15 +12,6 @@ class KronoTweet implements KronoPost {
   final Tweet _tweet;
   final DateTime _creationTime;
 
-  static const _defaultTextStyle = const TextStyle(
-    fontSize: 17.0,
-    fontFamily: 'Helvetica',
-    fontWeight: FontWeight.w300,
-    height: 1.1,
-    letterSpacing: 0.1,
-    color: Colors.black,
-  );
-
   /// Constructs a KronoTweet object given a [Tweet] object
   /// The constructor also parses the createdAt field of
   /// the Tweet and stores it as a [DateTime] object
@@ -29,7 +21,7 @@ class KronoTweet implements KronoPost {
   /// Returns a [TweetView] Widget displaying the underlying tweet.
   @override
   Widget createPostWidget() {
-    return TweetView.fromTweet(_tweet, textStyle: _defaultTextStyle);
+    return TweetView.fromTweet(_tweet, textStyle: defaultTweetTextStyle);
   }
 
   /// Returns a [DateTime] object representing the time this tweet
