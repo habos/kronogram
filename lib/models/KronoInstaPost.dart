@@ -1,56 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:kronogram/models/InstaPost.dart';
 import 'package:kronogram/models/KronoPost.dart';
 import 'package:kronogram/models/SMPlatform.dart';
-import 'package:kronogram/models/media.dart';
-import 'package:kronogram/utils/DateUtils.dart';
+import 'package:kronogram/widgets/InstagramPostView.dart';
 
+/// KronoInstaPost wraps a [InstaPost] object so that it
+/// fulfills the [KronoPost] interface
 class KronoInstaPost implements KronoPost {
-  final int _id;
-  final String _caption;
-  final DateTime _createdAt;
-  List<InstaMedia> _media = new List();
+  final InstaPost _instaPost;
 
-  KronoInstaPost.fromJson(Map<String, dynamic> json)
-      : _id = int.parse(json['id']),
-        _caption = json['caption'],
-        _createdAt = parseInstagramCreationTime(json['timestamp']) {
-    String type = json['media_type'];
-    if (type != 'CAROUSEL_ALBUM') {
-      _media.add(new InstaMedia(type, json['media_url']));
-    }
-  }
+  /// Constructs a KronoInstaPost object given a [InstaPost] object
+  KronoInstaPost(this._instaPost);
 
-  /// Returns a [Widget] that displays the post.
-  /// Still needs to be implemented.
+  /// Returns a [InstagramPostView] Widget displaying the underlying Instagram
+  /// post.
   @override
   Widget createPostWidget() {
-    // TODO: implement createPostWidget
-    return null;
+    return InstagramPostView.fromInstaPost(_instaPost);
   }
 
+  /// Returns a [DateTime] object representing the time this post
+  /// was made.
+  @override
+  DateTime getCreationTime() {
+    return _instaPost.getCreationTime();
+  }
+
+  /// Returns [SMPlatform.instagram] since this post was made on Instagram.
   @override
   SMPlatform getPlatform() {
     return SMPlatform.instagram;
-  }
-
-  @override
-  DateTime getCreationTime() {
-    return _createdAt;
-  }
-
-  void addMedia(String type, String url) {
-    _media.add(new InstaMedia(type, url));
-  }
-
-  int getID() {
-    return _id;
-  }
-
-  String getCaption() {
-    return _caption;
-  }
-
-  List<InstaMedia> getPostMedia() {
-    return _media;
   }
 }
