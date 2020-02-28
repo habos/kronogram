@@ -47,6 +47,6 @@ DateTime parseTwitterCreationTime(String createdAt) {
 /// a [DateTime] object.
 DateTime parseInstagramCreationTime(String createdAt) {
   DateTime date = DateTime.parse(createdAt);
-  return new DateTime.utc(date.year, date.month, date.day, date.hour,
-      date.minute, date.second);
+  return new DateTime.utc(
+      date.year, date.month, date.day, date.hour, date.minute, date.second);
 }

@@ -23,7 +23,8 @@ class KronoTweet implements KronoPost {
   /// Constructs a KronoTweet object given a [Tweet] object
   /// The constructor also parses the createdAt field of
   /// the Tweet and stores it as a [DateTime] object
-  KronoTweet(this.tweet) : creationTime = parseTwitterCreationTime(tweet.createdAt);
+  KronoTweet(this.tweet)
+      : creationTime = parseTwitterCreationTime(tweet.createdAt);
 
   /// Returns a [TweetView] Widget displaying the underlying tweet.
   @override

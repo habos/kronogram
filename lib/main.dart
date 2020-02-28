@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:kronogram/pages/root_page.dart';
 import 'package:kronogram/services/authentication.dart';
