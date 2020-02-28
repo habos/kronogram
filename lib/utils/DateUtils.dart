@@ -17,8 +17,8 @@ String monthToNumber(String month) {
   return _monthToNumberMap[month];
 }
 
-// Takes in a twitter timestamp in the format "Thu Feb 27 22:20:44 +0000 2020"
-//     and returns a DateTime object.
+/// Takes in a twitter creation time [String] in the format
+/// "Thu Feb 27 22:20:44 +0000 2020" and returns a [DateTime] object.
 DateTime parseTwitterCreationTime(String createdAt) {
   // Should give us a list of size 6.
   List<String> splitted = createdAt.split(" ");
