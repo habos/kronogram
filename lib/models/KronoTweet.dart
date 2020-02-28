@@ -8,8 +8,8 @@ import 'package:tweet_ui/tweet_ui.dart';
 /// KronoTweet wraps a [Tweet] object so that it
 /// fulfills the [KronoPost] interface
 class KronoTweet implements KronoPost {
-  final Tweet tweet;
-  final DateTime creationTime;
+  final Tweet _tweet;
+  final DateTime _creationTime;
 
   static const _defaultTextStyle = const TextStyle(
     fontSize: 17.0,
@@ -23,20 +23,20 @@ class KronoTweet implements KronoPost {
   /// Constructs a KronoTweet object given a [Tweet] object
   /// The constructor also parses the createdAt field of
   /// the Tweet and stores it as a [DateTime] object
-  KronoTweet(this.tweet)
-      : creationTime = parseTwitterCreationTime(tweet.createdAt);
+  KronoTweet(this._tweet)
+      : _creationTime = parseTwitterCreationTime(_tweet.createdAt);
 
   /// Returns a [TweetView] Widget displaying the underlying tweet.
   @override
   Widget createPostWidget() {
-    return TweetView.fromTweet(tweet, textStyle: _defaultTextStyle);
+    return TweetView.fromTweet(_tweet, textStyle: _defaultTextStyle);
   }
 
   /// Returns a [DateTime] object representing the time this tweet
   /// was made.
   @override
   DateTime getCreationTime() {
-    return creationTime;
+    return _creationTime;
   }
 
   /// Returns [SMPlatform.twitter] since this post was made on Twitter.
