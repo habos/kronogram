@@ -1,13 +1,13 @@
 import 'package:kronogram/models/media.dart';
 import 'package:kronogram/utils/DateUtils.dart';
 
-class InstaPost {
+class KronoInstaPost {
   final int id;
   final String caption;
   final DateTime createdAt;
   List<InstaMedia> media = new List();
 
-  InstaPost.fromJson(Map<String, dynamic> json)
+  KronoInstaPost.fromJson(Map<String, dynamic> json)
       : id = int.parse(json['id']),
         caption = json['caption'],
         createdAt = parseInstagramCreationTime(json['timestamp']) {

@@ -3,7 +3,7 @@ import 'dart:convert' as JSON;
 import 'dart:core';
 import 'package:kronogram/services/database.dart';
 import 'package:kronogram/services/authentication.dart';
-import 'package:kronogram/models/InstaPost.dart';
+import 'package:kronogram/models/KronoInstaPost.dart';
 import 'package:http/http.dart' as http;
 
 class InstagramPage extends StatefulWidget {
@@ -20,7 +20,7 @@ class InstagramPage extends StatefulWidget {
 }
 
 class _InstagramPageState extends State<InstagramPage> {
-  List<InstaPost> posts = new List();
+  List<KronoInstaPost> posts = new List();
 
   Future getPosts() async {
     var instaUser = await widget.db.getInstagramInfo(widget.userId);
@@ -30,7 +30,7 @@ class _InstagramPageState extends State<InstagramPage> {
     final jsonPostHistory = JSON.jsonDecode(graphResponse.body);
     print(jsonPostHistory);
     for (var jsonPost in jsonPostHistory['data']) {
-      InstaPost instaPost = new InstaPost.fromJson(jsonPost);
+      KronoInstaPost instaPost = new KronoInstaPost.fromJson(jsonPost);
       if (jsonPost['media_type'] == 'CAROUSEL_ALBUM') {
         var id = instaPost.id;
         var albumResponse = await http.get(
