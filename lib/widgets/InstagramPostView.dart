@@ -7,7 +7,7 @@ class InstagramPostView extends StatelessWidget {
   final String imgUrl;
   final String caption;
 
-  InstagramPostView.fromInstaPost(InstaPost instaPost)
+  InstagramPostView.fromInstaPost(InstaPostData instaPost)
       : imgUrl = instaPost.getPostMedia()[0].url,
         caption = instaPost.getCaption();
 

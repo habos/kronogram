@@ -4,12 +4,12 @@ import 'package:kronogram/models/KronoPost.dart';
 import 'package:kronogram/models/SMPlatform.dart';
 import 'package:kronogram/widgets/InstagramPostView.dart';
 
-/// KronoInstaPost wraps a [InstaPost] object so that it
+/// KronoInstaPost wraps a [InstaPostData] object so that it
 /// fulfills the [KronoPost] interface
 class KronoInstaPost implements KronoPost {
-  final InstaPost _instaPost;
+  final InstaPostData _instaPost;
 
-  /// Constructs a KronoInstaPost object given a [InstaPost] object
+  /// Constructs a KronoInstaPost object given a [InstaPostData] object
   KronoInstaPost(this._instaPost);
 
   /// Returns a [InstagramPostView] Widget displaying the underlying Instagram

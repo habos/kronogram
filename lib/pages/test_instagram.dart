@@ -32,7 +32,7 @@ class _InstagramPageState extends State<InstagramPage> {
     final jsonPostHistory = JSON.jsonDecode(graphResponse.body);
     print(jsonPostHistory);
     for (var jsonPost in jsonPostHistory['data']) {
-      InstaPost instaPost = new InstaPost.fromJson(jsonPost);
+      InstaPostData instaPost = new InstaPostData.fromJson(jsonPost);
       if (jsonPost['media_type'] == 'CAROUSEL_ALBUM') {
         var id = instaPost.getID();
         var albumResponse = await http.get(
