@@ -1,6 +1,4 @@
-
 import 'package:flutter/rendering.dart';
-
 
 class Borders {
   static const BorderSide primaryBorder = BorderSide(

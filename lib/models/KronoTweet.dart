@@ -8,7 +8,6 @@ import 'package:tweet_ui/tweet_ui.dart';
 /// KronoTweet wraps a [Tweet] object so that it
 /// fulfills the [KronoPost] interface
 class KronoTweet implements KronoPost {
-
   Tweet tweet;
   DateTime creationTime;
 
@@ -25,8 +24,8 @@ class KronoTweet implements KronoPost {
   /// The constructor also parses the createdAt field of
   /// the Tweet and stores it as a [DateTime] object
   KronoTweet(Tweet tweet) {
-   this.tweet = tweet;
-   this.creationTime = parseTwitterCreationTime(tweet.createdAt);
+    this.tweet = tweet;
+    this.creationTime = parseTwitterCreationTime(tweet.createdAt);
   }
 
   /// Returns a [TweetView] Widget displaying the underlying tweet.

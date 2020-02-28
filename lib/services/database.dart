@@ -29,16 +29,17 @@ class Database implements BaseDatabase {
   final String _instagramInfoField = "instagram_info";
 
   Future<void> setField(String userID, String fieldName, var value) {
-    return _firestore.collection(_usersCollectionName).document(userID).setData({
-      fieldName : value
-    }, merge: true);
+    return _firestore
+        .collection(_usersCollectionName)
+        .document(userID)
+        .setData({fieldName: value}, merge: true);
   }
 
   DocumentReference getUserDocumentRef(String userID) {
     return _firestore.collection(_usersCollectionName).document(userID);
   }
 
-  Future <DocumentSnapshot> getDocumentSnapshot(String userID) {
+  Future<DocumentSnapshot> getDocumentSnapshot(String userID) {
     return getUserDocumentRef(userID).get();
   }
 
@@ -120,5 +121,4 @@ class Database implements BaseDatabase {
   Future<void> setInstagramInfo(String userID, Map info) async {
     return setField(userID, _instagramInfoField, info);
   }
-
 }

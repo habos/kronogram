@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:kronogram/UI_pages/osearch_bar_widget/osearch_bar_widget.dart';
 import 'package:kronogram/UI_pages/settings_add_accounts_widget/settings_add_accounts_widget.dart';
@@ -9,10 +8,7 @@ import 'package:kronogram/UI_pages/user_map_widget/user_map_widget.dart';
 import 'package:kronogram/UI_pages/my_app_bar/my_app_bar.dart';
 
 class UserCurrentDateWidget extends StatelessWidget {
-
-  void onButtonValueChanged(BuildContext context) {
-
-  }
+  void onButtonValueChanged(BuildContext context) {}
 /*
 
   void onnavigationBarItemPressed(BuildContext context) {
@@ -33,9 +29,8 @@ class UserCurrentDateWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-     /*extendBodyBehindAppBar: true,
+      /*extendBodyBehindAppBar: true,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(70.0),
       child: AppBar(
@@ -201,20 +196,12 @@ class UserCurrentDateWidget extends StatelessWidget {
       ),
 */
 
-
-
-
-
-
-
-appBar: PreferredSize(
+      appBar: PreferredSize(
         preferredSize: Size.fromHeight(90.0),
-child: myAppBar(
-  //height: 100,
-),
-
-),
-
+        child: myAppBar(
+            //height: 100,
+            ),
+      ),
       body: Container(
         constraints: BoxConstraints.expand(),
         decoration: BoxDecoration(
@@ -260,7 +247,6 @@ child: myAppBar(
                       ),
                     ),
                   ),
-
                   Container(
                     height: 628,
                     child: Stack(
@@ -291,7 +277,8 @@ child: myAppBar(
                                 height: 12,
                                 margin: EdgeInsets.only(left: 3),
                                 child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
                                   children: [
                                     Align(
                                       alignment: Alignment.topLeft,
@@ -327,7 +314,8 @@ child: myAppBar(
                                 margin: EdgeInsets.only(top: 4, right: 6),
                                 decoration: BoxDecoration(
                                   color: AppColors.primaryBackground,
-                                  border: Border.fromBorderSide(Borders.primaryBorder),
+                                  border: Border.fromBorderSide(
+                                      Borders.primaryBorder),
                                 ),
                                 child: Container(),
                               ),
@@ -335,7 +323,8 @@ child: myAppBar(
                                 height: 12,
                                 margin: EdgeInsets.only(left: 3, top: 23),
                                 child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
                                   children: [
                                     Align(
                                       alignment: Alignment.topLeft,
@@ -371,7 +360,8 @@ child: myAppBar(
                                 margin: EdgeInsets.only(top: 2, right: 6),
                                 decoration: BoxDecoration(
                                   color: AppColors.primaryBackground,
-                                  border: Border.fromBorderSide(Borders.primaryBorder),
+                                  border: Border.fromBorderSide(
+                                      Borders.primaryBorder),
                                 ),
                                 child: Container(),
                               ),
@@ -380,7 +370,8 @@ child: myAppBar(
                                 margin: EdgeInsets.only(top: 6, right: 6),
                                 decoration: BoxDecoration(
                                   color: AppColors.primaryBackground,
-                                  border: Border.fromBorderSide(Borders.primaryBorder),
+                                  border: Border.fromBorderSide(
+                                      Borders.primaryBorder),
                                 ),
                                 child: Container(),
                               ),
@@ -390,7 +381,8 @@ child: myAppBar(
                                 margin: EdgeInsets.only(right: 6),
                                 decoration: BoxDecoration(
                                   color: AppColors.primaryBackground,
-                                  border: Border.fromBorderSide(Borders.primaryBorder),
+                                  border: Border.fromBorderSide(
+                                      Borders.primaryBorder),
                                 ),
                                 child: Container(),
                               ),

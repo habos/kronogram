@@ -1,12 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:kronogram/UI_pages/login_page_widget/login_page_widget.dart';
 import 'package:kronogram/UI_pages/values/values.dart';
 
-
-
 class NewUserWidget extends StatelessWidget {
-
   void onCreatePressed(BuildContext context) {
     showDialog(
       context: context,
@@ -69,8 +65,8 @@ class NewUserWidget extends StatelessWidget {
                                 this.onFacebookSignInPressed(context),
                             color: Color.fromARGB(0, 0, 0, 0),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(0)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(0)),
                             ),
                             textColor: Color.fromARGB(255, 112, 112, 112),
                             padding: EdgeInsets.all(0),
@@ -95,8 +91,8 @@ class NewUserWidget extends StatelessWidget {
                                 this.onInstagramSignInPressed(context),
                             color: Color.fromARGB(0, 0, 0, 0),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(0)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(0)),
                             ),
                             textColor: Color.fromARGB(255, 112, 112, 112),
                             padding: EdgeInsets.all(0),
@@ -121,8 +117,8 @@ class NewUserWidget extends StatelessWidget {
                                 this.onTwitterSignInPressed(context),
                             color: Color.fromARGB(0, 0, 0, 0),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(0)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(0)),
                             ),
                             textColor: Color.fromARGB(255, 112, 112, 112),
                             padding: EdgeInsets.all(0),
@@ -156,26 +152,20 @@ class NewUserWidget extends StatelessWidget {
           ],
         );
       },
-        );
-
-  }
-  void onTwitterSignInPressed(BuildContext context) {
-
+    );
   }
 
-  void onInstagramSignInPressed(BuildContext context) {
+  void onTwitterSignInPressed(BuildContext context) {}
 
-  }
+  void onInstagramSignInPressed(BuildContext context) {}
 
-  void onFacebookSignInPressed(BuildContext context) {
+  void onFacebookSignInPressed(BuildContext context) {}
 
-  }
-
-  void onCancelPressed(BuildContext context) => Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPageWidget()));
+  void onCancelPressed(BuildContext context) => Navigator.push(
+      context, MaterialPageRoute(builder: (context) => LoginPageWidget()));
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       //resizeToAvoidBottomPadding: false,
       body: Container(
@@ -208,50 +198,49 @@ class NewUserWidget extends StatelessWidget {
                       ),
                     ),
                     Container(
-                        width: 272,
-                        height: 25,
-                        margin: EdgeInsets.only(top: 17, left: 20),
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  hintText: "Email",
-                                  contentPadding: EdgeInsets.all(0),
-                                  border: InputBorder.none,
-                                ),
-                                style: TextStyle(
-                                  color: Color.fromARGB(255, 112, 112, 112),
-                                  fontFamily: "Helvetica Neue",
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 20,
-                                ),
-                                maxLines: 1,
-                                autocorrect: false,
-                              ),
-                            ),
+                      width: 272,
+                      height: 25,
+                      margin: EdgeInsets.only(top: 17, left: 20),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: "Email",
+                          contentPadding: EdgeInsets.all(0),
+                          border: InputBorder.none,
+                        ),
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 112, 112, 112),
+                          fontFamily: "Helvetica Neue",
+                          fontWeight: FontWeight.w400,
+                          fontSize: 20,
+                        ),
+                        maxLines: 1,
+                        autocorrect: false,
+                      ),
+                    ),
                     Container(
                       width: 272,
                       height: 25,
                       margin: EdgeInsets.only(top: 17, left: 20),
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  hintText: "Confirm Email",
-                                  contentPadding: EdgeInsets.all(0),
-                                  border: InputBorder.none,
-                                ),
-                                style: TextStyle(
-                                  color: Color.fromARGB(255, 112, 112, 112),
-                                  fontFamily: "Helvetica Neue",
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 20,
-                                ),
-                                maxLines: 1,
-                                autocorrect: false,
-                              ),
-                            ),
-                          ],
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: "Confirm Email",
+                          contentPadding: EdgeInsets.all(0),
+                          border: InputBorder.none,
                         ),
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 112, 112, 112),
+                          fontFamily: "Helvetica Neue",
+                          fontWeight: FontWeight.w400,
+                          fontSize: 20,
+                        ),
+                        maxLines: 1,
+                        autocorrect: false,
                       ),
                     ),
-
+                  ],
+                ),
+              ),
+            ),
             Align(
               alignment: Alignment.topLeft,
               child: Container(
@@ -314,7 +303,6 @@ class NewUserWidget extends StatelessWidget {
                 ),
               ),
             ),
-
             Align(
               alignment: Alignment.topLeft,
               child: Container(

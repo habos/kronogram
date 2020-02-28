@@ -25,14 +25,16 @@ class _InstagramPageState extends State<InstagramPage> {
   Future getPosts() async {
     var instaUser = await widget.db.getInstagramInfo(widget.userId);
     final token = instaUser['token'];
-    final graphResponse = await http.get('https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,timestamp&access_token=${token}');
+    final graphResponse = await http.get(
+        'https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,timestamp&access_token=${token}');
     final profile = JSON.jsonDecode(graphResponse.body);
     print(profile);
-    for(var x in profile['data']) {
+    for (var x in profile['data']) {
       InstaPost p = new InstaPost.fromJson(x, widget.userId);
-      if(x['media_type']=='CAROUSEL_ALBUM') {
-        var id=p.id;
-        var albumResponse = await http.get('https://graph.instagram.com/${id}/children?fields=media_type,media_url&access_token=${token}');
+      if (x['media_type'] == 'CAROUSEL_ALBUM') {
+        var id = p.id;
+        var albumResponse = await http.get(
+            'https://graph.instagram.com/${id}/children?fields=media_type,media_url&access_token=${token}');
         var res = JSON.jsonDecode(albumResponse.body);
         for (var y in res['data']) {
           p.addMedia(y['media_type'], y['media_url']);

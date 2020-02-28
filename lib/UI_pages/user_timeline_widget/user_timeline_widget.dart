@@ -1,18 +1,13 @@
-
 import 'package:flutter/material.dart';
 import 'package:kronogram/UI_pages/osearch_bar_widget/osearch_bar_widget.dart';
 import 'package:kronogram/UI_pages/settings_add_accounts_widget/settings_add_accounts_widget.dart';
 import 'package:kronogram/UI_pages/values/values.dart';
 
-
 import 'package:kronogram/UI_pages/my_app_bar/my_app_bar.dart';
 
 class UserTimelineWidget extends StatelessWidget {
-  
-  void onFriendsValueChanged(BuildContext context) {
-  
-  }
-  
+  void onFriendsValueChanged(BuildContext context) {}
+
   /*void onnavigationBarItemPressed(BuildContext context) {
   
   }
@@ -34,16 +29,13 @@ class UserTimelineWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  
     return Scaffold(
-        appBar: PreferredSize(
+      appBar: PreferredSize(
         preferredSize: Size.fromHeight(90.0),
         child: myAppBar(
-          //height: 100,
-        ),
-
+            //height: 100,
+            ),
       ),
-
       body: Container(
         constraints: BoxConstraints.expand(),
         decoration: BoxDecoration(
@@ -80,18 +72,15 @@ class UserTimelineWidget extends StatelessWidget {
                     height: 20,
                     margin: EdgeInsets.only(left: 10, top: 10),
                     child: Text(
-                              "ALL POSTS!!",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 0, 0, 0),
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ),
-
-
-
+                      "ALL POSTS!!",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
                   Container(
                     height: 628,
                     child: Stack(
@@ -122,7 +111,8 @@ class UserTimelineWidget extends StatelessWidget {
                                 height: 12,
                                 margin: EdgeInsets.only(left: 3),
                                 child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
                                   children: [
                                     Align(
                                       alignment: Alignment.topLeft,
@@ -158,7 +148,8 @@ class UserTimelineWidget extends StatelessWidget {
                                 margin: EdgeInsets.only(top: 4, right: 6),
                                 decoration: BoxDecoration(
                                   color: AppColors.primaryBackground,
-                                  border: Border.fromBorderSide(Borders.primaryBorder),
+                                  border: Border.fromBorderSide(
+                                      Borders.primaryBorder),
                                 ),
                                 child: Container(),
                               ),
@@ -166,7 +157,8 @@ class UserTimelineWidget extends StatelessWidget {
                                 height: 12,
                                 margin: EdgeInsets.only(left: 3, top: 23),
                                 child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
                                   children: [
                                     Align(
                                       alignment: Alignment.topLeft,
@@ -202,7 +194,8 @@ class UserTimelineWidget extends StatelessWidget {
                                 margin: EdgeInsets.only(top: 2, right: 6),
                                 decoration: BoxDecoration(
                                   color: AppColors.primaryBackground,
-                                  border: Border.fromBorderSide(Borders.primaryBorder),
+                                  border: Border.fromBorderSide(
+                                      Borders.primaryBorder),
                                 ),
                                 child: Container(),
                               ),
@@ -211,7 +204,8 @@ class UserTimelineWidget extends StatelessWidget {
                                 margin: EdgeInsets.only(top: 6, right: 6),
                                 decoration: BoxDecoration(
                                   color: AppColors.primaryBackground,
-                                  border: Border.fromBorderSide(Borders.primaryBorder),
+                                  border: Border.fromBorderSide(
+                                      Borders.primaryBorder),
                                 ),
                                 child: Container(),
                               ),
@@ -221,7 +215,8 @@ class UserTimelineWidget extends StatelessWidget {
                                 margin: EdgeInsets.only(right: 6),
                                 decoration: BoxDecoration(
                                   color: AppColors.primaryBackground,
-                                  border: Border.fromBorderSide(Borders.primaryBorder),
+                                  border: Border.fromBorderSide(
+                                      Borders.primaryBorder),
                                 ),
                                 child: Container(),
                               ),

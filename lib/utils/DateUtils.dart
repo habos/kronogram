@@ -1,16 +1,16 @@
 const _monthToNumberMap = {
-  'Jan' : '01',
-  'Feb' : '02',
-  'Mar' : '03',
-  'Apr' : '04',
-  'May' : '05',
-  'Jun' : '06',
-  'Jul' : '07',
-  'Aug' : '08',
-  'Sep' : '09',
-  'Oct' : '10',
-  'Nov' : '11',
-  'Dec' : '12'
+  'Jan': '01',
+  'Feb': '02',
+  'Mar': '03',
+  'Apr': '04',
+  'May': '05',
+  'Jun': '06',
+  'Jul': '07',
+  'Aug': '08',
+  'Sep': '09',
+  'Oct': '10',
+  'Nov': '11',
+  'Dec': '12'
 };
 
 String monthToNumber(String month) {
@@ -31,7 +31,6 @@ DateTime parseTwitterCreationTime(String createdAt) {
   String day = splitted[2];
   String time = splitted[3];
   String year = splitted[5];
-
 
   var buffer = new StringBuffer();
   buffer.write(year);

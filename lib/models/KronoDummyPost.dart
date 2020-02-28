@@ -4,14 +4,10 @@ import 'package:kronogram/models/SMPlatform.dart';
 
 /// Dummy class for UI testing purposes.
 class KronoDummyPost implements KronoPost {
-
-
   /// Returns a blank, white [Container].
   @override
   Widget createPostWidget() {
-    return Container(
-      color: Colors.white
-    );
+    return Container(color: Colors.white);
   }
 
   /// Returns the current time.
