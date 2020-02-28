@@ -19,7 +19,8 @@ void main() {
       expect(monthToNumber("Err"), null);
     });
 
-    test('parseTwitterCreationTime should parse Twitter timestamps correctly', () {
+    test('parseTwitterCreationTime should parse Twitter timestamps correctly',
+        () {
       String createdAtA = "Thu Feb 27 22:20:44 +0000 2020";
       String createdAtB = "Sat Dec 22 10:24:12 +0700 2010";
       DateTime actualA = parseTwitterCreationTime(createdAtA);
