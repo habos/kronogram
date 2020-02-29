@@ -3,6 +3,13 @@ class Media {
   String url;
 }
 
+class InstaMedia extends Media {
+  InstaMedia(String type, String url) {
+    this.type = type;
+    this.url = url;
+  }
+}
+
 class TwitterMedia extends Media {
   Map<String, Map<String, dynamic>> sizes;
 
@@ -31,12 +38,5 @@ class TwitterMedia extends Media {
         'resize': json['sizes']['large']['resize']
       }
     };
-  }
-}
-
-class InstaMedia extends Media {
-  InstaMedia(String type, String url) {
-    this.type = type;
-    this.url = url;
   }
 }
