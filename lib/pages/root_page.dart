@@ -36,7 +36,8 @@ class _RootPageState extends State<RootPage> {
         if (user != null) {
           _userId = user?.uid;
         }
-        authStatus = user?.uid == null ? AuthStatus.NOT_LOGGED_IN : AuthStatus.LOGGED_IN;
+        authStatus =
+            user?.uid == null ? AuthStatus.NOT_LOGGED_IN : AuthStatus.LOGGED_IN;
       });
     });
   }
@@ -49,7 +50,7 @@ class _RootPageState extends State<RootPage> {
       print("This is the userID: " + _userId);
       print("Should say true:");
       print(isNew.toString());
-      if (isNew){
+      if (isNew) {
         authStatus = AuthStatus.FIRST_LOGGED_IN;
       } else {
         authStatus = AuthStatus.LOGGED_IN;

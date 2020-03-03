@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'dart:developer';
 import 'dart:core';
@@ -19,7 +18,6 @@ abstract class BaseAuth {
 }
 
 class Auth implements BaseAuth {
-
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   Future<AuthResult> signIn(String email, String password) async {

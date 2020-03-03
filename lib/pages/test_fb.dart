@@ -3,8 +3,8 @@ import 'dart:convert' as JSON;
 import 'dart:core';
 import 'package:kronogram/services/database.dart';
 import 'package:kronogram/services/authentication.dart';
-import 'package:kronogram/services/post.dart';
 import 'package:http/http.dart' as http;
+import 'package:kronogram/services/post.dart';
 
 class FacebookPage extends StatefulWidget {
   FacebookPage({Key key, this.auth, this.userId, this.logoutCallback, this.db})
@@ -20,6 +20,7 @@ class FacebookPage extends StatefulWidget {
 }
 
 class _FacebookPageState extends State<FacebookPage> {
+
 
   Future getPosts() async{
     List<FacebookPost> posts = new List();
