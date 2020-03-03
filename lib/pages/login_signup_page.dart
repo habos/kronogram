@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../services/database.dart';
@@ -16,7 +15,6 @@ class LoginSignupPage extends StatefulWidget {
 }
 
 class _LoginSignupPageState extends State<LoginSignupPage> {
-
   @override
   @override
   final _formKey = new GlobalKey<FormState>();
@@ -67,7 +65,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         if (userId.length > 0 && userId != null && _isLoginForm) {
           widget.loginCallback();
         }
-        if(!_isLoginForm) {
+        if (!_isLoginForm) {
           setState(() {
             _isLoginForm = true;
           });
@@ -126,7 +124,9 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
             children: <Widget>[
               showLogo(),
               showEmailInput(),
-              _isLoginForm ?  new Container(width: 0, height: 0) : showUsernameInput(),
+              _isLoginForm
+                  ? new Container(width: 0, height: 0)
+                  : showUsernameInput(),
               showPasswordInput(),
               showPrimaryButton(),
               showSecondaryButton(),
@@ -135,7 +135,6 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
           ),
         ));
   }
-
 
   Widget showCircularProgress() {
     if (_isLoading) {
@@ -161,7 +160,6 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
     );
   }
 
-
   Widget showEmailInput() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0.0, 100.0, 0.0, 0.0),
@@ -182,7 +180,6 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
   }
 
   Widget showPasswordInput() {
-
     return Padding(
       padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
       child: new TextFormField(
@@ -202,7 +199,6 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
   }
 
   Widget showUsernameInput() {
-
     return Padding(
       padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
       child: new TextFormField(
@@ -244,7 +240,6 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
             style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300)),
         onPressed: toggleFormMode);
   }
-
 
   Widget showErrorMessage() {
     if (_errorMessage.length > 0 && _errorMessage != null) {
