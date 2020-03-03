@@ -1,5 +1,5 @@
 import 'package:kronogram/models/media.dart';
-import 'package:kronogram/utils/DateUtils.dart';
+import 'package:kronogram/utils/date_utils.dart';
 
 class InstaPostData {
   final int _id;

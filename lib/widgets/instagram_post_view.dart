@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:kronogram/models/InstaPostData.dart';
-import 'package:kronogram/styles/TextStyles.dart';
+import 'package:kronogram/models/insta_post_data.dart';
+import 'package:kronogram/styles/text_styles.dart';
 
 class InstagramPostView extends StatelessWidget {
   final String imgUrl;

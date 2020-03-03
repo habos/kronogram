@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kronogram/models/KronoTweet.dart';
+import 'package:kronogram/models/krono_tweet.dart';
 import 'package:tweet_ui/models/api/tweet.dart';
 import 'dart:convert' as JSON;
 import 'dart:core';

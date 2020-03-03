@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:kronogram/models/InstaPostData.dart';
-import 'package:kronogram/models/KronoPost.dart';
-import 'package:kronogram/models/SMPlatform.dart';
-import 'package:kronogram/widgets/InstagramPostView.dart';
+import 'package:kronogram/models/insta_post_data.dart';
+import 'package:kronogram/models/krono_post.dart';
+import 'package:kronogram/models/sm_platform.dart';
+import 'package:kronogram/widgets/instagram_post_view.dart';
 
 /// KronoInstaPost wraps a [InstaPostData] object so that it
 /// fulfills the [KronoPost] interface

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:kronogram/models/KronoPost.dart';
-import 'package:kronogram/models/SMPlatform.dart';
-import 'package:kronogram/styles/TextStyles.dart';
-import 'package:kronogram/utils/DateUtils.dart';
+import 'package:kronogram/models/krono_post.dart';
+import 'package:kronogram/models/sm_platform.dart';
+import 'package:kronogram/styles/text_styles.dart';
+import 'package:kronogram/utils/date_utils.dart';
 import 'package:tweet_ui/models/api/tweet.dart';
 import 'package:tweet_ui/tweet_ui.dart';
 

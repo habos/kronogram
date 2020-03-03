@@ -1,4 +1,4 @@
-import 'package:kronogram/utils/DateUtils.dart';
+import 'package:kronogram/utils/date_utils.dart';
 import 'package:test/test.dart';
 
 void main() {

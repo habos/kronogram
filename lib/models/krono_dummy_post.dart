@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kronogram/models/KronoPost.dart';
-import 'package:kronogram/models/SMPlatform.dart';
+import 'package:kronogram/models/krono_post.dart';
+import 'package:kronogram/models/sm_platform.dart';
 
 /// Dummy class for UI testing purposes.
 class KronoDummyPost implements KronoPost {
