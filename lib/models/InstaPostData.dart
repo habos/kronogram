@@ -36,4 +36,8 @@ class InstaPostData {
   List<InstaMedia> getPostMedia() {
     return _media;
   }
+
+  bool isAlbum() {
+    return _media.length > 1;
+  }
 }
