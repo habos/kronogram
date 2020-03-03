@@ -22,11 +22,15 @@ class FacebookPage extends StatefulWidget {
 class _FacebookPageState extends State<FacebookPage> {
 
   Future getPosts() async{
+    List<FacebookPost> posts = new List();
     var fbUser = await widget.db.getFacebookInfo(widget.userId);
     final token = fbUser['token'];
-    final graphResponse = await http.get('https://graph.facebook.com/me/posts?fields=id,created_time,message,place&access_token=${token}');
+    final graphResponse = await http.get('https://graph.facebook.com/me/?fields=posts.limit(6){id,created_time,name,message,place,attachments{media{image},type,subattachments}}&access_token=${token}');
     final profile = JSON.jsonDecode(graphResponse.body);
-    print(profile);
+//    print(profile['posts']['data']);
+    for(var x in profile['posts']['data']) {
+      posts.add(new FacebookPost.fromJson(x, widget.userId));
+    }
   }
 
   @override

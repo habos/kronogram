@@ -6,6 +6,7 @@ class Post {
   DateTime createdAt;
   String caption;
   String id;
+//  List<Media> media = new List(); //photo, video, animated_gif
 
   String getUserId() {
     return userId;
@@ -20,8 +21,8 @@ class Tweet extends Post {
 
   String screenname;
   TwitterLocation location; //can be null
-  List<TwitterMedia> media = new List(); //photo, video, animated_gif
   List links = new List();  //attached urls
+  List<TwitterMedia> media = new List();
 
 
   Tweet.fromJson(Map<String, dynamic> json, String userId) {
@@ -129,7 +130,7 @@ class QuoteTweet extends Tweet {
 }
 
 class InstaPost extends Post {
-  List<InstaMedia> media = new List();  //make InstaMedia
+  List<InstaMedia> media = new List();
 
   InstaPost.fromJson(Map<String,dynamic> json, String userId) {
     this.userId = userId;
@@ -146,5 +147,34 @@ class InstaPost extends Post {
 
   void addMedia(String type, String url) {
     this.media.add(new InstaMedia(type, url));
+  }
+}
+
+class FacebookPost extends Post {
+  String title;
+  List<FacebookMedia> media = new List();
+  FacebookPost.fromJson(Map<String,dynamic> json, String userId) {
+    this.userId = userId;
+
+    this.id = json['id'];
+    this.caption = json['message'];
+    this.title = json['name'];  //might be null if there is no title; mainly for like when photos are added to album or cover photo updated
+    DateTime date = DateTime.parse(json['created_time']);
+    this.createdAt = new DateTime.utc(date.year,date.month,date.day,date.hour,date.minute,date.second);
+
+    var attachments = json['attachments']['data'];
+    for(var x in attachments) {   //goes through array of [attachments][data]
+      if(x['type'] == 'album') {
+          var subAttachments = x['subattachments']['data'];
+          for(var y in subAttachments) {  //goes through array of ...[subattachments][data]
+            if (y['media'] != null) {
+              this.media.add(new FacebookMedia.fromJson(y));
+            }
+          }
+      }
+      else if (x['media'] != null){ //if single media like cover photo
+          this.media.add(new FacebookMedia.fromJson(x));
+      }
+    }
   }
 }

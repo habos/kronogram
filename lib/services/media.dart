@@ -40,3 +40,16 @@ class InstaMedia extends Media {
     this.url=url;
   }
 }
+
+class FacebookMedia extends Media {
+  //type can be cover_photo, profile_media, photo, probably video too but not tested
+  Map<String,int> size;
+  FacebookMedia.fromJson(Map<String,dynamic> json) {
+    this.type = json['type'];
+    this.url = json['media']['image']['src'];
+    this.size = {
+      'height' : json['media']['image']['height'],
+      'width' : json['media']['image']['width']
+    };
+  }
+}
