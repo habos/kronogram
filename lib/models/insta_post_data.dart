@@ -12,7 +12,13 @@ class InstaPostData {
         _caption = json['caption'],
         _createdAt = parseInstagramCreationTime(json['timestamp']) {
     String type = json['media_type'];
-    if (type != 'CAROUSEL_ALBUM') {
+    if (type=='CAROUSEL_ALBUM') {
+      var children = json['children']['data'];
+      for(var child in children) {
+        _media.add(new InstaMedia(child['media_type'], child['media_url']));
+      }
+    }
+    else {
       _media.add(new InstaMedia(type, json['media_url']));
     }
   }

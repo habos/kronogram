@@ -31,8 +31,12 @@ class Tweet extends Post {
     DateTime date = DateTime.parse(dateStr);
     this.createdAt = new DateTime.utc(date.year,date.month,date.day,date.hour,date.minute,date.second);
     //FIXME
-//    if (json['truncated']==true) this.caption = json['extended_tweet']['full_text'];  //tweet of 141-280 characters
-//    else this.caption = json['text'];
+    if (json['truncated']==true) {
+      this.caption = json['extended_tweet']['full_text'];
+    }  //tweet of 141-280 characters
+    else {
+      this.caption = json['text'];
+    }
     this.caption = json['text'];
     this.screenname = json['user']['screen_name'];
     if (json['place'] == null) this.location = null;
@@ -48,7 +52,7 @@ class Tweet extends Post {
       this.links.add(json['entities']['urls'][i]['url']);
     }
     this.userId = userId;
-  }
+    }
 
 //TODO: write Tweet Object back to into json
 //  Map<String,dynamic> toJson() =>
@@ -140,7 +144,13 @@ class InstaPost extends Post {
     DateTime date = DateTime.parse(json['timestamp']);
     this.createdAt = new DateTime.utc(date.year,date.month,date.day,date.hour,date.minute,date.second);
     String type = json['media_type'];
-    if (type!='CAROUSEL_ALBUM') {
+    if (type=='CAROUSEL_ALBUM') {
+      var children = json['children']['data'];
+      for(var child in children) {
+        this.media.add(new InstaMedia(child['media_type'], child['media_url']));
+      }
+    }
+    else {
       this.media.add(new InstaMedia(type, json['media_url']));
     }
   }
