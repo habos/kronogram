@@ -20,6 +20,13 @@ class AppColors {
   static const Color voidBackground9 = Color(0x80E3B7B0);
   static const Color voidBackground10 = Color(0xD93E3139);
 
+
+
+
+  static const Color selectedTabBar = Color(0xD9000000);
+  static const Color unselectedTabBar = Color(0xD9AE9190);
+
+
   static const Color appBarBackground = Color(0xD93E3139);
 
   static const Color placeholderBackground = Color(0xFFE1E2E6);
