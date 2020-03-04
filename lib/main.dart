@@ -22,13 +22,15 @@ class KronogramApp extends StatelessWidget {
 import 'package:flutter/material.dart';
 import 'package:kronogram/UI_pages/login_page_widget/login_page_widget.dart';
 
+import 'package:kronogram/UI_pages/user_pages/user_page.dart';
+
 void main() => runApp(KronogramApp());
 
 class KronogramApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: LoginPageWidget(),
+      home: UserPage(),
     );
   }
 }

@@ -52,7 +52,7 @@ class testPost extends StatelessWidget {
               ),
               Container(
                 height: 20,
-                margin: EdgeInsets.only(left: 10, top: 10, right: 70),
+                margin: EdgeInsets.only(left: 10, top: 10, right: 140),
                 child: Text(
                   " $action ",
                   textAlign: TextAlign.left,

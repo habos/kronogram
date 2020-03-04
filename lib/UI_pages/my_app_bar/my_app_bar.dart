@@ -33,199 +33,604 @@ class myAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 120,
-      margin: EdgeInsets.only(top: 25),
-
+      height: 70,
+      margin: EdgeInsets.only(),
       decoration: BoxDecoration(
-        color: AppColors.blackBackground,
+        color: AppColors.appBarBackground,
       ),
 
-      child: Column(
-        children: [
-          Row(
-            //mainAxisAlignment: MainAxisAlignment.end,
-            //crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                height: 15,
-                child: FlatButton(
-                  onPressed: () => this.onnavigationBarItemPressed(context),
-                  textColor: Color.fromARGB(255, 112, 112, 112),
-                  child: Text(
-                    "@",
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 0, 0, 0),
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12,
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                height: 15,
-                width: 3,
-                color: Colors.black,
-                margin: const EdgeInsets.only(),
-              ),
-              FlatButton(
-                onPressed: () => this.onUsernamePressed(context),
-                color: Color.fromARGB(255, 255, 255, 255),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-                textColor: Color.fromARGB(255, 112, 112, 112),
-                padding: EdgeInsets.all(0),
-                child: Text(
-                  "username",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 0, 0, 0),
-                    fontWeight: FontWeight.w400,
-                    fontSize: 12,
-                  ),
-                ),
-              ),
-              FlatButton(
-                onPressed: () => this.onSETTINGSPressed(context),
-                color: Color.fromARGB(255, 255, 255, 255),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-                textColor: Color.fromARGB(255, 112, 112, 112),
-                padding: EdgeInsets.all(0),
-                child: Text(
-                  "SETTINGS",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 0, 0, 0),
-                    fontWeight: FontWeight.w400,
-                    fontSize: 12,
-                  ),
-                ),
-              ),
-              FlatButton(
-                onPressed: () => this.onSEARCHPressed(context),
-                color: Color.fromARGB(255, 255, 255, 255),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-                textColor: Color.fromARGB(255, 112, 112, 112),
-                padding: EdgeInsets.all(1),
-                child: Text(
-                  "SEARCH",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 0, 0, 0),
-                    fontWeight: FontWeight.w400,
-                    fontSize: 12,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Row(
-            //mainAxisAlignment: MainAxisAlignment.end,
-            //crossAxisAlignment: CrossAxisAlignment.center,
+      child: Container(
+        margin: EdgeInsets.only(top: 25, bottom: 5, left: 15,right:15),
+        //child: userAppBar(),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Expanded(
+              flex: 15,
+              child:Row(
+                  children: <Widget>[
+                    Expanded(
+                      flex:1,
+                    child: InkWell(
+                      onTap: () => this.onnavigationBarItemPressed(context),
+                      child: Text(
+                        "@",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          color: AppColors.appBarText1,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 22,
+                        ),
+                      ),
 
-            children: <Widget>[
-              FlatButton(
-                onPressed: () => this.onDATEPressed(context),
-                color: Color.fromARGB(255, 255, 255, 255),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-                textColor: Color.fromARGB(255, 112, 112, 112),
-                padding: EdgeInsets.all(0),
-                child: Text(
-                  "TODAY",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 0, 0, 0),
-                    fontWeight: FontWeight.w400,
-                    fontSize: 12,
-                  ),
-                ),
-              ),
-              FlatButton(
-                onPressed: () => this.onTIMELINEPressed(context),
-                color: Color.fromARGB(255, 255, 255, 255),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-                textColor: Color.fromARGB(255, 112, 112, 112),
-                padding: EdgeInsets.all(0),
-                child: Text(
-                  "TIMELINE",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 0, 0, 0),
-                    fontWeight: FontWeight.w400,
-                    fontSize: 12,
-                  ),
-                ),
-              ),
-              FlatButton(
-                onPressed: () => this.onMAPSPressed(context),
-                color: Color.fromARGB(255, 255, 255, 255),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-                textColor: Color.fromARGB(255, 112, 112, 112),
-                padding: EdgeInsets.all(0),
-                child: Text(
-                  "MAPS",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 0, 0, 0),
-                    fontWeight: FontWeight.w400,
-                    fontSize: 12,
-                  ),
-                ),
-              ),
-              Row(
-                //mainAxisAlignment: MainAxisAlignment.end,
-                //crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    alignment: Alignment.topLeft,
-                    child: Switch.adaptive(
-                      value: false,
-                      inactiveTrackColor: Color.fromARGB(60, 0, 0, 0),
-                      onChanged: (value) {},
-                      activeColor: Color.fromARGB(255, 184, 184, 184),
-                      activeTrackColor: AppColors.secondaryElement,
+                    ),
+                    ),
+                    Expanded(
+                      flex:12,
+                    child:InkWell(
+                      onTap: () => this.onUsernamePressed(context),
+
+                      child: Text(
+                        "username",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          color: AppColors.appBarText1,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 25,
+                        ),
+                      ),
+                    ),
+                      ),
+                  ]),
+            ),
+            Spacer(),
+
+            Row(
+                children: <Widget>[
+
+                  InkWell(
+                    onTap: () => this.onSETTINGSPressed(context),
+                    child: Stack(
+                      alignment: Alignment.topCenter,
+                      children: <Widget>[
+                        Icon(
+                            Icons.settings_applications,
+                            color: AppColors.appBarIcon,
+                            size: 35
+                        ),
+                        //Transform.rotate(angle: 0.80, child:
+
+                        Container(
+                          padding: EdgeInsets.only(top: 4.5),
+                          child:
+                          Text(
+                            "SETTINGS",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              color: AppColors.appBarText2,
+                              fontWeight: FontWeight.bold,
+                              fontSize:5.5,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  Container(
-                    alignment: Alignment.topLeft,
+
+                  InkWell(
+                    onTap: () => this.onSEARCHPressed(context),
+                    child: Stack(
+                      alignment: Alignment.bottomLeft,
+                      children: <Widget>[
+                        Icon(
+                            Icons.search,
+                            color: AppColors.appBarIcon,
+                            size: 33
+                        ),
+
+                        //Transform.rotate(angle: 0.0, origin: Offset(60, 20), alignment:Alignment.topLeft, child:
+                        Container(
+                          padding: EdgeInsets.only(bottom: 2),
+                          child: Text(
+                            "SEARCH",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              color: AppColors.appBarText2,
+                              fontWeight: FontWeight.bold,
+                              fontSize:5.8,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ]
+
+              //   ),
+            ),
+
+          ],
+        ),
+      )
+
+
+
+
+      /*
+            Column(
+              children: <Widget>[
+
+                Container (
+                  height: 20,
+                  child: FlatButton(
+                    onPressed: () => this.onSEARCHPressed(context),
+
                     child: Text(
-                      "SHOW \nFREINDS",
+                      "SEARCH",
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         color: Color.fromARGB(255, 0, 0, 0),
                         fontWeight: FontWeight.w400,
-                        fontSize: 10,
+                        fontSize:20,
                       ),
                     ),
                   ),
-                ],
-              ),
-            ],
-          ),
-        ],
+                ),
+                Container (
+                  height: 12,
+
+                  child: FlatButton(
+                    //onPressed: () => this.onSETTINGSPressed(context),
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    textColor: Color.fromARGB(255, 112, 112, 112),
+                    padding: EdgeInsets.all(0),
+                    child: Text(
+                      "SETTINGS",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                ),
+
+
+              ],
+            ),
+
+
+          ],
+        ),
+
+      )
+
+
+    child: Row (
+      children: <Widget>[
+        Column(
+          //mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Row(
+    children: <Widget>[
+
+      Align(
+      alignment: Alignment.topLeft,
+
+            //child: Container(
+            //alignment: Alignment.centerLeft,
+            //width: 300,
+            child:Row(
+              //crossAxisAlignment: CrossAxisAlignment.start,
+              //mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                FlatButton(
+                    onPressed: () => this.onnavigationBarItemPressed(context),
+                    textColor: Color.fromARGB(255, 112, 112, 112),
+                    child: Text(
+                      "@",
+                      textAlign: TextAlign.right,
+                      style: TextStyle(
+                        color: AppColors.appBarButton,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 20,
+                      ),
+                    ),
+                    //),
+                  ),
+               FlatButton(
+                    onPressed: () => this.onUsernamePressed(context),
+                    /*
+                color: Color.fromARGB(255, 255, 255, 255),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                textColor: AppColors.appBarButton,
+                */
+                    padding: EdgeInsets.all(0),
+                    child: Text(
+                      "username",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: AppColors.appBarText1,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+
+              ],
+            //),
+                ),
       ),
-      // maybe other AppBar properties
-      //backgroundColor: Color.fromARGB(255, 240, 247, 250),
-      //elevation: 0,
-      //automaticallyImplyLeading: false,
-      // ),
-      //),
+            ],
+            ),
+          ],
+        )
+      ],
+    ),
+      */
     );
   }
   //@override
   //Size get preferredSize => Size.fromHeight(height);
 }
+/*
+Widget userAppBar(){
+  return new Container(
+    child: Row(
+      children: <Widget>[
+        Row(
+          children: <Widget>[
+            FlatButton(
+              // onPressed: () => this.onnavigationBarItemPressed(context),
+              textColor: Color.fromARGB(255, 112, 112, 112),
+              child: Text(
+                "@",
+                textAlign: TextAlign.right,
+                style: TextStyle(
+                  color: AppColors.appBarButton,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 20,
+                ),
+              ),
+              //),
+            ),
+            FlatButton(
+              //onPressed: () => this.onUsernamePressed(context),
+              /*
+                color: Color.fromARGB(255, 255, 255, 255),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                textColor: AppColors.appBarButton,
+                */
+              padding: EdgeInsets.all(0),
+              child: Text(
+                "username",
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  color: AppColors.appBarText1,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 20,
+                ),
+              ),
+            ),
+  ]),
+            Spacer(),
+            Column(
+              children: <Widget>[
+
+                Container (
+                  height: 20,
+                  child: FlatButton(
+                    //onPressed: () => this.onSEARCHPressed(context),
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    textColor: Color.fromARGB(255, 112, 112, 112),
+                    //padding: EdgeInsets.all(0),
+                    child: Text(
+                      "SEARCH",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        fontWeight: FontWeight.w400,
+                        fontSize:20,
+                      ),
+                    ),
+                  ),
+                ),
+                Container (
+                  height: 12,
+
+                  child: FlatButton(
+                    //onPressed: () => this.onSETTINGSPressed(context),
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    textColor: Color.fromARGB(255, 112, 112, 112),
+                    padding: EdgeInsets.all(0),
+                    child: Text(
+                      "SETTINGS",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                ),
+
+
+              ],
+            ),
+
+
+          ],
+        )
+
+  );
+
+
+
+}
+
+
+
+
+@override
+Widget build(BuildContext context) {
+  return Container(
+    height: 120,
+    margin: EdgeInsets.only(top: 25),
+
+    decoration: BoxDecoration(
+      color: AppColors.blackBackground,
+    ),
+
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Row(
+          //mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisSize: MainAxisSize.min,
+          //crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            //Container(
+            //height: 15,
+            FlatButton(
+              onPressed: () => this.onnavigationBarItemPressed(context),
+              //color: AppColors.appBarButton,
+              textColor: Color.fromARGB(255, 112, 112, 112),
+              child: Text(
+                "@",
+                textAlign: TextAlign.right,
+                style: TextStyle(
+                  color: AppColors.appBarButton,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 20,
+                ),
+              ),
+              //),
+            ),
+            /*            Container(
+                height: 15,
+                width: 3,
+                //color: Colors.black,
+                margin: const EdgeInsets.only(),
+              ),*/
+            FlatButton(
+              onPressed: () => this.onUsernamePressed(context),
+              /*
+                color: Color.fromARGB(255, 255, 255, 255),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                textColor: AppColors.appBarButton,
+                */
+              padding: EdgeInsets.all(0),
+              child: Text(
+                "username",
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  color: AppColors.appBarText1,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            Spacer(),
+
+            Column(
+              children: <Widget>[
+
+                Container (
+                  height: 20,
+                  child: FlatButton(
+                    onPressed: () => this.onSEARCHPressed(context),
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    textColor: Color.fromARGB(255, 112, 112, 112),
+                    //padding: EdgeInsets.all(0),
+                    child: Text(
+                      "SEARCH",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        fontWeight: FontWeight.w400,
+                        fontSize:20,
+                      ),
+                    ),
+                  ),
+                ),
+                Container (
+                  height: 12,
+
+                  child: FlatButton(
+                    onPressed: () => this.onSETTINGSPressed(context),
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    textColor: Color.fromARGB(255, 112, 112, 112),
+                    padding: EdgeInsets.all(0),
+                    child: Text(
+                      "SETTINGS",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                ),
+
+              ],
+            ),
+
+          ],
+        ),
+        Row(
+          //mainAxisAlignment: MainAxisAlignment.end,
+          //crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+
+          children: <Widget>[
+            FlatButton(
+              onPressed: () => this.onDATEPressed(context),
+              color: Color.fromARGB(255, 255, 255, 255),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
+              textColor: Color.fromARGB(255, 112, 112, 112),
+              padding: EdgeInsets.all(0),
+              child: Text(
+                "TODAY",
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  fontWeight: FontWeight.w400,
+                  fontSize: 12,
+                ),
+              ),
+            ),
+            FlatButton(
+              onPressed: () => this.onTIMELINEPressed(context),
+              color: Color.fromARGB(255, 255, 255, 255),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
+              textColor: Color.fromARGB(255, 112, 112, 112),
+              padding: EdgeInsets.all(0),
+              child: Text(
+                "TIMELINE",
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  fontWeight: FontWeight.w400,
+                  fontSize: 12,
+                ),
+              ),
+            ),
+            FlatButton(
+              onPressed: () => this.onMAPSPressed(context),
+              color: Color.fromARGB(255, 255, 255, 255),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
+              textColor: Color.fromARGB(255, 112, 112, 112),
+              padding: EdgeInsets.all(0),
+              child: Text(
+                "MAPS",
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  fontWeight: FontWeight.w400,
+                  fontSize: 12,
+                ),
+              ),
+            ),
+            Spacer(),
+            Row(
+              //mainAxisAlignment: MainAxisAlignment.end,
+              //crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  alignment: Alignment.topLeft,
+                  child: Switch.adaptive(
+                    value: false,
+                    inactiveTrackColor: Color.fromARGB(60, 0, 0, 0),
+                    onChanged: (value) {},
+                    activeColor: Color.fromARGB(255, 184, 184, 184),
+                    activeTrackColor: AppColors.secondaryElement,
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    "SHOW \nFREINDS",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 0, 0, 0),
+                      fontWeight: FontWeight.w400,
+                      fontSize: 10,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ],
+    ),
+    // maybe other AppBar properties
+    //backgroundColor: Color.fromARGB(255, 240, 247, 250),
+    //elevation: 0,
+    //automaticallyImplyLeading: false,
+    // ),
+    //),
+  );
+}
+//@override
+//Size get preferredSize => Size.fromHeight(height);
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
 class myAppBar extends PreferredSizeWidget {

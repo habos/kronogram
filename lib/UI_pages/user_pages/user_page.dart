@@ -23,8 +23,8 @@ class UserPage extends StatefulWidget{
 class _UserPageState extends State<UserPage>{
   int _currentIndex = 0;
   final List<Widget> _children = [
-    userFeed(),
-    userFeed(),
+    userFeed(today:true),
+    userFeed(today:false),
     PlaceholderWidget(Colors.white)
   ];
 

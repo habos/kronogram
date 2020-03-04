@@ -7,11 +7,11 @@ import 'package:kronogram/UI_pages/my_app_bar/my_app_bar.dart';
 import 'package:kronogram/UI_pages/display_posts/display_posts.dart';
 
 class userFeed extends StatelessWidget{
-  userFeed({Key key, bool today})
-  :super(key:key);
+  userFeed({ @required this.today})
+  :assert(today != null);
 
   bool today;
-  List<generalPost>postsList =userTestPost().getpostlists(5);
+  List<generalPost>postsList =userTestPost().getpostlists(15);
   String postDate;
 
 
@@ -45,7 +45,7 @@ class userFeed extends StatelessWidget{
                         ),
                         Container(
                           height: 1,
-                          width: 320,
+                          width: 260,
                           color: Colors.black,
                           margin:
                           const EdgeInsets.only(left: 10.0, right: 10.0),
@@ -73,7 +73,7 @@ class userFeed extends StatelessWidget{
   }
   void checkDate( bool today){
     if(today){
-      postDate = "X years agou today";
+      postDate = "X years ago today";
     }
     else{
       postDate = "DATE:";
