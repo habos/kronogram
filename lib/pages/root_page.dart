@@ -5,6 +5,7 @@ import 'package:kronogram/pages/login_signup_page.dart';
 import 'package:kronogram/services/authentication.dart';
 import 'package:kronogram/pages/home_page.dart';
 import 'package:kronogram/services/database.dart';
+import 'package:kronogram/UI_pages/user_pages/user_page.dart';
 
 enum AuthStatus {
   NOT_DETERMINED,
@@ -100,10 +101,9 @@ class _RootPageState extends State<RootPage> {
         break;
       case AuthStatus.LOGGED_IN:
         if (_userId.length > 0 && _userId != null) {
-          return new HomePage(
+          return new UserPage(
             userId: _userId,
             auth: widget.auth,
-            logoutCallback: logoutCallback,
           );
         } else
           return buildWaitingScreen();
