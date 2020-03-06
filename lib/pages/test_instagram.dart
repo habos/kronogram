@@ -28,20 +28,11 @@ class _InstagramPageState extends State<InstagramPage> {
     var instaUser = await widget.db.getInstagramInfo(widget.userId);
     final token = instaUser['token'];
     final graphResponse = await http.get(
-        'https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,timestamp&access_token=$token');
+        'https://graph.instagram.com/me?fields=media{id,caption,media_type,media_url,timestamp,children{media_type,media_url}}&access_token=$token');
     final jsonPostHistory = JSON.jsonDecode(graphResponse.body);
-    print(jsonPostHistory);
-    for (var jsonPost in jsonPostHistory['data']) {
+//    print(jsonPostHistory);
+    for (var jsonPost in jsonPostHistory['media']['data']) {
       InstaPostData instaPost = new InstaPostData.fromJson(jsonPost);
-      if (jsonPost['media_type'] == 'CAROUSEL_ALBUM') {
-        var id = instaPost.getID();
-        var albumResponse = await http.get(
-            'https://graph.instagram.com/$id/children?fields=media_type,media_url&access_token=$token');
-        var res = JSON.jsonDecode(albumResponse.body);
-        for (var y in res['data']) {
-          instaPost.addMedia(y['media_type'], y['media_url']);
-        }
-      }
       posts.add(new KronoInstaPost(instaPost));
     }
 
