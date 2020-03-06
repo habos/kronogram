@@ -160,10 +160,10 @@ class InstaPost extends Post {
   }
 }
 
-class FacebookPost extends Post {
+class FacebookPostData extends Post {
   String title;
   List<FacebookMedia> media = new List();
-  FacebookPost.fromJson(Map<String,dynamic> json, String userId) {
+  FacebookPostData.fromJson(Map<String,dynamic> json, String userId) {
     this.userId = userId;
 
     this.id = json['id'];
