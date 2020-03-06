@@ -21,11 +21,19 @@ class InstagramPostView extends StatelessWidget {
     controller.initialize();
     return controller;
   }
+
+  Widget singleImage(InstaMedia media) {
+    return CachedNetworkImage(
+      imageUrl: media.url,
+      placeholder: (context, url) => CircularProgressIndicator(),
+      errorWidget: (context, url, error) => Icon(Icons.error),
+    );
+  }
   
   Widget postView() {
     return _isAlbum ? albumCarousel() :
       _media.length == 0 ? Container() :
-          Image(image: CachedNetworkImageProvider(_media[0].url));
+          singleImage(_media[0]);
   }
 
   Widget albumCarousel() {
@@ -33,7 +41,7 @@ class InstagramPostView extends StatelessWidget {
       height: 400.0,
       items: _media.map((med) {
         if (med.type == "IMAGE") {
-          return Image(image: CachedNetworkImageProvider(med.url));
+          return singleImage(med);
         }
         VideoPlayerController controller = getVideoPlayerController(med);
         return AspectRatio(
