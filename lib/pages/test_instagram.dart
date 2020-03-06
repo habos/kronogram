@@ -37,7 +37,7 @@ class _InstagramPageState extends State<InstagramPage> {
     }
 
     setState(() {
-      instagramExample = posts[0].createPostWidget();
+      instagramExample = posts[1].createPostWidget();
     });
   }
 

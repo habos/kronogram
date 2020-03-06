@@ -21,8 +21,14 @@ class InstagramPostView extends StatelessWidget {
     controller.initialize();
     return controller;
   }
+  
+  Widget postView() {
+    return _isAlbum ? albumCarousel() :
+      _media.length == 0 ? Container() :
+          Image(image: CachedNetworkImageProvider(_media[0].url));
+  }
 
-  Widget buildAlbumCarousel() {
+  Widget albumCarousel() {
     return CarouselSlider(
       height: 400.0,
       items: _media.map((med) {
@@ -30,12 +36,12 @@ class InstagramPostView extends StatelessWidget {
           return Image(image: CachedNetworkImageProvider(med.url));
         }
         VideoPlayerController controller = getVideoPlayerController(med);
-        while (!controller.value.initialized) {}
         return AspectRatio(
           aspectRatio: controller.value.aspectRatio,
           child: VideoPlayer(controller)
         );
-      }).toList()
+      }).toList(),
+      enableInfiniteScroll: false,
     );
   }
 
@@ -45,13 +51,14 @@ class InstagramPostView extends StatelessWidget {
         color: Colors.white,
         child: Column(
           children: <Widget>[
+            postView(),
             Container(
               width: MediaQuery.of(context).size.width,
               child: RichText(
                 textAlign: TextAlign.start,
                 text: TextSpan(
                   text: _caption,
-                  style: defaultTweetTextStyle
+                  style: defaultIGCaptionTextStyle
                 )
               )
             )
