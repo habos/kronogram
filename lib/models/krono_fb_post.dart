@@ -16,8 +16,7 @@ class KronoFacebookPost implements KronoPost {
 
   @override
   DateTime getCreationTime() {
-    // TODO: implement getCreationTime
-    return null;
+    return _fbPostData.createdAt;
   }
 
   @override
@@ -27,7 +26,6 @@ class KronoFacebookPost implements KronoPost {
 
   @override
   int getPostID() {
-    // TODO: implement getPostID
-    return null;
+    return int.parse(_fbPostData.id);
   }
 }
