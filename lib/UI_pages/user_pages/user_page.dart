@@ -5,14 +5,17 @@ import 'package:kronogram/UI_pages/values/values.dart';
 import 'package:kronogram/UI_pages/user_pages/user_timeline.dart';
 import 'package:kronogram/UI_pages/user_pages/user_feed.dart';
 import 'package:kronogram/UI_pages/my_app_bar/my_app_bar.dart';
+import 'package:kronogram/services/database.dart';
 //import 'package:kronogram/UI_pages/display_posts/display_posts.dart';
 
 class UserPage extends StatefulWidget{
-  UserPage({Key key, this.auth, this.userId})
+  UserPage({Key key, this.auth, this.userId, this.db, this.logoutCallback})
         :super(key:key);
 
   final BaseAuth auth;
   final String userId;
+  final VoidCallback logoutCallback;
+  final Database db;
 
   @override
   State<StatefulWidget> createState(){
@@ -33,7 +36,7 @@ class _UserPageState extends State<UserPage>{
     return new Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(110.0),
-        child: myAppBar(
+        child: myAppBar(db: widget.db, auth: widget.auth, userId: widget.userId, logoutCallback: widget.logoutCallback
           //height: 100,
         ),
       ),

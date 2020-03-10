@@ -11,12 +11,15 @@ abstract class BaseDatabase {
 
   Future<Map> getFacebookInfo(String userID);
   Future<void> setFacebookInfo(String userID, Map facebookId);
+  Future<bool> checkFacebookInfo(String userID);
 
   Future<Map> getTwitterInfo(String userID);
   Future<void> setTwitterInfo(String userID, Map info);
+  Future<bool> checkTwitterInfo(String userID);
 
   Future<Map> getInstagramInfo(String userID);
   Future<void> setInstagramInfo(String userID, Map info);
+  Future<bool> checkInstagramInfo(String userID);
 }
 
 class Database implements BaseDatabase {
@@ -84,6 +87,11 @@ class Database implements BaseDatabase {
     return setField(userID, _facebookInfoField, facebookId);
   }
 
+  Future<bool> checkFacebookInfo(String userID) async {
+    var snapshot = await getDocumentSnapshot(userID);
+    return snapshot.data.containsKey(_facebookInfoField) ?  true : false;
+  }
+
   Future<Map> getTwitterInfo(String userID) async {
     var snapshot = await getDocumentSnapshot(userID);
     return snapshot.data.remove(_twitterInfoField);
@@ -104,9 +112,19 @@ class Database implements BaseDatabase {
     return setField(userID, _twitterInfoField, info);
   }
 
+  Future<bool> checkTwitterInfo(String userID) async {
+    var snapshot = await getDocumentSnapshot(userID);
+    return snapshot.data.containsKey(_twitterInfoField) ?  true : false;
+  }
+
   Future<Map> getInstagramInfo(String userID) async {
     var snapshot = await getDocumentSnapshot(userID);
     return snapshot.data.remove(_instagramInfoField);
+  }
+
+  Future<bool> checkInstagramInfo(String userID) async {
+    var snapshot = await getDocumentSnapshot(userID);
+    return snapshot.data.containsKey(_instagramInfoField) ?  true : false;
   }
 
 /*

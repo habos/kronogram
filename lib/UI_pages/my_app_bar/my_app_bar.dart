@@ -5,16 +5,27 @@ import 'package:kronogram/UI_pages/values/values.dart';
 import 'package:kronogram/UI_pages/user_timeline_widget/user_timeline_widget.dart';
 import 'package:kronogram/UI_pages/user_map_widget/user_map_widget.dart';
 import 'package:kronogram/UI_pages/user_current_date_widget/user_current_date_widget.dart';
+import 'package:kronogram/pages/settings.dart';
+import 'package:kronogram/services/authentication.dart';
+import 'package:kronogram/services/database.dart';
 
 class myAppBar extends StatelessWidget {
 //final double height;
+
+  myAppBar({Key key, this.auth, this.userId, this.logoutCallback, this.db})
+      : super(key: key);
+
+  final BaseAuth auth;
+  final Database db;
+  final String userId;
+  final VoidCallback logoutCallback;
 
   void onnavigationBarItemPressed(BuildContext context) {}
 
   void onUsernamePressed(BuildContext context) {}
 
   void onSETTINGSPressed(BuildContext context) => Navigator.push(context,
-      MaterialPageRoute(builder: (context) => SettingsAddAccountsWidget()));
+      MaterialPageRoute(builder: (context) => SettingsPage(db: this.db, auth: this.auth, userId: this.userId, logoutCallback: this.logoutCallback)));
   void onSEARCHPressed(BuildContext context) => Navigator.push(
       context, MaterialPageRoute(builder: (context) => OSearchBarWidget()));
   void onMAPSPressed(BuildContext context) => Navigator.push(
@@ -23,12 +34,6 @@ class myAppBar extends StatelessWidget {
       context, MaterialPageRoute(builder: (context) => UserTimelineWidget()));
   void onDATEPressed(BuildContext context) => Navigator.push(context,
       MaterialPageRoute(builder: (context) => UserCurrentDateWidget()));
-
-//class myAppBar extends PreferredSize {
-  const myAppBar({
-    Key key,
-//@required this.height,
-  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

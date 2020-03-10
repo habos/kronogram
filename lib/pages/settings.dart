@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:kronogram/UI_pages/user_pages/user_page.dart';
-import 'package:kronogram/pages/test_fb.dart';
-import 'package:kronogram/pages/test_instagram.dart';
 import 'package:kronogram/services/authentication.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:flutter_twitter_login/flutter_twitter_login.dart';
 import 'package:kronogram/services/instagram_login.dart' as insta;
 import 'dart:core';
 import 'dart:developer';
-import 'package:kronogram/pages/test_twitter_requests.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:kronogram/services/remote_config.dart';
 import 'package:kronogram/services/database.dart';
 
-class IntroPage extends StatefulWidget {
-  IntroPage({Key key, this.auth, this.userId, this.logoutCallback, this.db})
+class SettingsPage extends StatefulWidget {
+  SettingsPage({Key key, this.auth, this.userId, this.logoutCallback, this.db})
       : super(key: key);
 
   final BaseAuth auth;
@@ -22,15 +20,57 @@ class IntroPage extends StatefulWidget {
   final VoidCallback logoutCallback;
 
   @override
-  State<StatefulWidget> createState() => new _IntroPageState();
+  State<StatefulWidget> createState() => new _SettingsPageState();
 
-  void onContinuePressed(BuildContext context) => Navigator.push(context,
-      MaterialPageRoute(builder: (context) => UserPage()));
+  void onBackPressed(BuildContext context) => Navigator.push(context,
+      MaterialPageRoute(builder: (context) => UserPage(userId: userId,
+          auth: auth,
+          db: db,
+          logoutCallback: logoutCallback)));
 }
 
-class _IntroPageState extends State<IntroPage> {
-  //Logout button
+class _SettingsPageState extends State<SettingsPage>{
 
+  bool _isLoggedInFacebook;
+  bool _isLoggedInTwitter;
+  bool _isLoggedInInstagram;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.auth.getCurrentUser().then((user) {
+        String userId = user.uid;
+        widget.db.checkFacebookInfo(userId).then((value){
+         setState(() {
+           if(value){
+             _isLoggedInFacebook = true;
+           } else {
+             _isLoggedInFacebook = false;
+           }
+         });
+        });
+        widget.db.checkTwitterInfo(userId).then((val){
+          setState(() {
+            if(val){
+              _isLoggedInTwitter = true;
+            } else {
+              _isLoggedInTwitter = false;
+            }
+          });
+        });
+        widget.db.checkInstagramInfo(userId).then((val){
+          setState(() {
+            if(val){
+              _isLoggedInInstagram = true;
+            } else {
+              _isLoggedInInstagram = false;
+            }
+          });
+        });
+    });
+  }
+
+  //Logout button
   signOut() async {
     try {
       await widget.auth.signOut();
@@ -40,7 +80,7 @@ class _IntroPageState extends State<IntroPage> {
     }
   }
 
-  Widget showPrimaryButton() {
+  Widget showBackButton() {
     return new Padding(
         padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
         child: SizedBox(
@@ -50,16 +90,32 @@ class _IntroPageState extends State<IntroPage> {
             shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(30.0)),
             color: Colors.blue,
-            child: new Text('Continue',
+            child: new Text('Go Back',
                 style: new TextStyle(fontSize: 20.0, color: Colors.white)),
-            onPressed: () => widget.onContinuePressed(context),
+            onPressed: () => widget.onBackPressed(context),
+          ),
+        ));
+  }
+
+  Widget showLogoutButton() {
+    return new Padding(
+        padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
+        child: SizedBox(
+          height: 40.0,
+          child: new RaisedButton(
+            elevation: 5.0,
+            shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(30.0)),
+            color: Colors.blue,
+            child: new Text('Logout',
+                style: new TextStyle(fontSize: 20.0, color: Colors.white)),
+            onPressed: signOut,
           ),
         ));
   }
 
   //Facebook Login
 
-  bool _isLoggedInFacebook = false;
   final facebookLogin = FacebookLogin();
 
   _loginWithFB() async {
@@ -99,44 +155,23 @@ class _IntroPageState extends State<IntroPage> {
   Widget FacebookButton() {
     return new Padding(
         padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
-        child: _isLoggedInFacebook
-            ? SizedBox(
-                height: 40.0,
-                child: RaisedButton(
-                  elevation: 5.0,
-                  shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(30.0)),
-                  color: Colors.blue,
-                  child: new Text("Logout of Facebook",
-                      style:
-                          new TextStyle(fontSize: 20.0, color: Colors.white)),
-                  onPressed: () {
-                    _FacebookLogout();
-                  },
-                ),
-              )
-            : SizedBox(
-                height: 40.0,
-                child: RaisedButton(
-                  elevation: 5.0,
-                  shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(30.0)),
-                  color: Colors.blue,
-                  child: new Text("Login with Facebook",
-                      style:
-                          new TextStyle(fontSize: 20.0, color: Colors.white)),
-                  onPressed: () {
-                    _loginWithFB();
-                  },
-                ),
-              ));
+    child:
+    _isLoggedInFacebook ? SignInButton(
+    Buttons.Facebook,
+    text: "Logout of Facebook",
+    onPressed: () { _FacebookLogout(); },
+    )
+    : SignInButton(
+      Buttons.Facebook,
+      text: "Login with Facebook",
+      onPressed: () { _loginWithFB(); },
+    ),
+    );
   }
 
   //Twitter Login
 
   static final Future<TwitterLogin> twitterLoginFuture = getTwitterLogin();
-
-  bool _isLoggedInTwitter = false;
 
   void _loginTwitter() async {
     TwitterLogin twitterLogin = await twitterLoginFuture;
@@ -176,40 +211,38 @@ class _IntroPageState extends State<IntroPage> {
         padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
         child: _isLoggedInTwitter
             ? SizedBox(
-                height: 40.0,
-                child: RaisedButton(
-                  elevation: 5.0,
-                  shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(30.0)),
-                  color: Colors.blue,
-                  child: new Text("Logout of Twitter",
-                      style:
-                          new TextStyle(fontSize: 20.0, color: Colors.white)),
-                  onPressed: () {
-                    _logoutTwitter();
-                  },
-                ),
-              )
+          height: 40.0,
+          child: RaisedButton(
+            elevation: 5.0,
+            shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(30.0)),
+            color: Colors.blue,
+            child: new Text("Logout of Twitter",
+                style:
+                new TextStyle(fontSize: 20.0, color: Colors.white)),
+            onPressed: () {
+              _logoutTwitter();
+            },
+          ),
+        )
             : SizedBox(
-                height: 40.0,
-                child: RaisedButton(
-                  elevation: 5.0,
-                  shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(30.0)),
-                  color: Colors.blue,
-                  child: new Text("Login with Twitter",
-                      style:
-                          new TextStyle(fontSize: 20.0, color: Colors.white)),
-                  onPressed: () {
-                    _loginTwitter();
-                  },
-                ),
-              ));
+          height: 40.0,
+          child: RaisedButton(
+            elevation: 5.0,
+            shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(30.0)),
+            color: Colors.blue,
+            child: new Text("Login with Twitter",
+                style:
+                new TextStyle(fontSize: 20.0, color: Colors.white)),
+            onPressed: () {
+              _loginTwitter();
+            },
+          ),
+        ));
   }
 
   //Instagram login
-
-  bool _isLoggedInInstagram = false;
 
   void _loginInstagram() async {
     final insta.Token token = await insta.getToken();
@@ -239,35 +272,35 @@ class _IntroPageState extends State<IntroPage> {
         padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
         child: _isLoggedInInstagram
             ? SizedBox(
-                height: 40.0,
-                child: RaisedButton(
-                  elevation: 5.0,
-                  shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(30.0)),
-                  color: Colors.blue,
-                  child: new Text("Logout of Instagram",
-                      style:
-                          new TextStyle(fontSize: 20.0, color: Colors.white)),
-                  onPressed: () {
-                    _logoutInstagram();
-                  },
-                ),
-              )
+          height: 40.0,
+          child: RaisedButton(
+            elevation: 5.0,
+            shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(30.0)),
+            color: Colors.blue,
+            child: new Text("Logout of Instagram",
+                style:
+                new TextStyle(fontSize: 20.0, color: Colors.white)),
+            onPressed: () {
+              _logoutInstagram();
+            },
+          ),
+        )
             : SizedBox(
-                height: 40.0,
-                child: RaisedButton(
-                  elevation: 5.0,
-                  shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(30.0)),
-                  color: Colors.blue,
-                  child: new Text("Login with Instagram",
-                      style:
-                          new TextStyle(fontSize: 20.0, color: Colors.white)),
-                  onPressed: () {
-                    _loginInstagram();
-                  },
-                ),
-              ));
+          height: 40.0,
+          child: RaisedButton(
+            elevation: 5.0,
+            shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(30.0)),
+            color: Colors.blue,
+            child: new Text("Login with Instagram",
+                style:
+                new TextStyle(fontSize: 20.0, color: Colors.white)),
+            onPressed: () {
+              _loginInstagram();
+            },
+          ),
+        ));
   }
 
   //Build Components
@@ -284,7 +317,8 @@ class _IntroPageState extends State<IntroPage> {
                       FacebookButton(),
                       twitterButton(),
                       instagramButton(),
-                      showPrimaryButton(),
+                      showLogoutButton(),
+                      showBackButton(),
                     ],
                   ),
                 ))));

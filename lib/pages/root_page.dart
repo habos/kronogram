@@ -1,9 +1,10 @@
+import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kronogram/pages/first_time_login.dart';
 import 'package:kronogram/pages/login_signup_page.dart';
 import 'package:kronogram/services/authentication.dart';
-import 'package:kronogram/pages/home_page.dart';
 import 'package:kronogram/services/database.dart';
 import 'package:kronogram/UI_pages/user_pages/user_page.dart';
 
@@ -48,9 +49,6 @@ class _RootPageState extends State<RootPage> {
     _userId = user.uid.toString();
     var isNew = await widget.db.isNewUser(_userId);
     setState(() {
-      print("This is the userID: " + _userId);
-      print("Should say true:");
-      print(isNew.toString());
       if (isNew) {
         authStatus = AuthStatus.FIRST_LOGGED_IN;
       } else {
@@ -104,6 +102,8 @@ class _RootPageState extends State<RootPage> {
           return new UserPage(
             userId: _userId,
             auth: widget.auth,
+            db: widget.db,
+            logoutCallback: logoutCallback,
           );
         } else
           return buildWaitingScreen();
