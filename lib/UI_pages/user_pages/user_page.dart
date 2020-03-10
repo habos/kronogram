@@ -7,12 +7,19 @@ import 'package:kronogram/UI_pages/user_pages/user_feed.dart';
 import 'package:kronogram/UI_pages/my_app_bar/my_app_bar.dart';
 //import 'package:kronogram/UI_pages/display_posts/display_posts.dart';
 
+
+import 'package:kronogram/UI_pages/user_pages/user_test_post.dart';
+
+
+
 class UserPage extends StatefulWidget{
   UserPage({Key key, this.auth, this.userId})
         :super(key:key);
 
   final BaseAuth auth;
   final String userId;
+
+  //List<generalPost>postsLists =userTestPost().getpostlists(15);
 
   @override
   State<StatefulWidget> createState(){

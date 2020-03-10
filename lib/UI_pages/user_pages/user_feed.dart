@@ -11,7 +11,7 @@ class userFeed extends StatelessWidget{
   :assert(today != null);
 
   bool today;
-  List<generalPost>postsList =userTestPost().getpostlists(15);
+  List<generalPost> postsList =userTestPost().getpostlists(15);
   String postDate;
 
 
