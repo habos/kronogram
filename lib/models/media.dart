@@ -52,4 +52,8 @@ class FacebookMedia extends Media {
       'width' : json['media']['image']['width']
     };
   }
+
+  String getUrl() {
+    return this.url;
+  }
 }

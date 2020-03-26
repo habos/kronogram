@@ -1,4 +1,4 @@
-import 'package:kronogram/services/media.dart';
+import 'package:kronogram/models/media.dart';
 import 'package:kronogram/models/location.dart';
 
 class Post {
@@ -172,6 +172,8 @@ class FacebookPostData extends Post {
     DateTime date = DateTime.parse(json['created_time']);
     this.createdAt = new DateTime.utc(date.year,date.month,date.day,date.hour,date.minute,date.second);
 
+    if (this.caption == null) this.caption = this.title;
+
     var attachments = json['attachments']['data'];
     for(var x in attachments) {   //goes through array of [attachments][data]
       if(x['type'] == 'album') {
@@ -186,5 +188,29 @@ class FacebookPostData extends Post {
           this.media.add(new FacebookMedia.fromJson(x));
       }
     }
+  }
+
+  String getCaption() {
+    return this.caption;
+  }
+
+  String getTitle() {
+    return title;
+  }
+
+  DateTime getCreationTime() {
+    return this.createdAt;
+  }
+
+  String getID() {
+    return this.id;
+  }
+
+  List<FacebookMedia> getPostMedia() {
+    return media;
+  }
+
+  bool isAlbum() {
+    return media.length > 1;
   }
 }
