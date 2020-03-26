@@ -29,14 +29,14 @@ class _FacebookPageState extends State<FacebookPage> {
     final token = fbUser['token'];
     final graphResponse = await http.get('https://graph.facebook.com/me/?fields=posts.limit(6){id,created_time,name,message,place,attachments{media{image},type,subattachments}}&access_token=${token}');
     final profile = JSON.jsonDecode(graphResponse.body);
-//    print(profile['posts']['data']);
+//    print(profile['posts']['data']['attachments']);
     for(var jsonPost in profile['posts']['data']) {
       FacebookPostData fbPost = new FacebookPostData.fromJson(jsonPost, widget.userId);
       posts.add(new KronoFacebookPost(fbPost));
     }
 
     setState(() {
-      facebookExample = posts[1].createPostWidget();
+      facebookExample = posts[5].createPostWidget();
     });
   }
 
