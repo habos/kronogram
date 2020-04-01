@@ -16,9 +16,22 @@ class AppColors {
   static const Color voidBackground6 = Color(0xFFCC9999);
   static const Color voidBackground7 = Color(0xb3996666);
 
+
+  static const Color facebookColor = Color(0xcf3b5998);
+  static const Color twitterColor = Color(0xcf00acee);
+  static const Color instagramColor = Color(0xcfe95950);
+
+  static const Color randomButton = Color(0xbfE1E2E6);
+  static const Color randomButtonText = Color(0xCC000000);
+
+  static const Color randomButton2 = Color(0xCC000000);
+  static const Color randomButtonText2 = Color(0xffE1E2E6);
+
+  static const Color inputError = Color(0xFF990000);
   static const Color selectedTabBar = Color(0xFFCC9999);
   static const Color unSelectedTabBar = Color(0xb3996666);
-  static const Color voidBackground8 = Color(0x597F666F);
+  static const Color loginIcons = Color(0x597F666F);
+  static const Color loginButton = Color(0x55996666);
   static const Color voidBackground9 = Color(0x80E3B7B0);
   static const Color voidBackground10 = Color(0xD93E3139);
   static const Color appBarBackground = Color(0xD93E3139);

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:kronogram/UI_pages/values/colors.dart';
 import '../services/database.dart';
 import '../services/authentication.dart';
 
@@ -168,7 +169,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
             hintText: 'Email',
             icon: new Icon(
               Icons.mail,
-              color: Colors.grey,
+              color: AppColors.loginIcons,
             )),
         validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
         onSaved: (value) => _email = value.trim(),
@@ -187,7 +188,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
             hintText: 'Password',
             icon: new Icon(
               Icons.lock,
-              color: Colors.grey,
+              color: AppColors.loginIcons,
             )),
         validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
         onSaved: (value) => _password = value.trim(),
@@ -205,7 +206,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
             hintText: 'Username',
             icon: new Icon(
               Icons.account_circle,
-              color: Colors.grey,
+              color: AppColors.loginIcons,
             )),
         validator: (value) => value.isEmpty ? 'Username can\'t be empty' : null,
         onSaved: (value) => _username = value.trim(),
@@ -222,7 +223,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
             elevation: 5.0,
             shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(30.0)),
-            color: Colors.blue,
+            color: AppColors.loginButton,
             child: new Text(_isLoginForm ? 'Login' : 'Create account',
                 style: new TextStyle(fontSize: 20.0, color: Colors.white)),
             onPressed: validateAndSubmit,
@@ -244,7 +245,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         _errorMessage,
         style: TextStyle(
             fontSize: 13.0,
-            color: Colors.red,
+            color: AppColors.inputError,
             height: 1.0,
             fontWeight: FontWeight.w300),
       );

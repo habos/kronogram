@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_builder.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kronogram/UI_pages/user_pages/user_page.dart';
+import 'package:kronogram/UI_pages/values/colors.dart';
 import 'package:kronogram/pages/test_fb.dart';
 import 'package:kronogram/pages/test_instagram.dart';
 import 'package:kronogram/services/authentication.dart';
@@ -51,9 +52,9 @@ class _IntroPageState extends State<IntroPage> {
             elevation: 5.0,
             shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(30.0)),
-            color: Colors.blue,
+            color: AppColors.randomButton2,
             child: new Text('Continue',
-                style: new TextStyle(fontSize: 20.0, color: Colors.white)),
+                style: new TextStyle(fontSize: 20.0, color: AppColors.randomButtonText2)),
             onPressed: () => widget.onContinuePressed(context),
           ),
         ));
@@ -109,7 +110,7 @@ class _IntroPageState extends State<IntroPage> {
         icon: FontAwesomeIcons.facebook,
         shape: RoundedRectangleBorder(
             borderRadius: new BorderRadius.circular(30.0)),
-        backgroundColor: Color(0xff3b5998),
+        backgroundColor: AppColors.facebookColor,
         onPressed: () { _FacebookLogout(); },
       )
           : SignInButtonBuilder(
@@ -119,7 +120,7 @@ class _IntroPageState extends State<IntroPage> {
         icon: FontAwesomeIcons.facebook,
         shape: RoundedRectangleBorder(
             borderRadius: new BorderRadius.circular(30.0)),
-        backgroundColor: Color(0xff3b5998),
+        backgroundColor: AppColors.facebookColor,
         onPressed: () { _loginWithFB(); },
       ),
     );
@@ -175,7 +176,7 @@ class _IntroPageState extends State<IntroPage> {
         icon: FontAwesomeIcons.twitter,
         shape: RoundedRectangleBorder(
             borderRadius: new BorderRadius.circular(30.0)),
-        backgroundColor: Color(0xff00acee),
+        backgroundColor: AppColors.twitterColor,
         onPressed: () { _logoutTwitter(); },
       )
           : SignInButtonBuilder(
@@ -185,7 +186,7 @@ class _IntroPageState extends State<IntroPage> {
         icon: FontAwesomeIcons.twitter,
         shape: RoundedRectangleBorder(
             borderRadius: new BorderRadius.circular(30.0)),
-        backgroundColor: Color(0xff00acee),
+        backgroundColor: AppColors.twitterColor,
         onPressed: () { _loginTwitter(); },
       ),
     );
@@ -229,7 +230,7 @@ class _IntroPageState extends State<IntroPage> {
         icon: FontAwesomeIcons.instagram,
         shape: RoundedRectangleBorder(
             borderRadius: new BorderRadius.circular(30.0)),
-        backgroundColor: Color(0xffe95950),
+        backgroundColor: AppColors.instagramColor,
         onPressed: () { _logoutInstagram(); },
       )
           : SignInButtonBuilder(
@@ -239,7 +240,7 @@ class _IntroPageState extends State<IntroPage> {
         icon: FontAwesomeIcons.instagram,
         shape: RoundedRectangleBorder(
             borderRadius: new BorderRadius.circular(30.0)),
-        backgroundColor: Color(0xffe95950),
+        backgroundColor: AppColors.instagramColor,
         onPressed: () { _loginInstagram(); },
       ),
     );
