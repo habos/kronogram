@@ -8,8 +8,9 @@ import 'package:kronogram/UI_pages/user_current_date_widget/user_current_date_wi
 import 'package:kronogram/pages/settings.dart';
 import 'package:kronogram/services/authentication.dart';
 import 'package:kronogram/services/database.dart';
+import 'package:kronogram/services/stateful_wrapper.dart';
 
-class myAppBar extends StatelessWidget {
+class myAppBar extends StatefulWidget {
 //final double height;
 
   myAppBar({Key key, this.userId, this.logoutCallback})
@@ -19,13 +20,21 @@ class myAppBar extends StatelessWidget {
   final Auth auth = globals.auth;
   final String userId;
   final VoidCallback logoutCallback;
+  String username;
+
+  @override
+  State<StatefulWidget> createState(){
+    return _myAppBarState();
+  }
+}
+  class _myAppBarState extends State<myAppBar>{
 
   void onnavigationBarItemPressed(BuildContext context) {}
 
   void onUsernamePressed(BuildContext context) {}
 
   void onSETTINGSPressed(BuildContext context) => Navigator.push(context,
-      MaterialPageRoute(builder: (context) => SettingsPage(userId: this.userId, logoutCallback: this.logoutCallback)));
+      MaterialPageRoute(builder: (context) => SettingsPage(userId: widget.userId, logoutCallback: widget.logoutCallback)));
   void onSEARCHPressed(BuildContext context) => Navigator.push(
       context, MaterialPageRoute(builder: (context) => OSearchBarWidget()));
   void onMAPSPressed(BuildContext context) => Navigator.push(
@@ -35,6 +44,17 @@ class myAppBar extends StatelessWidget {
   void onDATEPressed(BuildContext context) => Navigator.push(context,
       MaterialPageRoute(builder: (context) => UserCurrentDateWidget()));
 
+  void setUsername(String userId) async{
+    String user = await widget.db.getUsername(userId);
+    setState(() {
+      widget.username = user;
+    });
+  }
+  @override
+  void initState(){
+    super.initState();
+    setUsername(widget.userId);
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -76,7 +96,7 @@ class myAppBar extends StatelessWidget {
                       onTap: () => this.onUsernamePressed(context),
 
                       child: Text(
-                        "username",
+                        widget.username,
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           color: AppColors.appBarText1,
@@ -104,20 +124,6 @@ class myAppBar extends StatelessWidget {
                             size: 35
                         ),
                         //Transform.rotate(angle: 0.80, child:
-
-                        Container(
-                          padding: EdgeInsets.only(top: 4.5),
-                          child:
-                          Text(
-                            "SETTINGS",
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              color: AppColors.appBarText2,
-                              fontWeight: FontWeight.bold,
-                              fontSize:5.5,
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                   ),
@@ -134,18 +140,6 @@ class myAppBar extends StatelessWidget {
                         ),
 
                         //Transform.rotate(angle: 0.0, origin: Offset(60, 20), alignment:Alignment.topLeft, child:
-                        Container(
-                          padding: EdgeInsets.only(bottom: 2),
-                          child: Text(
-                            "SEARCH",
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              color: AppColors.appBarText2,
-                              fontWeight: FontWeight.bold,
-                              fontSize:5.8,
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                   ),
