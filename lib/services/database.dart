@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 abstract class BaseDatabase {
   Future<bool> isNewUser(String userID);
-  Future<void> setIsNewUser(String userID, {bool status});
+  Future<void> setIsNewUser(String userID, bool status);
 
   Future<String> getUsername(String userID);
   Future<void> setUsername(String userID, String username);
@@ -49,11 +49,12 @@ class Database implements BaseDatabase {
   @override
   Future<bool> isNewUser(String userID) async {
     var snapshot = await getDocumentSnapshot(userID);
+    print(snapshot.data.toString());
     return snapshot.data.remove(_newUserStatusField);
   }
 
   @override
-  Future<void> setIsNewUser(String userID, {bool status = true}) {
+  Future<void> setIsNewUser(String userID, bool status) {
     return setField(userID, _newUserStatusField, status);
   }
 

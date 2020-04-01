@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:kronogram/UI_pages/user_pages/user_page.dart';
+import 'package:kronogram/pages/root_page.dart';
 import 'package:kronogram/services/authentication.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:flutter_twitter_login/flutter_twitter_login.dart';
 import 'package:kronogram/services/instagram_login.dart' as insta;
+import 'package:kronogram/services/globals.dart' as globals;
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:core';
 import 'dart:developer';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
@@ -11,11 +14,11 @@ import 'package:kronogram/services/remote_config.dart';
 import 'package:kronogram/services/database.dart';
 
 class SettingsPage extends StatefulWidget {
-  SettingsPage({Key key, this.auth, this.userId, this.logoutCallback, this.db})
+  SettingsPage({Key key, this.userId, this.logoutCallback})
       : super(key: key);
 
-  final BaseAuth auth;
-  final Database db;
+  final BaseAuth auth = globals.auth;
+  final Database db = globals.db;
   final String userId;
   final VoidCallback logoutCallback;
 
@@ -24,9 +27,10 @@ class SettingsPage extends StatefulWidget {
 
   void onBackPressed(BuildContext context) => Navigator.push(context,
       MaterialPageRoute(builder: (context) => UserPage(userId: userId,
-          auth: auth,
-          db: db,
           logoutCallback: logoutCallback)));
+
+  void onLogoutPressed(BuildContext context) => Navigator.push(context,
+      MaterialPageRoute(builder: (context) => RootPage()));
 }
 
 class _SettingsPageState extends State<SettingsPage>{
@@ -109,7 +113,7 @@ class _SettingsPageState extends State<SettingsPage>{
             color: Colors.blue,
             child: new Text('Logout',
                 style: new TextStyle(fontSize: 20.0, color: Colors.white)),
-            onPressed: signOut,
+            onPressed: () => [signOut(), widget.onLogoutPressed(context)]
           ),
         ));
   }
@@ -154,18 +158,28 @@ class _SettingsPageState extends State<SettingsPage>{
 
   Widget FacebookButton() {
     return new Padding(
-        padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
-    child:
-    _isLoggedInFacebook ? SignInButton(
-    Buttons.Facebook,
-    text: "Logout of Facebook",
-    onPressed: () { _FacebookLogout(); },
-    )
-    : SignInButton(
-      Buttons.Facebook,
-      text: "Login with Facebook",
-      onPressed: () { _loginWithFB(); },
-    ),
+      padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
+      child:
+      _isLoggedInFacebook ? SignInButtonBuilder(
+        height: 40.0,
+        fontSize: 19,
+        text: "Logout of Facebook",
+        icon: FontAwesomeIcons.facebook,
+        shape: RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(30.0)),
+        backgroundColor: Color(0xff3b5998),
+        onPressed: () { _FacebookLogout(); },
+      )
+          : SignInButtonBuilder(
+        height: 40.0,
+        fontSize: 19,
+        text: "Login to Facebook",
+        icon: FontAwesomeIcons.facebook,
+        shape: RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(30.0)),
+        backgroundColor: Color(0xff3b5998),
+        onPressed: () { _loginWithFB(); },
+      ),
     );
   }
 
@@ -206,40 +220,31 @@ class _SettingsPageState extends State<SettingsPage>{
     widget.db.setTwitterInfo(widget.userId, null);
   }
 
-  Widget twitterButton() {
+  Widget TwitterButton() {
     return new Padding(
-        padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
-        child: _isLoggedInTwitter
-            ? SizedBox(
-          height: 40.0,
-          child: RaisedButton(
-            elevation: 5.0,
-            shape: new RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(30.0)),
-            color: Colors.blue,
-            child: new Text("Logout of Twitter",
-                style:
-                new TextStyle(fontSize: 20.0, color: Colors.white)),
-            onPressed: () {
-              _logoutTwitter();
-            },
-          ),
-        )
-            : SizedBox(
-          height: 40.0,
-          child: RaisedButton(
-            elevation: 5.0,
-            shape: new RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(30.0)),
-            color: Colors.blue,
-            child: new Text("Login with Twitter",
-                style:
-                new TextStyle(fontSize: 20.0, color: Colors.white)),
-            onPressed: () {
-              _loginTwitter();
-            },
-          ),
-        ));
+      padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
+      child:
+      _isLoggedInTwitter ? SignInButtonBuilder(
+        height: 40.0,
+        fontSize: 19,
+        text: "Logout of Twitter",
+        icon: FontAwesomeIcons.twitter,
+        shape: RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(30.0)),
+        backgroundColor: Color(0xff00acee),
+        onPressed: () { _logoutTwitter(); },
+      )
+          : SignInButtonBuilder(
+        height: 40.0,
+        fontSize: 19,
+        text: "Login to Twitter",
+        icon: FontAwesomeIcons.twitter,
+        shape: RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(30.0)),
+        backgroundColor: Color(0xff00acee),
+        onPressed: () { _loginTwitter(); },
+      ),
+    );
   }
 
   //Instagram login
@@ -267,40 +272,32 @@ class _SettingsPageState extends State<SettingsPage>{
     widget.db.setInstagramInfo(widget.userId, null);
   }
 
-  Widget instagramButton() {
+
+  Widget InstagramButton() {
     return new Padding(
-        padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
-        child: _isLoggedInInstagram
-            ? SizedBox(
-          height: 40.0,
-          child: RaisedButton(
-            elevation: 5.0,
-            shape: new RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(30.0)),
-            color: Colors.blue,
-            child: new Text("Logout of Instagram",
-                style:
-                new TextStyle(fontSize: 20.0, color: Colors.white)),
-            onPressed: () {
-              _logoutInstagram();
-            },
-          ),
-        )
-            : SizedBox(
-          height: 40.0,
-          child: RaisedButton(
-            elevation: 5.0,
-            shape: new RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(30.0)),
-            color: Colors.blue,
-            child: new Text("Login with Instagram",
-                style:
-                new TextStyle(fontSize: 20.0, color: Colors.white)),
-            onPressed: () {
-              _loginInstagram();
-            },
-          ),
-        ));
+      padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
+      child:
+      _isLoggedInInstagram ? SignInButtonBuilder(
+        height: 40.0,
+        fontSize: 19,
+        text: "Logout of Instagram",
+        icon: FontAwesomeIcons.instagram,
+        shape: RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(30.0)),
+        backgroundColor: Color(0xffe95950),
+        onPressed: () { _logoutInstagram(); },
+      )
+          : SignInButtonBuilder(
+        height: 40.0,
+        fontSize: 19,
+        text: "Login to Instagram",
+        icon: FontAwesomeIcons.instagram,
+        shape: RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(30.0)),
+        backgroundColor: Color(0xffe95950),
+        onPressed: () { _loginInstagram(); },
+      ),
+    );
   }
 
   //Build Components
@@ -315,8 +312,8 @@ class _SettingsPageState extends State<SettingsPage>{
                     shrinkWrap: true,
                     children: <Widget>[
                       FacebookButton(),
-                      twitterButton(),
-                      instagramButton(),
+                      TwitterButton(),
+                      InstagramButton(),
                       showLogoutButton(),
                       showBackButton(),
                     ],

@@ -30,7 +30,7 @@ class KronogramApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: new RootPage(auth: new Auth(), db: new Database()));
+        home: new RootPage());
 
   }
 }

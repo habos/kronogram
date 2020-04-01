@@ -53,7 +53,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
           authResult = await widget.auth.signUp(_email, _password);
           userId = authResult.user.uid;
           await widget.db.setUsername(userId, _username);
-          await widget.db.setIsNewUser(userId);
+          await widget.db.setIsNewUser(userId, true);
           //widget.auth.sendEmailVerification();
           //_showVerifyEmailSentDialog();
           print('Signed up user: $userId');

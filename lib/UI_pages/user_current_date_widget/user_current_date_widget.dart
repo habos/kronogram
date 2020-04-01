@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kronogram/UI_pages/osearch_bar_widget/osearch_bar_widget.dart';
-import 'package:kronogram/UI_pages/settings_add_accounts_widget/settings_add_accounts_widget.dart';
 import 'package:kronogram/UI_pages/values/values.dart';
 import 'package:kronogram/UI_pages/user_timeline_widget/user_timeline_widget.dart';
 import 'package:kronogram/UI_pages/user_map_widget/user_map_widget.dart';

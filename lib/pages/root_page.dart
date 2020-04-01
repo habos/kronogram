@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:kronogram/services/globals.dart' as globals;
 import 'package:flutter/material.dart';
 import 'package:kronogram/pages/first_time_login.dart';
 import 'package:kronogram/pages/login_signup_page.dart';
@@ -16,10 +17,10 @@ enum AuthStatus {
 }
 
 class RootPage extends StatefulWidget {
-  RootPage({this.auth, this.db});
+  RootPage();
 
-  final BaseAuth auth;
-  final Database db;
+  final BaseAuth auth = globals.auth;
+  final Database db = globals.db;
 
   @override
   State<StatefulWidget> createState() => new _RootPageState();
@@ -50,6 +51,7 @@ class _RootPageState extends State<RootPage> {
     var isNew = await widget.db.isNewUser(_userId);
     setState(() {
       if (isNew) {
+        widget.db.setIsNewUser(_userId, false);
         authStatus = AuthStatus.FIRST_LOGGED_IN;
       } else {
         authStatus = AuthStatus.LOGGED_IN;
@@ -101,8 +103,6 @@ class _RootPageState extends State<RootPage> {
         if (_userId.length > 0 && _userId != null) {
           return new UserPage(
             userId: _userId,
-            auth: widget.auth,
-            db: widget.db,
             logoutCallback: logoutCallback,
           );
         } else

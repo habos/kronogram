@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kronogram/UI_pages/osearch_bar_widget/osearch_bar_widget.dart';
-import 'package:kronogram/UI_pages/settings_add_accounts_widget/settings_add_accounts_widget.dart';
+import 'package:kronogram/services/globals.dart' as globals;
 import 'package:kronogram/UI_pages/values/values.dart';
 import 'package:kronogram/UI_pages/user_timeline_widget/user_timeline_widget.dart';
 import 'package:kronogram/UI_pages/user_map_widget/user_map_widget.dart';
@@ -12,11 +12,11 @@ import 'package:kronogram/services/database.dart';
 class myAppBar extends StatelessWidget {
 //final double height;
 
-  myAppBar({Key key, this.auth, this.userId, this.logoutCallback, this.db})
+  myAppBar({Key key, this.userId, this.logoutCallback})
       : super(key: key);
 
-  final BaseAuth auth;
-  final Database db;
+  final Database db = globals.db;
+  final Auth auth = globals.auth;
   final String userId;
   final VoidCallback logoutCallback;
 
@@ -25,7 +25,7 @@ class myAppBar extends StatelessWidget {
   void onUsernamePressed(BuildContext context) {}
 
   void onSETTINGSPressed(BuildContext context) => Navigator.push(context,
-      MaterialPageRoute(builder: (context) => SettingsPage(db: this.db, auth: this.auth, userId: this.userId, logoutCallback: this.logoutCallback)));
+      MaterialPageRoute(builder: (context) => SettingsPage(userId: this.userId, logoutCallback: this.logoutCallback)));
   void onSEARCHPressed(BuildContext context) => Navigator.push(
       context, MaterialPageRoute(builder: (context) => OSearchBarWidget()));
   void onMAPSPressed(BuildContext context) => Navigator.push(

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 //import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:kronogram/UI_pages/osearch_bar_widget/osearch_bar_widget.dart';
-import 'package:kronogram/UI_pages/settings_add_accounts_widget/settings_add_accounts_widget.dart';
 import 'package:kronogram/UI_pages/values/values.dart';
 import 'package:kronogram/UI_pages/my_app_bar/my_app_bar.dart';
+import 'package:kronogram/pages/settings.dart';
 
 // to use google maps plug in : https://pub.dev/packages/google_maps_flutter
 class UserMapWidget extends StatelessWidget {
@@ -14,7 +14,7 @@ class UserMapWidget extends StatelessWidget {
   void onUsernamePressed(BuildContext context) {}
 
   void onSETTINGSPressed(BuildContext context) => Navigator.push(context,
-      MaterialPageRoute(builder: (context) => SettingsAddAccountsWidget()));
+      MaterialPageRoute(builder: (context) => SettingsPage()));
 
   void onSEARCHPressed(BuildContext context) => Navigator.push(
       context, MaterialPageRoute(builder: (context) => OSearchBarWidget()));

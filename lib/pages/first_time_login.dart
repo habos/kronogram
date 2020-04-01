@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/button_builder.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kronogram/UI_pages/user_pages/user_page.dart';
 import 'package:kronogram/pages/test_fb.dart';
 import 'package:kronogram/pages/test_instagram.dart';
@@ -98,38 +100,29 @@ class _IntroPageState extends State<IntroPage> {
 
   Widget FacebookButton() {
     return new Padding(
-        padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
-        child: _isLoggedInFacebook
-            ? SizedBox(
-                height: 40.0,
-                child: RaisedButton(
-                  elevation: 5.0,
-                  shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(30.0)),
-                  color: Colors.blue,
-                  child: new Text("Logout of Facebook",
-                      style:
-                          new TextStyle(fontSize: 20.0, color: Colors.white)),
-                  onPressed: () {
-                    _FacebookLogout();
-                  },
-                ),
-              )
-            : SizedBox(
-                height: 40.0,
-                child: RaisedButton(
-                  elevation: 5.0,
-                  shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(30.0)),
-                  color: Colors.blue,
-                  child: new Text("Login with Facebook",
-                      style:
-                          new TextStyle(fontSize: 20.0, color: Colors.white)),
-                  onPressed: () {
-                    _loginWithFB();
-                  },
-                ),
-              ));
+      padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
+      child:
+      _isLoggedInFacebook ? SignInButtonBuilder(
+        height: 40.0,
+        fontSize: 19,
+        text: "Logout of Facebook",
+        icon: FontAwesomeIcons.facebook,
+        shape: RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(30.0)),
+        backgroundColor: Color(0xff3b5998),
+        onPressed: () { _FacebookLogout(); },
+      )
+          : SignInButtonBuilder(
+        height: 40.0,
+        fontSize: 19,
+        text: "Login to Facebook",
+        icon: FontAwesomeIcons.facebook,
+        shape: RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(30.0)),
+        backgroundColor: Color(0xff3b5998),
+        onPressed: () { _loginWithFB(); },
+      ),
+    );
   }
 
   //Twitter Login
@@ -173,38 +166,29 @@ class _IntroPageState extends State<IntroPage> {
 
   Widget twitterButton() {
     return new Padding(
-        padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
-        child: _isLoggedInTwitter
-            ? SizedBox(
-                height: 40.0,
-                child: RaisedButton(
-                  elevation: 5.0,
-                  shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(30.0)),
-                  color: Colors.blue,
-                  child: new Text("Logout of Twitter",
-                      style:
-                          new TextStyle(fontSize: 20.0, color: Colors.white)),
-                  onPressed: () {
-                    _logoutTwitter();
-                  },
-                ),
-              )
-            : SizedBox(
-                height: 40.0,
-                child: RaisedButton(
-                  elevation: 5.0,
-                  shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(30.0)),
-                  color: Colors.blue,
-                  child: new Text("Login with Twitter",
-                      style:
-                          new TextStyle(fontSize: 20.0, color: Colors.white)),
-                  onPressed: () {
-                    _loginTwitter();
-                  },
-                ),
-              ));
+      padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
+      child:
+      _isLoggedInTwitter ? SignInButtonBuilder(
+        height: 40.0,
+        fontSize: 19,
+        text: "Logout of Twitter",
+        icon: FontAwesomeIcons.twitter,
+        shape: RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(30.0)),
+        backgroundColor: Color(0xff00acee),
+        onPressed: () { _logoutTwitter(); },
+      )
+          : SignInButtonBuilder(
+        height: 40.0,
+        fontSize: 19,
+        text: "Login to Twitter",
+        icon: FontAwesomeIcons.twitter,
+        shape: RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(30.0)),
+        backgroundColor: Color(0xff00acee),
+        onPressed: () { _loginTwitter(); },
+      ),
+    );
   }
 
   //Instagram login
@@ -236,38 +220,29 @@ class _IntroPageState extends State<IntroPage> {
 
   Widget instagramButton() {
     return new Padding(
-        padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
-        child: _isLoggedInInstagram
-            ? SizedBox(
-                height: 40.0,
-                child: RaisedButton(
-                  elevation: 5.0,
-                  shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(30.0)),
-                  color: Colors.blue,
-                  child: new Text("Logout of Instagram",
-                      style:
-                          new TextStyle(fontSize: 20.0, color: Colors.white)),
-                  onPressed: () {
-                    _logoutInstagram();
-                  },
-                ),
-              )
-            : SizedBox(
-                height: 40.0,
-                child: RaisedButton(
-                  elevation: 5.0,
-                  shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(30.0)),
-                  color: Colors.blue,
-                  child: new Text("Login with Instagram",
-                      style:
-                          new TextStyle(fontSize: 20.0, color: Colors.white)),
-                  onPressed: () {
-                    _loginInstagram();
-                  },
-                ),
-              ));
+      padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
+      child:
+      _isLoggedInInstagram ? SignInButtonBuilder(
+        height: 40.0,
+        fontSize: 19,
+        text: "Logout of Instagram",
+        icon: FontAwesomeIcons.instagram,
+        shape: RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(30.0)),
+        backgroundColor: Color(0xffe95950),
+        onPressed: () { _logoutInstagram(); },
+      )
+          : SignInButtonBuilder(
+        height: 40.0,
+        fontSize: 19,
+        text: "Login to Instagram",
+        icon: FontAwesomeIcons.instagram,
+        shape: RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(30.0)),
+        backgroundColor: Color(0xffe95950),
+        onPressed: () { _loginInstagram(); },
+      ),
+    );
   }
 
   //Build Components
