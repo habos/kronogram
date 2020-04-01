@@ -8,7 +8,6 @@ import 'package:kronogram/UI_pages/user_current_date_widget/user_current_date_wi
 import 'package:kronogram/pages/settings.dart';
 import 'package:kronogram/services/authentication.dart';
 import 'package:kronogram/services/database.dart';
-import 'package:kronogram/services/stateful_wrapper.dart';
 
 class myAppBar extends StatefulWidget {
 //final double height;
