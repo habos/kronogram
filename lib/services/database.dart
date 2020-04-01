@@ -82,6 +82,24 @@ class Database implements BaseDatabase {
         .setData(igPost.toJson());
   }
 
+  Future<DocumentSnapshot> getFacebookPost(int postID) {
+    return _firestore.collection(_fbPostsCollectionName)
+        .document(postID.toString())
+        .get();
+  }
+
+  Future<DocumentSnapshot> getIGPost(int postID) {
+    return _firestore.collection(_igPostsCollectionName)
+        .document(postID.toString())
+        .get();
+  }
+
+  Future<DocumentSnapshot> getTweet(int postID) {
+    return _firestore.collection(_tweetsCollectionName)
+        .document(postID.toString())
+        .get();
+  }
+
   DocumentReference getUserDocumentRef(String userID) {
     return _firestore.collection(_usersCollectionName).document(userID);
   }
