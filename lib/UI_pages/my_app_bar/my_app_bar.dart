@@ -12,14 +12,14 @@ import 'package:kronogram/services/database.dart';
 class myAppBar extends StatefulWidget {
 //final double height;
 
-  myAppBar({Key key, this.userId, this.logoutCallback})
+  myAppBar({Key key, this.userId, this.logoutCallback, this.username})
       : super(key: key);
 
   final Database db = globals.db;
   final Auth auth = globals.auth;
   final String userId;
   final VoidCallback logoutCallback;
-  String username = "ERROR";
+  final String username;
 
   @override
   State<StatefulWidget> createState(){
@@ -43,17 +43,6 @@ class myAppBar extends StatefulWidget {
   void onDATEPressed(BuildContext context) => Navigator.push(context,
       MaterialPageRoute(builder: (context) => UserCurrentDateWidget()));
 
-  void setUsername(String userId) async{
-    String user = await widget.db.getUsername(userId);
-    setState(() {
-      widget.username = user;
-    });
-  }
-  @override
-  void initState(){
-    super.initState();
-    setUsername(widget.userId);
-  }
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -17,6 +17,7 @@ class UserPage extends StatefulWidget{
   final String userId;
   final VoidCallback logoutCallback;
   final Database db = globals.db;
+  String username = "error";
 
   @override
   State<StatefulWidget> createState(){
@@ -32,12 +33,26 @@ class _UserPageState extends State<UserPage>{
     PlaceholderWidget(Colors.white)
   ];
 
+  void setUsername(String userId) async{
+    String user = await widget.db.getUsername(userId);
+    setState(() {
+      widget.username = user;
+    });
+  }
+  @override
+  void initState(){
+    super.initState();
+    setState(() {
+      setUsername(widget.userId);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(110.0),
-        child: myAppBar(userId: widget.userId, logoutCallback: widget.logoutCallback
+        child: myAppBar(userId: widget.userId, logoutCallback: widget.logoutCallback, username: widget.username,
           //height: 100,
         ),
       ),
