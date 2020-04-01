@@ -1,10 +1,13 @@
+import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:kronogram/services/globals.dart' as globals;
 import 'package:flutter/material.dart';
 import 'package:kronogram/pages/first_time_login.dart';
 import 'package:kronogram/pages/login_signup_page.dart';
 import 'package:kronogram/services/authentication.dart';
-import 'package:kronogram/pages/home_page.dart';
 import 'package:kronogram/services/database.dart';
+import 'package:kronogram/UI_pages/user_pages/user_page.dart';
 
 enum AuthStatus {
   NOT_DETERMINED,
@@ -14,10 +17,10 @@ enum AuthStatus {
 }
 
 class RootPage extends StatefulWidget {
-  RootPage({this.auth, this.db});
+  RootPage();
 
-  final BaseAuth auth;
-  final Database db;
+  final BaseAuth auth = globals.auth;
+  final Database db = globals.db;
 
   @override
   State<StatefulWidget> createState() => new _RootPageState();
@@ -47,10 +50,8 @@ class _RootPageState extends State<RootPage> {
     _userId = user.uid.toString();
     var isNew = await widget.db.isNewUser(_userId);
     setState(() {
-      print("This is the userID: " + _userId);
-      print("Should say true:");
-      print(isNew.toString());
       if (isNew) {
+        widget.db.setIsNewUser(_userId, false);
         authStatus = AuthStatus.FIRST_LOGGED_IN;
       } else {
         authStatus = AuthStatus.LOGGED_IN;
@@ -100,9 +101,8 @@ class _RootPageState extends State<RootPage> {
         break;
       case AuthStatus.LOGGED_IN:
         if (_userId.length > 0 && _userId != null) {
-          return new HomePage(
+          return new UserPage(
             userId: _userId,
-            auth: widget.auth,
             logoutCallback: logoutCallback,
           );
         } else

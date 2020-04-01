@@ -69,7 +69,7 @@ class testPost extends StatelessWidget {
             height: 150,
             margin: EdgeInsets.only(left: 10, top: 10),
             decoration: BoxDecoration(
-              color: AppColors.placeholderBackground,
+              color: AppColors.primaryBackground,
               borderRadius: Radii.k10pxRadius,
             ),
           ),

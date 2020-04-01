@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 import 'dart:core';
+import 'package:kronogram/pages/root_page.dart' as root;
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class BaseAuth {

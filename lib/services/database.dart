@@ -9,19 +9,22 @@ import 'package:kronogram/models/krono_tweet.dart';
 
 abstract class BaseDatabase {
   Future<bool> isNewUser(String userID);
-  Future<void> setIsNewUser(String userID, {bool status});
+  Future<void> setIsNewUser(String userID, bool status);
 
   Future<String> getUsername(String userID);
   Future<void> setUsername(String userID, String username);
 
   Future<Map> getFacebookInfo(String userID);
   Future<void> setFacebookInfo(String userID, Map facebookId);
+  Future<bool> checkFacebookInfo(String userID);
 
   Future<Map> getTwitterInfo(String userID);
   Future<void> setTwitterInfo(String userID, Map info);
+  Future<bool> checkTwitterInfo(String userID);
 
   Future<Map> getInstagramInfo(String userID);
   Future<void> setInstagramInfo(String userID, Map info);
+  Future<bool> checkInstagramInfo(String userID);
 }
 
 class Database implements BaseDatabase {
@@ -94,7 +97,7 @@ class Database implements BaseDatabase {
   }
 
   @override
-  Future<void> setIsNewUser(String userID, {bool status = true}) {
+  Future<void> setIsNewUser(String userID, bool status) {
     return setFieldInUsers(userID, _newUserStatusField, status);
   }
 
@@ -128,6 +131,11 @@ class Database implements BaseDatabase {
     return setFieldInUsers(userID, _facebookInfoField, facebookId);
   }
 
+  Future<bool> checkFacebookInfo(String userID) async {
+    var snapshot = await getUserDocumentSnapshot(userID);
+    return snapshot.data.containsKey(_facebookInfoField) ?  true : false;
+  }
+
   Future<Map> getTwitterInfo(String userID) async {
     var snapshot = await getUserDocumentSnapshot(userID);
     return snapshot.data.remove(_twitterInfoField);
@@ -148,9 +156,19 @@ class Database implements BaseDatabase {
     return setFieldInUsers(userID, _twitterInfoField, info);
   }
 
+  Future<bool> checkTwitterInfo(String userID) async {
+    var snapshot = await getUserDocumentSnapshot(userID);
+    return snapshot.data.containsKey(_twitterInfoField) ?  true : false;
+  }
+
   Future<Map> getInstagramInfo(String userID) async {
     var snapshot = await getUserDocumentSnapshot(userID);
     return snapshot.data.remove(_instagramInfoField);
+  }
+
+  Future<bool> checkInstagramInfo(String userID) async {
+    var snapshot = await getUserDocumentSnapshot(userID);
+    return snapshot.data.containsKey(_instagramInfoField) ?  true : false;
   }
 
 /*

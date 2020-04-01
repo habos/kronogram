@@ -1,38 +1,80 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_signin_button/button_builder.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kronogram/UI_pages/user_pages/user_page.dart';
-import 'package:kronogram/pages/test_fb.dart';
-import 'package:kronogram/pages/test_instagram.dart';
+import 'package:kronogram/pages/root_page.dart';
 import 'package:kronogram/services/authentication.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:flutter_twitter_login/flutter_twitter_login.dart';
 import 'package:kronogram/services/instagram_login.dart' as insta;
+import 'package:kronogram/services/globals.dart' as globals;
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:core';
 import 'dart:developer';
-import 'package:kronogram/pages/test_twitter_requests.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:kronogram/services/remote_config.dart';
 import 'package:kronogram/services/database.dart';
 
-class IntroPage extends StatefulWidget {
-  IntroPage({Key key, this.auth, this.userId, this.logoutCallback, this.db})
+class SettingsPage extends StatefulWidget {
+  SettingsPage({Key key, this.userId, this.logoutCallback})
       : super(key: key);
 
-  final BaseAuth auth;
-  final Database db;
+  final BaseAuth auth = globals.auth;
+  final Database db = globals.db;
   final String userId;
   final VoidCallback logoutCallback;
 
   @override
-  State<StatefulWidget> createState() => new _IntroPageState();
+  State<StatefulWidget> createState() => new _SettingsPageState();
 
-  void onContinuePressed(BuildContext context) => Navigator.push(context,
-      MaterialPageRoute(builder: (context) => UserPage()));
+  void onBackPressed(BuildContext context) => Navigator.push(context,
+      MaterialPageRoute(builder: (context) => UserPage(userId: userId,
+          logoutCallback: logoutCallback)));
+
+  void onLogoutPressed(BuildContext context) => Navigator.push(context,
+      MaterialPageRoute(builder: (context) => RootPage()));
 }
 
-class _IntroPageState extends State<IntroPage> {
-  //Logout button
+class _SettingsPageState extends State<SettingsPage>{
 
+  bool _isLoggedInFacebook;
+  bool _isLoggedInTwitter;
+  bool _isLoggedInInstagram;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.auth.getCurrentUser().then((user) {
+        String userId = user.uid;
+        widget.db.checkFacebookInfo(userId).then((value){
+         setState(() {
+           if(value){
+             _isLoggedInFacebook = true;
+           } else {
+             _isLoggedInFacebook = false;
+           }
+         });
+        });
+        widget.db.checkTwitterInfo(userId).then((val){
+          setState(() {
+            if(val){
+              _isLoggedInTwitter = true;
+            } else {
+              _isLoggedInTwitter = false;
+            }
+          });
+        });
+        widget.db.checkInstagramInfo(userId).then((val){
+          setState(() {
+            if(val){
+              _isLoggedInInstagram = true;
+            } else {
+              _isLoggedInInstagram = false;
+            }
+          });
+        });
+    });
+  }
+
+  //Logout button
   signOut() async {
     try {
       await widget.auth.signOut();
@@ -42,7 +84,7 @@ class _IntroPageState extends State<IntroPage> {
     }
   }
 
-  Widget showPrimaryButton() {
+  Widget showBackButton() {
     return new Padding(
         padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
         child: SizedBox(
@@ -52,16 +94,32 @@ class _IntroPageState extends State<IntroPage> {
             shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(30.0)),
             color: Colors.blue,
-            child: new Text('Continue',
+            child: new Text('Go Back',
                 style: new TextStyle(fontSize: 20.0, color: Colors.white)),
-            onPressed: () => widget.onContinuePressed(context),
+            onPressed: () => widget.onBackPressed(context),
+          ),
+        ));
+  }
+
+  Widget showLogoutButton() {
+    return new Padding(
+        padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
+        child: SizedBox(
+          height: 40.0,
+          child: new RaisedButton(
+            elevation: 5.0,
+            shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(30.0)),
+            color: Colors.blue,
+            child: new Text('Logout',
+                style: new TextStyle(fontSize: 20.0, color: Colors.white)),
+            onPressed: () => [signOut(), widget.onLogoutPressed(context)]
           ),
         ));
   }
 
   //Facebook Login
 
-  bool _isLoggedInFacebook = false;
   final facebookLogin = FacebookLogin();
 
   _loginWithFB() async {
@@ -129,8 +187,6 @@ class _IntroPageState extends State<IntroPage> {
 
   static final Future<TwitterLogin> twitterLoginFuture = getTwitterLogin();
 
-  bool _isLoggedInTwitter = false;
-
   void _loginTwitter() async {
     TwitterLogin twitterLogin = await twitterLoginFuture;
     final TwitterLoginResult result = await twitterLogin.authorize();
@@ -164,7 +220,7 @@ class _IntroPageState extends State<IntroPage> {
     widget.db.setTwitterInfo(widget.userId, null);
   }
 
-  Widget twitterButton() {
+  Widget TwitterButton() {
     return new Padding(
       padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
       child:
@@ -193,8 +249,6 @@ class _IntroPageState extends State<IntroPage> {
 
   //Instagram login
 
-  bool _isLoggedInInstagram = false;
-
   void _loginInstagram() async {
     final insta.Token token = await insta.getToken();
     if (token != null) {
@@ -218,7 +272,8 @@ class _IntroPageState extends State<IntroPage> {
     widget.db.setInstagramInfo(widget.userId, null);
   }
 
-  Widget instagramButton() {
+
+  Widget InstagramButton() {
     return new Padding(
       padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
       child:
@@ -257,9 +312,10 @@ class _IntroPageState extends State<IntroPage> {
                     shrinkWrap: true,
                     children: <Widget>[
                       FacebookButton(),
-                      twitterButton(),
-                      instagramButton(),
-                      showPrimaryButton(),
+                      TwitterButton(),
+                      InstagramButton(),
+                      showLogoutButton(),
+                      showBackButton(),
                     ],
                   ),
                 ))));
