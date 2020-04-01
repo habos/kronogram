@@ -7,14 +7,6 @@ class Post {
   String caption;
   String id;
 //  List<Media> media = new List(); //photo, video, animated_gif
-
-  String getUserId() {
-    return userId;
-  }
-
-  void setUserId(String userId) {
-    this.userId = userId;
-  }
 }
 
 class Tweet extends Post {
@@ -26,6 +18,7 @@ class Tweet extends Post {
 
 
   Tweet.fromJson(Map<String, dynamic> json, String userId) {
+    this.userId = userId;
     id = json['id_str'];
     String dateStr = _parseDate(json['created_at']);
     DateTime date = DateTime.parse(dateStr);
@@ -51,7 +44,6 @@ class Tweet extends Post {
     for (var i=0; i<json['entities']['urls'].length; i++) {
       this.links.add(json['entities']['urls'][i]['url']);
     }
-    this.userId = userId;
     }
 
 //TODO: write Tweet Object back to into json
@@ -136,9 +128,7 @@ class QuoteTweet extends Tweet {
 class InstaPost extends Post {
   List<InstaMedia> media = new List();
 
-  InstaPost.fromJson(Map<String,dynamic> json, String userId) {
-    this.userId = userId;
-
+  InstaPost.fromJson(Map<String,dynamic> json) {
     this.id = json['id'];
     this.caption = json['caption'];
     DateTime date = DateTime.parse(json['timestamp']);
@@ -165,7 +155,6 @@ class FacebookPostData extends Post {
   List<FacebookMedia> media = new List();
   FacebookPostData.fromJson(Map<String,dynamic> json, String userId) {
     this.userId = userId;
-
     this.id = json['id'];
     this.caption = json['message'];
     this.title = json['name'];  //might be null if there is no title; mainly for like when photos are added to album or cover photo updated
@@ -192,6 +181,10 @@ class FacebookPostData extends Post {
 
   String getCaption() {
     return this.caption;
+  }
+
+  String getUserId() {
+    return this.userId;
   }
 
   String getTitle() {

@@ -36,7 +36,7 @@ class _FacebookPageState extends State<FacebookPage> {
     }
 
     setState(() {
-      facebookExample = posts[5].createPostWidget();
+      facebookExample = posts[0].createPostWidget();
     });
   }
 
