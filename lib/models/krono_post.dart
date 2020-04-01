@@ -16,4 +16,7 @@ abstract class KronoPost {
 
   /// Returns the post ID
   int getPostID();
+
+  /// Returns a map for easy encoding.
+  Map<String, dynamic> toJson();
 }

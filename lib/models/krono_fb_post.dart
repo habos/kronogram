@@ -28,4 +28,20 @@ class KronoFacebookPost implements KronoPost {
   int getPostID() {
     return int.parse(_fbPostData.id);
   }
+
+  String userId;
+  DateTime createdAt;
+  String caption;
+  String id;
+
+  @override
+  Map<String, dynamic> toJson() =>
+      {
+        'userId' : _fbPostData.getUserId(),
+        'createdAt' : _fbPostData.getCreationTime(),
+        'caption' : _fbPostData.getCaption(),
+        'postId' : _fbPostData.getID(),
+        'title' : _fbPostData.getTitle(),
+        'media' : _fbPostData.getPostMedia()
+      };
 }

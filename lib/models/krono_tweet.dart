@@ -41,4 +41,13 @@ class KronoTweet implements KronoPost {
   int getPostID() {
     return int.parse(_tweet.idStr);
   }
+
+  @override
+  Map<String, dynamic> toJson()  =>
+      {
+        'userId' : _tweet.user.id,
+        'createdAt' : _creationTime,
+        'caption' : _tweet.text,
+        'tweetData' : _tweet,
+      };
 }
