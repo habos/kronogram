@@ -19,14 +19,14 @@ class myAppBar extends StatefulWidget {
   final Auth auth = globals.auth;
   final String userId;
   final VoidCallback logoutCallback;
-  String username;
+  String username = "ERROR";
 
   @override
   State<StatefulWidget> createState(){
     return _myAppBarState();
   }
 }
-  class _myAppBarState extends State<myAppBar>{
+ class _myAppBarState extends State<myAppBar>{
 
   void onnavigationBarItemPressed(BuildContext context) {}
 
