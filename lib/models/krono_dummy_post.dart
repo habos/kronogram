@@ -27,4 +27,10 @@ class KronoDummyPost implements KronoPost {
   int getPostID() {
     return 1;
   }
+
+  @override
+  Map<String, dynamic> toJson() =>
+      {
+        'test' : 'test'
+      };
 }

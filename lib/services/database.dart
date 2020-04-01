@@ -1,4 +1,9 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:kronogram/models/krono_fb_post.dart';
+import 'package:kronogram/models/krono_insta_post.dart';
+import 'package:kronogram/models/krono_tweet.dart';
 
 // All default parameters are the defaults for a new user.
 
@@ -25,17 +30,56 @@ abstract class BaseDatabase {
 class Database implements BaseDatabase {
   final Firestore _firestore = Firestore.instance;
   final String _usersCollectionName = "users";
+  final String _fbPostsCollectionName = "facebookPosts";
+  final String _tweetsCollectionName = "twitterPosts";
+  final String _igPostsCollectionName = "instagramPosts";
   final String _newUserStatusField = "is_new_user";
   final String _usernameField = "username";
   final String _facebookInfoField = "facebook_info";
   final String _twitterInfoField = "twitter_info";
   final String _instagramInfoField = "instagram_info";
+  final String _timelineSummaryField = "timeline";
 
   Future<void> setFieldInUsers(String userID, String fieldName, var value) {
     return _firestore
         .collection(_usersCollectionName)
         .document(userID)
         .setData({fieldName: value}, merge: true);
+  }
+
+  CollectionReference getUserTimelineSummary(String userID) {
+    return getUserDocumentRef(userID).collection(_timelineSummaryField);
+  }
+
+  Future<void> addToUserTimelineSummary(String userID, int postID, DateTime creationTime,
+      String platform) {
+      return _firestore.collection(_usersCollectionName)
+          .document(userID)
+          .collection(_timelineSummaryField)
+          .document()
+          .setData({
+              'postID' : postID,
+              'creationTime' : creationTime,
+              'platform'   : platform
+          });
+  }
+
+  Future<void> addToFacebookPosts(KronoFacebookPost fbPost) {
+    return _firestore.collection(_fbPostsCollectionName)
+        .document(fbPost.getPostID().toString())
+        .setData(fbPost.toJson());
+  }
+
+  Future<void> addToTwitterPosts(KronoTweet tweet) {
+    return _firestore.collection(_tweetsCollectionName)
+        .document(tweet.getPostID().toString())
+        .setData(tweet.toJson());
+  }
+
+  Future<void> addToInstagramPosts(KronoInstaPost igPost) {
+    return _firestore.collection(_igPostsCollectionName)
+        .document(igPost.getPostID().toString())
+        .setData(igPost.toJson());
   }
 
   DocumentReference getUserDocumentRef(String userID) {
