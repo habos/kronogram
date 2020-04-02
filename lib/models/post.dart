@@ -202,22 +202,25 @@ class FacebookPostData extends Post {
 
     if (this.caption == null) this.caption = this.title;
 
-    var attachments = json['attachments']['data'];
-    for (var x in attachments) {
-      //goes through array of [attachments][data]
-      if (x['type'] == 'album') {
-        var subAttachments = x['subattachments']['data'];
-        for (var y in subAttachments) {
-          //goes through array of ...[subattachments][data]
-          if (y['media'] != null) {
-            this.media.add(new FacebookMedia.fromJson(y));
+    if (json['attachments'] != null) {
+      var attachments = json['attachments']['data'];
+      for (var x in attachments) {
+        //goes through array of [attachments][data]
+        if (x['type'] == 'album') {
+          var subAttachments = x['subattachments']['data'];
+          for (var y in subAttachments) {
+            //goes through array of ...[subattachments][data]
+            if (y['media'] != null) {
+              this.media.add(new FacebookMedia.fromJson(y));
+            }
           }
+        } else if (x['media'] != null) {
+          //if single media like cover photo
+          this.media.add(new FacebookMedia.fromJson(x));
         }
-      } else if (x['media'] != null) {
-        //if single media like cover photo
-        this.media.add(new FacebookMedia.fromJson(x));
       }
     }
+
   }
 
   String getCaption() {

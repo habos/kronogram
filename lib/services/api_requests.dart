@@ -16,7 +16,9 @@ abstract class APIrequests {
 
 class APIcalls extends APIrequests {
   Future<List<KronoInstaPost>> requestInstaPosts(var userInfo) async {
-    var posts = new List();
+    if (userInfo == null) return null;
+
+    var posts = new List<KronoInstaPost>();
 
     final token = userInfo['token'];
     final graphResponse = await http.get(
@@ -32,7 +34,7 @@ class APIcalls extends APIrequests {
   }
 
   Future<List<KronoFacebookPost>> requestFbPosts(var userInfo) async {
-    var posts = new List();
+    var posts = new List<KronoFacebookPost>();
 
     final token = userInfo['token'];
     final graphResponse = await http.get(
@@ -49,7 +51,7 @@ class APIcalls extends APIrequests {
   }
 
   Future<List<KronoTweet>> requestTweets(var userInfo) async {
-    var tweets = new List();
+    var tweets = new List<KronoTweet>();
 
     final _twitterOauth = new twitterApi(
         consumerKey: 'JZScfVJ2TnkzVHy7lS7XHGU1z',
