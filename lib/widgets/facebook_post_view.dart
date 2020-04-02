@@ -13,15 +13,15 @@ class FacebookPostView extends StatelessWidget {
 
   // TODO: implement constructor
   FacebookPostView.fromFacebookPost(FacebookPostData fbPost)
-    : _media = fbPost.getPostMedia(),
-      _caption = fbPost.getCaption(),
-      _isAlbum = fbPost.isAlbum();
+      : _media = fbPost.getPostMedia(),
+        _caption = fbPost.getCaption(),
+        _isAlbum = fbPost.isAlbum();
 
   Widget singleImage(FacebookMedia media) {
     return CachedNetworkImage(
       imageUrl: media.url,
       placeholder: (context, url) => CircularProgressIndicator(),
-      errorWidget: (context,url,error) => Icon(Icons.error),
+      errorWidget: (context, url, error) => Icon(Icons.error),
     );
   }
 
@@ -35,7 +35,9 @@ class FacebookPostView extends StatelessWidget {
     return CarouselSlider(
       height: 400.0,
       items: _media.map((med) {
-        if(med.type == "photo" || med.type == "cover_photo" || med.type == "profile_media") {
+        if (med.type == "photo" ||
+            med.type == "cover_photo" ||
+            med.type == "profile_media") {
           return singleImage(med);
         }
         VideoPlayerController controller = getVideoPlayerController(med);
@@ -49,9 +51,9 @@ class FacebookPostView extends StatelessWidget {
   }
 
   Widget postView() {
-    return _isAlbum ? albumCarousel() :
-      _media.length == 0 ? Container() :
-        singleImage(_media[0]);
+    return _isAlbum
+        ? albumCarousel()
+        : _media.length == 0 ? Container() : singleImage(_media[0]);
   }
 
   @override
@@ -66,15 +68,11 @@ class FacebookPostView extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             child: RichText(
               textAlign: TextAlign.start,
-              text: TextSpan(
-                text: _caption,
-                style: defaultFBCaptionTextStyle
-              ),
+              text: TextSpan(text: _caption, style: defaultFBCaptionTextStyle),
             ),
           )
         ],
       ),
     );
   }
-
 }

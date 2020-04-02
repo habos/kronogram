@@ -105,11 +105,11 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
         body: Stack(
-          children: <Widget>[
-            showForm(),
-            showCircularProgress(),
-          ],
-        ));
+      children: <Widget>[
+        showForm(),
+        showCircularProgress(),
+      ],
+    ));
   }
 
   Widget showForm() {

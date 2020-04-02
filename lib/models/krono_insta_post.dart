@@ -38,13 +38,12 @@ class KronoInstaPost implements KronoPost {
   }
 
   @override
-  Map<String, dynamic> toJson()  =>
-      {
-        'media' : _instaPost.getPostMedia(),
-        'createdAt' : _instaPost.getCreationTime(),
-        'caption' : _instaPost.getCaption(),
-        'postId' : _instaPost.getID(),
-        'isAlbum' : _instaPost.isAlbum()
+  Map<String, dynamic> toJson() => {
+        'media': _instaPost.getPostMedia(),
+        'createdAt': _instaPost.getCreationTime(),
+        'caption': _instaPost.getCaption(),
+        'postId': _instaPost.getID(),
+        'isAlbum': _instaPost.isAlbum()
       };
 
   static KronoInstaPost fromJson(Map<String, dynamic> json) {

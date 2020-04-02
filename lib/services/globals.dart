@@ -8,5 +8,3 @@ import 'authentication.dart';
 Database db = new Database();
 BaseAuth auth = new Auth();
 APIcalls APIcaller = new APIcalls();
-
-

@@ -13,8 +13,8 @@ class UserMapWidget extends StatelessWidget {
 
   void onUsernamePressed(BuildContext context) {}
 
-  void onSETTINGSPressed(BuildContext context) => Navigator.push(context,
-      MaterialPageRoute(builder: (context) => SettingsPage()));
+  void onSETTINGSPressed(BuildContext context) => Navigator.push(
+      context, MaterialPageRoute(builder: (context) => SettingsPage()));
 
   void onSEARCHPressed(BuildContext context) => Navigator.push(
       context, MaterialPageRoute(builder: (context) => OSearchBarWidget()));

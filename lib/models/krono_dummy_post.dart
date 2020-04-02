@@ -29,8 +29,5 @@ class KronoDummyPost implements KronoPost {
   }
 
   @override
-  Map<String, dynamic> toJson() =>
-      {
-        'test' : 'test'
-      };
+  Map<String, dynamic> toJson() => {'test': 'test'};
 }

@@ -3,7 +3,6 @@ import 'package:kronogram/models/sm_platform.dart';
 
 /// An interface that abstracts the idea of a post within Kronogram.
 abstract class KronoPost {
-
   /// Returns a [Widget] that displays the post.
   Widget createPostWidget();
 

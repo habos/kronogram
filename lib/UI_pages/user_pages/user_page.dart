@@ -9,9 +9,8 @@ import 'package:kronogram/UI_pages/my_app_bar/my_app_bar.dart';
 import 'package:kronogram/services/database.dart';
 //import 'package:kronogram/UI_pages/display_posts/display_posts.dart';
 
-class UserPage extends StatefulWidget{
-  UserPage({Key key, this.userId, this.logoutCallback})
-        :super(key:key);
+class UserPage extends StatefulWidget {
+  UserPage({Key key, this.userId, this.logoutCallback}) : super(key: key);
 
   final BaseAuth auth = globals.auth;
   final String userId;
@@ -20,27 +19,28 @@ class UserPage extends StatefulWidget{
   String username = "error";
 
   @override
-  State<StatefulWidget> createState(){
+  State<StatefulWidget> createState() {
     return _UserPageState();
   }
-
 }
-class _UserPageState extends State<UserPage>{
+
+class _UserPageState extends State<UserPage> {
   int _currentIndex = 0;
   final List<Widget> _children = [
-    userFeed(today:true),
-    userFeed(today:false),
+    userFeed(today: true),
+    userFeed(today: false),
     PlaceholderWidget(Colors.white)
   ];
 
-  void setUsername(String userId) async{
+  void setUsername(String userId) async {
     String user = await widget.db.getUsername(userId);
     setState(() {
       widget.username = user;
     });
   }
+
   @override
-  void initState(){
+  void initState() {
     super.initState();
     setState(() {
       setUsername(widget.userId);
@@ -52,7 +52,9 @@ class _UserPageState extends State<UserPage>{
     return new Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(110.0),
-        child: myAppBar(userId: widget.userId, logoutCallback: widget.logoutCallback, username: widget.username,
+        child: myAppBar(
+          userId: widget.userId, logoutCallback: widget.logoutCallback,
+          username: widget.username,
           //height: 100,
         ),
       ),
@@ -66,31 +68,21 @@ class _UserPageState extends State<UserPage>{
           new BottomNavigationBarItem(
             icon: Icon(Icons.calendar_today),
             title: Text('TODAY'),
-
           ),
           new BottomNavigationBarItem(
             icon: Icon(Icons.storage),
             title: Text('TIMELINE'),
           ),
           new BottomNavigationBarItem(
-              icon: Icon(Icons.public),
-              title: Text('MAP')
-          )
+              icon: Icon(Icons.public), title: Text('MAP'))
         ],
       ),
     );
   }
-    void onTabTapped(int index) {
-      setState(() {
-        _currentIndex = index;
-      });
-    }
+
+  void onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
   }
-
-
-
-
-
-
-
-
+}
