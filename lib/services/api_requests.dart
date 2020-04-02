@@ -20,7 +20,8 @@ class APIcalls extends APIrequests {
 
     final token = userInfo['token'];
     final graphResponse = await http.get(
-        'https://graph.instagram.com/me?fields=media{id,caption,media_type,media_url,timestamp,children{media_type,media_url}}&access_token=$token');
+        'https://graph.instagram.com/me?fields=media{id,caption,media_type,media_url,timestamp,children{media_type,media_url}}&access_token={$token}');
+    if(graphResponse.statusCode != 200) return null;
     final jsonPostHistory = JSON.jsonDecode(graphResponse.body);
     for (var jsonPost in jsonPostHistory['media']['data']) {
       InstaPostData instaPost = new InstaPostData.fromJson(jsonPost);
@@ -35,7 +36,8 @@ class APIcalls extends APIrequests {
 
     final token = userInfo['token'];
     final graphResponse = await http.get(
-        'https://graph.facebook.com/me/?fields=posts{id,created_time,name,message,place,attachments{media{image},type,subattachments}}&access_token=$token');
+        'https://graph.facebook.com/me/?fields=posts.limit(6){id,created_time,name,message,place,attachments{media{image},type,subattachments}}&access_token=$token');
+    if(graphResponse.statusCode != 200) return null;
     final jsonPostHistory = JSON.jsonDecode(graphResponse.body);
     for (var jsonPost in jsonPostHistory['posts']['data']) {
       FacebookPostData fbPost =
@@ -61,6 +63,7 @@ class APIcalls extends APIrequests {
     });
 
     var res = await twitterRequest;
+    if(res.statusCode != 200) return null;
     var tweetResponse = JSON.jsonDecode(res.body);
     for (var i = 0; i < tweetResponse.length; i++) {
       tweets.add(new KronoTweet(TweetUI.Tweet.fromJson(tweetResponse[i])));
