@@ -47,6 +47,10 @@ class Database implements BaseDatabase {
         .setData({fieldName: value}, merge: true);
   }
 
+  Future<QuerySnapshot> getUsernames(){
+    return _firestore.collection(_usersCollectionName).where(_usernameField).getDocuments();
+  }
+
   CollectionReference getUserTimelineSummary(String userID) {
     return getUserDocumentRef(userID).collection(_timelineSummaryField);
   }

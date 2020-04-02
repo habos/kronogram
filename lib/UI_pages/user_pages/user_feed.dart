@@ -79,6 +79,23 @@ class userFeed extends StatelessWidget{
       postDate = "DATE:";
     }
   }
+
+  Widget showPrimaryButton() {
+    return new Padding(
+        padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
+        child: SizedBox(
+          height: 40.0,
+          child: new RaisedButton(
+            elevation: 5.0,
+            shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(30.0)),
+            color: AppColors.randomButton2,
+            child: new Text('Show Timeline',
+                style: new TextStyle(fontSize: 20.0, color: AppColors.randomButtonText2)),
+            onPressed: null,
+          ),
+        ));
+  }
 }
 
 

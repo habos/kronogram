@@ -29,7 +29,7 @@ class _UserPageState extends State<UserPage>{
   int _currentIndex = 0;
   final List<Widget> _children = [
     userFeed(today:true),
-    userFeed(today:false),
+    Timeline(),
     PlaceholderWidget(Colors.white)
   ];
 

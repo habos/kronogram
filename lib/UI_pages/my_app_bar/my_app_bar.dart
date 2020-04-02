@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kronogram/UI_pages/osearch_bar_widget/osearch_bar_widget.dart';
+import 'package:kronogram/pages/search_page.dart';
 import 'package:kronogram/services/globals.dart' as globals;
 import 'package:kronogram/UI_pages/values/values.dart';
-import 'package:kronogram/UI_pages/user_timeline_widget/user_timeline_widget.dart';
-import 'package:kronogram/UI_pages/user_map_widget/user_map_widget.dart';
-import 'package:kronogram/UI_pages/user_current_date_widget/user_current_date_widget.dart';
 import 'package:kronogram/pages/settings.dart';
 import 'package:kronogram/services/authentication.dart';
 import 'package:kronogram/services/database.dart';
@@ -35,13 +32,7 @@ class myAppBar extends StatefulWidget {
   void onSETTINGSPressed(BuildContext context) => Navigator.push(context,
       MaterialPageRoute(builder: (context) => SettingsPage(userId: widget.userId, logoutCallback: widget.logoutCallback)));
   void onSEARCHPressed(BuildContext context) => Navigator.push(
-      context, MaterialPageRoute(builder: (context) => OSearchBarWidget()));
-  void onMAPSPressed(BuildContext context) => Navigator.push(
-      context, MaterialPageRoute(builder: (context) => UserMapWidget()));
-  void onTIMELINEPressed(BuildContext context) => Navigator.push(
-      context, MaterialPageRoute(builder: (context) => UserTimelineWidget()));
-  void onDATEPressed(BuildContext context) => Navigator.push(context,
-      MaterialPageRoute(builder: (context) => UserCurrentDateWidget()));
+      context, MaterialPageRoute(builder: (context) => SearchPage()));
 
   @override
   Widget build(BuildContext context) {
