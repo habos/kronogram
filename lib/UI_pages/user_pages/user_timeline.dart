@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:kronogram/models/krono_post.dart';
 
 class Timeline extends StatefulWidget{
-  Timeline({Key key})
+  Timeline({Key key, this.userId})
       :super(key:key);
 
+  final String userId;
 
   @override
   State<StatefulWidget> createState(){
@@ -23,7 +24,7 @@ class _TimelineState extends State<Timeline>{
   void initState() {
     // TODO: implement initState
     super.initState();
-    print("made it");
+    print(widget.userId);
     nickMethod();
   }
 

@@ -25,13 +25,17 @@ class UserPage extends StatefulWidget{
   }
 
 }
+
 class _UserPageState extends State<UserPage>{
   int _currentIndex = 0;
-  final List<Widget> _children = [
-    userFeed(today:true),
-    Timeline(),
-    PlaceholderWidget(Colors.white)
-  ];
+
+  List<Widget> makeList() {
+    return [
+      userFeed(today: true),
+      Timeline(userId: widget.userId),
+      PlaceholderWidget(Colors.white)
+    ];
+  }
 
   void setUsername(String userId) async{
     String user = await widget.db.getUsername(userId);
@@ -56,7 +60,7 @@ class _UserPageState extends State<UserPage>{
           //height: 100,
         ),
       ),
-      body: _children[_currentIndex], // new
+      body: makeList()[_currentIndex], // new
       bottomNavigationBar: BottomNavigationBar(
         onTap: onTabTapped, // new
         selectedItemColor: AppColors.selectedTabBar,
