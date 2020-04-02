@@ -19,42 +19,43 @@ class myAppBar extends StatefulWidget {
   final String username;
 
   @override
-  State<StatefulWidget> createState(){
+  State<StatefulWidget> createState() {
     return _myAppBarState();
   }
 }
- class _myAppBarState extends State<myAppBar>{
 
+class _myAppBarState extends State<myAppBar> {
   void onnavigationBarItemPressed(BuildContext context) {}
 
   void onUsernamePressed(BuildContext context) {}
 
-  void onSETTINGSPressed(BuildContext context) => Navigator.push(context,
-      MaterialPageRoute(builder: (context) => SettingsPage(userId: widget.userId, logoutCallback: widget.logoutCallback)));
+  void onSETTINGSPressed(BuildContext context) => Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => SettingsPage(
+              userId: widget.userId, logoutCallback: widget.logoutCallback)));
   void onSEARCHPressed(BuildContext context) => Navigator.push(
       context, MaterialPageRoute(builder: (context) => SearchPage()));
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 70,
-      margin: EdgeInsets.only(),
-      decoration: BoxDecoration(
-        color: AppColors.appBarBackground,
-      ),
-
-      child: Container(
-        margin: EdgeInsets.only(top: 25, bottom: 5, left: 15,right:15),
-        //child: userAppBar(),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Expanded(
-              flex: 15,
-              child:Row(
-                  children: <Widget>[
-                    Expanded(
-                      flex:1,
+        height: 70,
+        margin: EdgeInsets.only(),
+        decoration: BoxDecoration(
+          color: AppColors.appBarBackground,
+        ),
+        child: Container(
+          margin: EdgeInsets.only(top: 25, bottom: 5, left: 15, right: 15),
+          //child: userAppBar(),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Expanded(
+                flex: 15,
+                child: Row(children: <Widget>[
+                  Expanded(
+                    flex: 1,
                     child: InkWell(
                       onTap: () => this.onnavigationBarItemPressed(context),
                       child: Text(
@@ -66,14 +67,12 @@ class myAppBar extends StatefulWidget {
                           fontSize: 22,
                         ),
                       ),
-
                     ),
-                    ),
-                    Expanded(
-                      flex:12,
-                    child:InkWell(
+                  ),
+                  Expanded(
+                    flex: 12,
+                    child: InkWell(
                       onTap: () => this.onUsernamePressed(context),
-
                       child: Text(
                         widget.username,
                         textAlign: TextAlign.left,
@@ -84,57 +83,42 @@ class myAppBar extends StatefulWidget {
                         ),
                       ),
                     ),
-                      ),
-                  ]),
-            ),
-            Spacer(),
-
-            Row(
-                children: <Widget>[
-
-                  InkWell(
-                    onTap: () => this.onSETTINGSPressed(context),
-                    child: Stack(
-                      alignment: Alignment.topCenter,
-                      children: <Widget>[
-                        Icon(
-                            Icons.settings_applications,
-                            color: AppColors.appBarIcon,
-                            size: 35
-                        ),
-                        //Transform.rotate(angle: 0.80, child:
-                      ],
-                    ),
                   ),
-
-                  InkWell(
-                    onTap: () => this.onSEARCHPressed(context),
-                    child: Stack(
-                      alignment: Alignment.bottomLeft,
-                      children: <Widget>[
-                        Icon(
-                            Icons.search,
-                            color: AppColors.appBarIcon,
-                            size: 33
-                        ),
-
-                        //Transform.rotate(angle: 0.0, origin: Offset(60, 20), alignment:Alignment.topLeft, child:
-                      ],
-                    ),
+                ]),
+              ),
+              Spacer(),
+              Row(children: <Widget>[
+                InkWell(
+                  onTap: () => this.onSETTINGSPressed(context),
+                  child: Stack(
+                    alignment: Alignment.topCenter,
+                    children: <Widget>[
+                      Icon(Icons.settings_applications,
+                          color: AppColors.appBarIcon, size: 35),
+                      //Transform.rotate(angle: 0.80, child:
+                    ],
                   ),
-                ]
+                ),
+                InkWell(
+                  onTap: () => this.onSEARCHPressed(context),
+                  child: Stack(
+                    alignment: Alignment.bottomLeft,
+                    children: <Widget>[
+                      Icon(Icons.search, color: AppColors.appBarIcon, size: 33),
 
-              //   ),
-            ),
+                      //Transform.rotate(angle: 0.0, origin: Offset(60, 20), alignment:Alignment.topLeft, child:
+                    ],
+                  ),
+                ),
+              ]
 
-          ],
-        ),
-      )
+                  //   ),
+                  ),
+            ],
+          ),
+        )
 
-
-
-
-      /*
+        /*
             Column(
               children: <Widget>[
 
@@ -253,7 +237,7 @@ class myAppBar extends StatefulWidget {
       ],
     ),
       */
-    );
+        );
   }
   //@override
   //Size get preferredSize => Size.fromHeight(height);
@@ -586,29 +570,6 @@ Widget build(BuildContext context) {
 //Size get preferredSize => Size.fromHeight(height);
 }
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*
 class myAppBar extends PreferredSizeWidget {

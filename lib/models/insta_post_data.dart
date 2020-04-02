@@ -2,48 +2,49 @@ import 'package:kronogram/models/media.dart';
 import 'package:kronogram/utils/date_utils.dart';
 
 class InstaPostData {
-  final int _id;
-  final String _caption;
-  final DateTime _createdAt;
-  List<InstaMedia> _media = new List();
+  int id;
+  String caption;
+  DateTime createdAt;
+  List<InstaMedia> media = new List();
+
+  InstaPostData();
 
   InstaPostData.fromJson(Map<String, dynamic> json)
-      : _id = int.parse(json['id']),
-        _caption = json['caption'],
-        _createdAt = parseInstagramCreationTime(json['timestamp']) {
+      : id = int.parse(json['id']),
+        caption = json['caption'],
+        createdAt = parseInstagramCreationTime(json['timestamp']) {
     String type = json['media_type'];
-    if (type=='CAROUSEL_ALBUM') {
+    if (type == 'CAROUSEL_ALBUM') {
       var children = json['children']['data'];
-      for(var child in children) {
-        _media.add(new InstaMedia(child['media_type'], child['media_url']));
+      for (var child in children) {
+        media.add(new InstaMedia(child['media_type'], child['media_url']));
       }
-    }
-    else {
-      _media.add(new InstaMedia(type, json['media_url']));
+    } else {
+      media.add(new InstaMedia(type, json['media_url']));
     }
   }
 
   DateTime getCreationTime() {
-    return _createdAt;
+    return createdAt;
   }
 
   void addMedia(String type, String url) {
-    _media.add(new InstaMedia(type, url));
+    media.add(new InstaMedia(type, url));
   }
 
   int getID() {
-    return _id;
+    return id;
   }
 
   String getCaption() {
-    return _caption;
+    return caption;
   }
 
   List<InstaMedia> getPostMedia() {
-    return _media;
+    return media;
   }
 
   bool isAlbum() {
-    return _media.length > 1;
+    return media.length > 1;
   }
 }

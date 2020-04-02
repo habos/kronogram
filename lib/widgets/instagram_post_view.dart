@@ -29,11 +29,11 @@ class InstagramPostView extends StatelessWidget {
       errorWidget: (context, url, error) => Icon(Icons.error),
     );
   }
-  
+
   Widget postView() {
-    return _isAlbum ? albumCarousel() :
-      _media.length == 0 ? Container() :
-          singleImage(_media[0]);
+    return _isAlbum
+        ? albumCarousel()
+        : _media.length == 0 ? Container() : singleImage(_media[0]);
   }
 
   Widget albumCarousel() {
@@ -45,9 +45,8 @@ class InstagramPostView extends StatelessWidget {
         }
         VideoPlayerController controller = getVideoPlayerController(med);
         return AspectRatio(
-          aspectRatio: controller.value.aspectRatio,
-          child: VideoPlayer(controller)
-        );
+            aspectRatio: controller.value.aspectRatio,
+            child: VideoPlayer(controller));
       }).toList(),
       enableInfiniteScroll: false,
     );
@@ -61,17 +60,12 @@ class InstagramPostView extends StatelessWidget {
           children: <Widget>[
             postView(),
             Container(
-              width: MediaQuery.of(context).size.width,
-              child: RichText(
-                textAlign: TextAlign.start,
-                text: TextSpan(
-                  text: _caption,
-                  style: defaultIGCaptionTextStyle
-                )
-              )
-            )
+                width: MediaQuery.of(context).size.width,
+                child: RichText(
+                    textAlign: TextAlign.start,
+                    text: TextSpan(
+                        text: _caption, style: defaultIGCaptionTextStyle)))
           ],
-        )
-    );
+        ));
   }
 }

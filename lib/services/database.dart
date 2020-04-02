@@ -55,51 +55,58 @@ class Database implements BaseDatabase {
     return getUserDocumentRef(userID).collection(_timelineSummaryField);
   }
 
-  Future<void> addToUserTimelineSummary(String userID, int postID, DateTime creationTime,
-      String platform) {
-      return _firestore.collection(_usersCollectionName)
-          .document(userID)
-          .collection(_timelineSummaryField)
-          .document()
-          .setData({
-              'postID' : postID,
-              'creationTime' : creationTime,
-              'platform'   : platform
-          });
+  Future<void> addToUserTimelineSummary(
+      String userID, int postID, DateTime creationTime, String platform) {
+    return _firestore
+        .collection(_usersCollectionName)
+        .document(userID)
+        .collection(_timelineSummaryField)
+        .document()
+        .setData({
+      'postID': postID,
+      'creationTime': creationTime,
+      'platform': platform
+    });
   }
 
   Future<void> addToFacebookPosts(KronoFacebookPost fbPost) {
-    return _firestore.collection(_fbPostsCollectionName)
+    return _firestore
+        .collection(_fbPostsCollectionName)
         .document(fbPost.getPostID().toString())
         .setData(fbPost.toJson());
   }
 
   Future<void> addToTwitterPosts(KronoTweet tweet) {
-    return _firestore.collection(_tweetsCollectionName)
+    return _firestore
+        .collection(_tweetsCollectionName)
         .document(tweet.getPostID().toString())
         .setData(tweet.toJson());
   }
 
   Future<void> addToInstagramPosts(KronoInstaPost igPost) {
-    return _firestore.collection(_igPostsCollectionName)
+    return _firestore
+        .collection(_igPostsCollectionName)
         .document(igPost.getPostID().toString())
         .setData(igPost.toJson());
   }
 
   Future<DocumentSnapshot> getFacebookPost(int postID) {
-    return _firestore.collection(_fbPostsCollectionName)
+    return _firestore
+        .collection(_fbPostsCollectionName)
         .document(postID.toString())
         .get();
   }
 
   Future<DocumentSnapshot> getIGPost(int postID) {
-    return _firestore.collection(_igPostsCollectionName)
+    return _firestore
+        .collection(_igPostsCollectionName)
         .document(postID.toString())
         .get();
   }
 
   Future<DocumentSnapshot> getTweet(int postID) {
-    return _firestore.collection(_tweetsCollectionName)
+    return _firestore
+        .collection(_tweetsCollectionName)
         .document(postID.toString())
         .get();
   }
@@ -155,7 +162,7 @@ class Database implements BaseDatabase {
 
   Future<bool> checkFacebookInfo(String userID) async {
     var snapshot = await getUserDocumentSnapshot(userID);
-    return snapshot.data.containsKey(_facebookInfoField) ?  true : false;
+    return snapshot.data.containsKey(_facebookInfoField) ? true : false;
   }
 
   Future<Map> getTwitterInfo(String userID) async {
@@ -180,7 +187,7 @@ class Database implements BaseDatabase {
 
   Future<bool> checkTwitterInfo(String userID) async {
     var snapshot = await getUserDocumentSnapshot(userID);
-    return snapshot.data.containsKey(_twitterInfoField) ?  true : false;
+    return snapshot.data.containsKey(_twitterInfoField) ? true : false;
   }
 
   Future<Map> getInstagramInfo(String userID) async {
@@ -190,7 +197,7 @@ class Database implements BaseDatabase {
 
   Future<bool> checkInstagramInfo(String userID) async {
     var snapshot = await getUserDocumentSnapshot(userID);
-    return snapshot.data.containsKey(_instagramInfoField) ?  true : false;
+    return snapshot.data.containsKey(_instagramInfoField) ? true : false;
   }
 
 /*

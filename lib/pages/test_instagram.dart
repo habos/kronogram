@@ -39,7 +39,6 @@ class _InstagramPageState extends State<InstagramPage> {
 //      posts.add(new KronoInstaPost(instaPost));
 //    }
 
-
     setState(() {
       instagramExample = posts[1].createPostWidget();
     });

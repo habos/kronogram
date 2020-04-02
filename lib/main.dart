@@ -8,8 +8,6 @@ void main() => runApp(KronogramApp());
 class KronogramApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: new RootPage());
-
+    return MaterialApp(home: new RootPage());
   }
 }

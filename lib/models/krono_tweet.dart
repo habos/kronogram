@@ -43,11 +43,15 @@ class KronoTweet implements KronoPost {
   }
 
   @override
-  Map<String, dynamic> toJson()  =>
-      {
-        'userId' : _tweet.user.id,
-        'createdAt' : _creationTime,
-        'caption' : _tweet.text,
-        'tweetData' : _tweet,
+  Map<String, dynamic> toJson() => {
+        'userId': _tweet.user.id,
+        'createdAt': _creationTime,
+        'caption': _tweet.text,
+        'tweetData': _tweet,
       };
+
+  static KronoTweet fromJson(Map<String, dynamic> json) {
+    Tweet tweet = json['tweetData'];
+    return KronoTweet(tweet);
+  }
 }
