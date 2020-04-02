@@ -33,5 +33,19 @@ void main() {
       expect(actualA.isAtSameMomentAs(expectedB), isFalse);
       expect(actualB.isAtSameMomentAs(expectedA), isFalse);
     });
+
+    test('parseInstagramCreationTime should parse Instagram timestamps correctly', () {
+      String createdAtA = "1997-07-16T19:20:30+00:00";
+      String createdAtB = "2020-03-31T12:22:02+00:00";
+      DateTime actualA = parseInstagramCreationTime(createdAtA);
+      DateTime expectedA = new DateTime.utc(1997, 7, 16, 19, 20, 30);
+      DateTime actualB = parseInstagramCreationTime(createdAtB);
+      DateTime expectedB = new DateTime.utc(2020, 3, 31, 12, 22, 2);
+
+      expect(actualA.isAtSameMomentAs(expectedA), isTrue);
+      expect(actualB.isAtSameMomentAs(expectedB), isTrue);
+      expect(actualA.isAtSameMomentAs(expectedB), isFalse);
+      expect(actualB.isAtSameMomentAs(expectedA), isFalse);
+    });
   });
 }

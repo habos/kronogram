@@ -20,6 +20,7 @@ String monthToNumber(String month) {
 /// Takes in a Twitter creation time [String] in the format
 /// "Thu Feb 27 22:20:44 +0000 2020" and returns a [DateTime] object.
 DateTime parseTwitterCreationTime(String createdAt) {
+  if(createdAt == null) return null;
   // Should give us a list of size 6.
   List<String> splitted = createdAt.split(" ");
 
