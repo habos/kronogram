@@ -44,4 +44,15 @@ class KronoFacebookPost implements KronoPost {
         'title' : _fbPostData.getTitle(),
         'media' : _fbPostData.getPostMedia()
       };
+
+  static KronoFacebookPost fromJson(Map<String, dynamic> json) {
+    FacebookPostData data = new FacebookPostData();
+    data.userId = json['userId'];
+    data.createdAt = json['createdAt'];
+    data.caption = json['caption'];
+    data.id = json['postId'];
+    data.title = json['title'];
+    data.media = json['media'];
+    return KronoFacebookPost(data);
+  }
 }

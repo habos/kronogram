@@ -46,4 +46,13 @@ class KronoInstaPost implements KronoPost {
         'postId' : _instaPost.getID(),
         'isAlbum' : _instaPost.isAlbum()
       };
+
+  static KronoInstaPost fromJson(Map<String, dynamic> json) {
+    InstaPostData data = new InstaPostData();
+    data.media = json['media'];
+    data.createdAt = json['createdAt'];
+    data.caption = json['caption'];
+    data.id = json['postId'];
+    return KronoInstaPost(data);
+  }
 }

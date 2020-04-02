@@ -50,4 +50,9 @@ class KronoTweet implements KronoPost {
         'caption' : _tweet.text,
         'tweetData' : _tweet,
       };
+
+  static KronoTweet fromJson(Map<String, dynamic> json) {
+    Tweet tweet = json['tweetData'];
+    return KronoTweet(tweet);
+  }
 }

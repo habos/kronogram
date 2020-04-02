@@ -153,6 +153,9 @@ class InstaPost extends Post {
 class FacebookPostData extends Post {
   String title;
   List<FacebookMedia> media = new List();
+
+  FacebookPostData();
+
   FacebookPostData.fromJson(Map<String,dynamic> json, String userId) {
     this.userId = userId;
     this.id = json['id'];
