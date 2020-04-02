@@ -3,6 +3,9 @@ import 'package:test/test.dart';
 
 void main() {
   group('DateUtils, ', () {
+    /// Tests that our monthToNumber function correctly converts
+    /// the three-letter representation of a given month
+    /// to the correct numeric value.
     test('monthToNumber should return correct values', () {
       expect(monthToNumber("Jan"), "01");
       expect(monthToNumber("Feb"), "02");
@@ -19,6 +22,8 @@ void main() {
       expect(monthToNumber("Err"), null);
     });
 
+    /// Tests that our parsing function correctly converts the string representation
+    /// of a timestamp into the native Dart format DateTime.
     test('parseTwitterCreationTime should parse Twitter timestamps correctly',
         () {
       String createdAtA = "Thu Feb 27 22:20:44 +0000 2020";

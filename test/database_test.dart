@@ -19,6 +19,9 @@ class MockSnap extends Mock implements DocumentSnapshot {
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+  /// This group of tests ensures that, after uploading serialized
+  /// representations of social media posts to the database, we can retrieve
+  /// them and reconstruct them.
   group('Database, ', () {
     test('getIGPost and addToInstagramPosts should work correctly', () async {
       Database db = MockDB();
