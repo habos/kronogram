@@ -35,7 +35,7 @@ class _myAppBarState extends State<myAppBar> {
           builder: (context) => SettingsPage(
               userId: widget.userId, logoutCallback: widget.logoutCallback)));
   void onSEARCHPressed(BuildContext context) => Navigator.push(
-      context, MaterialPageRoute(builder: (context) => SearchPage()));
+      context, MaterialPageRoute(builder: (context) => SearchPage(userId: widget.userId, logoutCallback: widget.logoutCallback)));
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:kronogram/UI_pages/user_pages/user_page.dart';
 import 'package:kronogram/services/globals.dart' as globals;
 import 'package:kronogram/services/database.dart';
 
@@ -13,10 +14,20 @@ class SearchUser {
 }
 
 class SearchPage extends StatefulWidget {
+  SearchPage({Key key, this.userId, this.logoutCallback}) : super(key: key);
 
   final Database db = globals.db;
+  final String userId;
+  final VoidCallback logoutCallback;
+
   @override
   _SearchPageState createState() => _SearchPageState();
+
+  void onBackPressed(BuildContext context) => Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) =>
+              UserPage(userId: userId, logoutCallback: logoutCallback)));
 }
 
 class _SearchPageState extends State<SearchPage> {
@@ -89,6 +100,10 @@ class _SearchPageState extends State<SearchPage> {
                   _searchBarController.replayLastSearch();
                 },
               ),
+              RaisedButton(
+                child: Text("Back"),
+                onPressed: () => widget.onBackPressed(context),
+              )
             ],
           ),
           onCancelled: () {
