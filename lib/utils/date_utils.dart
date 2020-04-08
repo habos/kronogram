@@ -13,6 +13,21 @@ const _monthToNumberMap = {
   'Dec': '12'
 };
 
+const _numberToMonthMap = {
+  '1' : 'Jan',
+  '2' : 'Feb',
+  '3' : 'Mar',
+  '4' : 'Apr',
+  '5' : 'May',
+  '6' : 'Jun',
+  '7' : 'Jul',
+  '8' : 'Aug',
+  '9' : 'Sep',
+  '10' : 'Oct',
+  '11' : 'Nov',
+  '12' : 'Dec'
+};
+
 String monthToNumber(String month) {
   return _monthToNumberMap[month];
 }
@@ -52,4 +67,9 @@ DateTime parseInstagramCreationTime(String createdAt) {
   DateTime date = DateTime.parse(createdAt);
   return new DateTime.utc(
       date.year, date.month, date.day, date.hour, date.minute, date.second);
+}
+
+String getDateString(DateTime date) {
+  String month = _numberToMonthMap[date.month.toString()];
+  return month + ' ' + date.day.toString() + ', ' + date.year.toString();
 }

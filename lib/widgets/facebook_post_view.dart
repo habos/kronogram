@@ -1,21 +1,26 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:kronogram/UI_pages/values/colors.dart';
+import 'package:kronogram/UI_pages/values/radii.dart';
 import 'package:kronogram/models/media.dart';
 import 'package:kronogram/models/post.dart';
 import 'package:kronogram/styles/text_styles.dart';
+import 'package:kronogram/utils/date_utils.dart';
 import 'package:video_player/video_player.dart';
 
 class FacebookPostView extends StatelessWidget {
   final List<FacebookMedia> _media;
   final String _caption;
   final bool _isAlbum;
+  final DateTime _date;
 
   // TODO: implement constructor
   FacebookPostView.fromFacebookPost(FacebookPostData fbPost)
       : _media = fbPost.getPostMedia(),
         _caption = fbPost.getCaption(),
-        _isAlbum = fbPost.isAlbum();
+        _isAlbum = fbPost.isAlbum(),
+        _date = fbPost.getCreationTime();
 
   Widget singleImage(FacebookMedia media) {
     return CachedNetworkImage(
@@ -56,22 +61,59 @@ class FacebookPostView extends StatelessWidget {
         : _media.length == 0 ? Container() : singleImage(_media[0]);
   }
 
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
-      color: Colors.white,
+      margin: EdgeInsets.only(left: 10, right: 10),
+      decoration: BoxDecoration(
+        color: AppColors.primaryBackground,
+        borderRadius: Radii.k10pxRadius,
+      ),
       child: Column(
-        children: <Widget>[
-          postView(),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            child: RichText(
-              textAlign: TextAlign.start,
-              text: TextSpan(text: _caption, style: defaultFBCaptionTextStyle),
+        children: [ Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              height: 20,
+              margin: EdgeInsets.only(left: 10, top: 10),
+              child: Text(
+                "Facebook",
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  fontWeight: FontWeight.w400,
+                  fontSize: 14,
+                ),
+              ),
             ),
-          )
-        ],
+            Spacer(),
+            Container(
+              height: 20,
+              margin: EdgeInsets.only(left: 10, top: 10, right: 10),
+              child: Text(
+                getDateString(_date),
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  fontWeight: FontWeight.w400,
+                  fontSize: 14,
+                ),
+              ),
+            )
+          ],
+        ),
+        postView(),
+        Container(
+            width: MediaQuery.of(context).size.width,
+            child: Text(
+              "$_caption",
+              textAlign: TextAlign.start,
+            ),
+        )
+      ],
       ),
     );
   }
