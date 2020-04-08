@@ -5,6 +5,7 @@ import 'package:kronogram/models/krono_post.dart';
 import 'package:kronogram/models/krono_tweet.dart';
 import 'package:kronogram/models/sm_platform.dart';
 import 'package:kronogram/services/globals.dart';
+import 'package:kronogram/widgets/post_view.dart';
 
 class Timeline extends StatefulWidget{
   Timeline({Key key, this.userId})
@@ -62,7 +63,7 @@ class _TimelineState extends State<Timeline>{
         padding: const EdgeInsets.all(8),
         itemCount: timelinePosts.length,
         itemBuilder: (BuildContext context, int index) {
-          return timelinePosts[index].createPostWidget();
+          return postView(timelinePosts[index]);
         }
     );
 

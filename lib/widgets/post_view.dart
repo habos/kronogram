@@ -1,21 +1,21 @@
-
+import 'package:enum_to_string/enum_to_string.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:kronogram/UI_pages/values/colors.dart';
 import 'package:kronogram/UI_pages/values/radii.dart';
+import 'package:kronogram/models/krono_post.dart';
 import 'package:kronogram/utils/date_utils.dart';
 
-class TwitterPostView extends StatelessWidget {
-  final Widget _tweetWidget;
-  final DateTime _date;
+class postView extends StatelessWidget {
+  final String _username;
+  final KronoPost _post;
 
-  TwitterPostView.fromTweetWidget(Widget w, DateTime date)
-    : _tweetWidget = w,
-      _date = date;
+  postView(KronoPost this._post, [String this._username]);
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Container (
+    return Container(
       margin: EdgeInsets.only(left: 10, right: 10),
       decoration: BoxDecoration(
         color: AppColors.primaryBackground,
@@ -30,7 +30,7 @@ class TwitterPostView extends StatelessWidget {
               height: 20,
               margin: EdgeInsets.only(left: 10, top: 10),
               child: Text(
-                "Twitter",
+                EnumToString.parseCamelCase(_post.getPlatform()),
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   color: Color.fromARGB(255, 0, 0, 0),
@@ -44,7 +44,7 @@ class TwitterPostView extends StatelessWidget {
               height: 20,
               margin: EdgeInsets.only(left: 10, top: 10, right: 10),
               child: Text(
-                getDateString(_date),
+                getDateString(_post.getCreationTime()),
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   color: Color.fromARGB(255, 0, 0, 0),
@@ -55,7 +55,7 @@ class TwitterPostView extends StatelessWidget {
             )
           ],
         ),
-          _tweetWidget,
+          _post.createPostWidget()
         ],
       ),
     );

@@ -59,46 +59,11 @@ class InstagramPostView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: implement build
     return Container(
-      margin: EdgeInsets.only(left: 10, right: 10),
-      decoration: BoxDecoration(
-        color: AppColors.primaryBackground,
-        borderRadius: Radii.k10pxRadius,
-      ),
+      color: AppColors.primaryBackground,
       child: Column(
-        children: [ Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              height: 20,
-              margin: EdgeInsets.only(left: 10, top: 10),
-              child: Text(
-                "Instagram",
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  fontWeight: FontWeight.w400,
-                  fontSize: 14,
-                ),
-              ),
-            ),
-            Spacer(),
-            Container(
-              height: 20,
-              margin: EdgeInsets.only(left: 10, top: 10, right: 10),
-              child: Text(
-                getDateString(_date),
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  fontWeight: FontWeight.w400,
-                  fontSize: 14,
-                ),
-              ),
-            )
-          ],
-        ),
+        children: <Widget>[
           postView(),
           Container(
             width: MediaQuery.of(context).size.width,
@@ -111,4 +76,59 @@ class InstagramPostView extends StatelessWidget {
       ),
     );
   }
+
+//  @override
+//  Widget build(BuildContext context) {
+//    return Container(
+//      margin: EdgeInsets.only(left: 10, right: 10),
+//      decoration: BoxDecoration(
+//        color: AppColors.primaryBackground,
+//        borderRadius: Radii.k10pxRadius,
+//      ),
+//      child: Column(
+//        children: [ Row(
+//          mainAxisAlignment: MainAxisAlignment.center,
+//          crossAxisAlignment: CrossAxisAlignment.center,
+//          children: <Widget>[
+//            Container(
+//              height: 20,
+//              margin: EdgeInsets.only(left: 10, top: 10),
+//              child: Text(
+//                "Instagram",
+//                textAlign: TextAlign.left,
+//                style: TextStyle(
+//                  color: Color.fromARGB(255, 0, 0, 0),
+//                  fontWeight: FontWeight.w400,
+//                  fontSize: 14,
+//                ),
+//              ),
+//            ),
+//            Spacer(),
+//            Container(
+//              height: 20,
+//              margin: EdgeInsets.only(left: 10, top: 10, right: 10),
+//              child: Text(
+//                getDateString(_date),
+//                textAlign: TextAlign.left,
+//                style: TextStyle(
+//                  color: Color.fromARGB(255, 0, 0, 0),
+//                  fontWeight: FontWeight.w400,
+//                  fontSize: 14,
+//                ),
+//              ),
+//            )
+//          ],
+//        ),
+//          postView(),
+//          Container(
+//            width: MediaQuery.of(context).size.width,
+//            child: Text(
+//              "$_caption",
+//              textAlign: TextAlign.start,
+//            ),
+//          )
+//        ],
+//      ),
+//    );
+//  }
 }

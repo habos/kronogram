@@ -3,7 +3,6 @@ import 'package:kronogram/models/krono_post.dart';
 import 'package:kronogram/models/sm_platform.dart';
 import 'package:kronogram/styles/text_styles.dart';
 import 'package:kronogram/utils/date_utils.dart';
-import 'package:kronogram/widgets/twitter_post_view.dart';
 import 'package:tweet_ui/models/api/tweet.dart';
 import 'package:tweet_ui/tweet_ui.dart';
 
@@ -22,7 +21,7 @@ class KronoTweet implements KronoPost {
   /// Returns a [TweetView] Widget displaying the underlying tweet.
   @override
   Widget createPostWidget() {
-    return TwitterPostView.fromTweetWidget(TweetView.fromTweet(_tweet, textStyle: defaultTweetTextStyle),_creationTime);
+  return TweetView.fromTweet(_tweet, textStyle: defaultTweetTextStyle);
   }
 
   /// Returns a [DateTime] object representing the time this tweet
