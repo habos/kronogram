@@ -15,6 +15,9 @@ abstract class APIrequests {
 }
 
 class APIcalls extends APIrequests {
+  String twitterMaxID = '0';
+  String fbNext = '0';
+
   Future<List<KronoInstaPost>> requestInstaPosts(var userInfo) async {
     if (userInfo == null) return null;
 
@@ -47,6 +50,8 @@ class APIcalls extends APIrequests {
       posts.add(new KronoFacebookPost(fbPost));
     }
 
+    fbNext = jsonPostHistory['posts']['paging']['next'];
+
     return posts;
   }
 
@@ -59,17 +64,20 @@ class APIcalls extends APIrequests {
         token: userInfo['token'],
         tokenSecret: userInfo['secret']);
 
-    var twitterRequest = _twitterOauth
-        .getTwitterRequest("GET", "statuses/user_timeline.json", options: {
-      "screen_name": userInfo['username'],
-    });
+    var twitterRequest = _twitterOauth.getTwitterRequest("GET", "statuses/user_timeline.json",
+        options: {
+          "screen_name": userInfo['username'],
+          "count" : '100',
+        });
 
     var res = await twitterRequest;
-    if(res.statusCode != 200) return null;
+    if(res.statusCode != 200) {twitterMaxID = null; return null;}
     var tweetResponse = JSON.jsonDecode(res.body);
     for (var i = 0; i < tweetResponse.length; i++) {
       tweets.add(new KronoTweet(TweetUI.Tweet.fromJson(tweetResponse[i])));
     }
+
+    twitterMaxID = tweetResponse[tweetResponse.length - 1]['id_str'];
 
     return tweets;
   }

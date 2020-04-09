@@ -31,7 +31,7 @@ class _UserPageState extends State<UserPage>{
 
   List<Widget> makeList() {
     return [
-      userFeed(today: true),
+      UserFeed(userId: widget.userId),
       Timeline(userId: widget.userId),
       PlaceholderWidget(Colors.white)
     ];
