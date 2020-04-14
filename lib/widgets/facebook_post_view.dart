@@ -2,25 +2,20 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:kronogram/UI_pages/values/colors.dart';
-import 'package:kronogram/UI_pages/values/radii.dart';
 import 'package:kronogram/models/media.dart';
 import 'package:kronogram/models/post.dart';
-import 'package:kronogram/styles/text_styles.dart';
-import 'package:kronogram/utils/date_utils.dart';
 import 'package:video_player/video_player.dart';
 
 class FacebookPostView extends StatelessWidget {
   final List<FacebookMedia> _media;
   final String _caption;
   final bool _isAlbum;
-  final DateTime _date;
 
   // TODO: implement constructor
   FacebookPostView.fromFacebookPost(FacebookPostData fbPost)
       : _media = fbPost.getPostMedia(),
         _caption = fbPost.getCaption(),
-        _isAlbum = fbPost.isAlbum(),
-        _date = fbPost.getCreationTime();
+        _isAlbum = fbPost.isAlbum();
 
   Widget singleImage(FacebookMedia media) {
     return CachedNetworkImage(

@@ -2,24 +2,19 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:kronogram/UI_pages/values/colors.dart';
-import 'package:kronogram/UI_pages/values/radii.dart';
 import 'package:kronogram/models/insta_post_data.dart';
 import 'package:kronogram/models/media.dart';
-import 'package:kronogram/styles/text_styles.dart';
-import 'package:kronogram/utils/date_utils.dart';
 import 'package:video_player/video_player.dart';
 
 class InstagramPostView extends StatelessWidget {
   final List<InstaMedia> _media;
   final String _caption;
   final bool _isAlbum;
-  final DateTime _date;
 
   InstagramPostView.fromInstaPost(InstaPostData instaPost)
       : _media = instaPost.getPostMedia(),
         _caption = instaPost.getCaption(),
-        _isAlbum = instaPost.isAlbum(),
-        _date = instaPost.getCreationTime();
+        _isAlbum = instaPost.isAlbum();
 
   VideoPlayerController getVideoPlayerController(InstaMedia media) {
     var controller = VideoPlayerController.network(media.url);

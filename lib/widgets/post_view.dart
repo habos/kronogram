@@ -12,6 +12,24 @@ class postView extends StatelessWidget {
 
   postView(KronoPost this._post, [String this._username]);
 
+  Widget _usernameWidget() {
+    if(_username == null)
+      return Container();
+    else return Container(
+      height: 20,
+      margin: EdgeInsets.only(left: 10, top: 10, right: 40),
+      child: Text(
+        "- $_username -",
+        textAlign: TextAlign.left,
+        style: TextStyle(
+          color: Color.fromARGB(255, 0, 0, 0),
+          fontWeight: FontWeight.w400,
+          fontSize: 14
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -40,6 +58,7 @@ class postView extends StatelessWidget {
               ),
             ),
             Spacer(),
+            _usernameWidget(),
             Container(
               height: 20,
               margin: EdgeInsets.only(left: 10, top: 10, right: 10),
