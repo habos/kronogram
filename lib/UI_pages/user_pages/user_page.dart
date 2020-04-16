@@ -4,6 +4,7 @@ import 'package:kronogram/UI_pages/values/values.dart';
 import 'package:kronogram/services/globals.dart' as globals;
 
 import 'package:kronogram/UI_pages/user_pages/user_timeline.dart';
+import 'package:kronogram/UI_pages/user_pages/user_map.dart';
 import 'package:kronogram/UI_pages/user_pages/user_feed.dart';
 import 'package:kronogram/UI_pages/my_app_bar/my_app_bar.dart';
 import 'package:kronogram/services/database.dart';
@@ -33,7 +34,7 @@ class _UserPageState extends State<UserPage>{
     return [
       UserFeed(userId: widget.userId),
       Timeline(userId: widget.userId),
-      PlaceholderWidget(Colors.white)
+      UserMap(userId: widget.userId )
     ];
   }
 
