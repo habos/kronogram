@@ -65,6 +65,8 @@
                     android:pathPattern=".*" />
             </intent-filter>
         </activity>
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAJB2D8bRVUUyeK6H9TQN1HoEIYNGfPMgQ"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

@@ -51,7 +51,9 @@ dependencies:
   cupertino_icons: ^0.1.2
 
   #MAP
+  google_maps_flutter: ^0.5.11
   flutter_map: any
+
 
 dev_dependencies:
   test: ^1.9.0
