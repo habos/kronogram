@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:kronogram/models/insta_post_data.dart';
 import 'package:kronogram/models/krono_fb_post.dart';
 import 'package:kronogram/models/krono_insta_post.dart';
@@ -81,4 +82,182 @@ class APIcalls extends APIrequests {
 
     return tweets;
   }
+
+
+
+  /////////////////////////////////////////////////////////////
+//for when able to store in database and implement paging/cursoring
+  ///called when a user logs in for the first time, this will return all current facebook posts from the user
+  Future<List<KronoFacebookPost>> requestFirstTimeFbPosts(var userInfo) async {
+    var posts = new List<KronoFacebookPost>();
+
+    final token = userInfo['token'];
+    final graphResponse = await http.get(
+        'https://graph.facebook.com/me/?fields=posts{id,created_time,name,message,place,attachments{media{image},type,subattachments}}&access_token=$token');
+    if(graphResponse.statusCode != 200) return null;
+    final jsonPostHistory = JSON.jsonDecode(graphResponse.body);
+    for (var jsonPost in jsonPostHistory['posts']['data']) {
+      FacebookPostData fbPost =
+      new FacebookPostData.fromJson(jsonPost, userInfo['userId']);
+      posts.add(new KronoFacebookPost(fbPost));
+    }
+
+    var fbNext = jsonPostHistory['posts']['paging']['next'];
+
+    while(fbNext != null) {
+      var res = await http.get(fbNext);
+      var json = JSON.jsonDecode(res.body);
+      for(var jsonPost in json['posts']['data']) {
+        FacebookPostData fbPost = new FacebookPostData.fromJson(jsonPost, userInfo['userId']);
+        posts.add(new KronoFacebookPost(fbPost));
+      }
+
+      fbNext = jsonPostHistory['posts']['paging']['next'];
+    }
+
+    //store in database to base new calls off of
+    var timestamp = new DateTime.now().millisecondsSinceEpoch.toString();
+
+    return posts;
+  }
+
+/// called when a user logs in after first time, looks for any new Facebook posts since the last login
+  Future<List<KronoFacebookPost>> requestNewFbPosts(var userInfo) async {
+    var posts = new List<KronoFacebookPost>();
+    //store in db for next new call
+    var currentTimestamp = new DateTime.now().millisecondsSinceEpoch.toString();
+    //pull from userInfo in database
+    var prevTimestamp = userInfo['timestamp'];
+
+    final token = userInfo['token'];
+    final graphResponse = await http.get(
+      'https://graph.facebook.com/me/?fields=posts{id,created_time,name,message,place,attachments{media{image}, type, subattachments}}'
+          '&access_token=$token&since=$prevTimestamp&until=$currentTimestamp'
+    );
+    if(graphResponse.statusCode != 200) return null;
+    final jsonPostHistory = JSON.jsonDecode(graphResponse.body);
+    for(var jsonPost in jsonPostHistory['posts']['data']) {
+      FacebookPostData fbPost =
+      new FacebookPostData.fromJson(jsonPost, userInfo['userId']);
+      posts.add(new KronoFacebookPost(fbPost));
+    }
+
+    var fbNext = jsonPostHistory['posts']['paging']['next'];
+
+    while(fbNext != null) {
+      var res = await http.get(fbNext);
+      var json = JSON.jsonDecode(res.body);
+      for(var jsonPost in json['posts']['data']) {
+        FacebookPostData fbPost = new FacebookPostData.fromJson(jsonPost, userInfo['userId']);
+        posts.add(new KronoFacebookPost(fbPost));
+      }
+
+      fbNext = jsonPostHistory['posts']['paging']['next'];
+    }
+
+    return posts;
+  }
+
+/// retrieves all of a users current tweets upon first login
+  Future<List<KronoTweet>> requestFirstTimeTweets(var userInfo) async {
+    var tweets = new List<KronoTweet>();
+
+    final _twitterOauth = new twitterApi(
+        consumerKey: 'JZScfVJ2TnkzVHy7lS7XHGU1z',
+        consumerSecret: 'fk9BSlBe6mDnioJeoIc7thAQeODgnbEBZAJoBsuPVGYG8PmMQW',
+        token: userInfo['token'],
+        tokenSecret: userInfo['secret']);
+
+    var twitterRequest = _twitterOauth.getTwitterRequest("GET", "statuses/user_timeline.json",
+        options: {
+          "screen_name": userInfo['username'],
+          "count" : '200',
+        });
+
+    List<KronoTweet> firstTweets= await _callTweets(twitterRequest,0);
+    tweets.addAll(firstTweets);
+
+    //to store in db to get new tweets
+    String twitterSinceID = firstTweets[0].getPostID().toString();
+
+    List<KronoTweet> nextTweets = firstTweets;
+
+    while(nextTweets.length == 200) {
+      String twitterMaxID = nextTweets[nextTweets.length - 1].getPostID().toString();
+
+      twitterRequest =
+          _twitterOauth.getTwitterRequest("GET", "statuses/user_timeline.json",
+              options: {
+                "screen_name": userInfo['username'],
+                "count": '200',
+                "max_id": twitterMaxID
+              });
+
+      nextTweets = await _callTweets(twitterRequest, 1);
+      tweets.addAll(nextTweets);
+    }
+
+    return tweets;
+  }
+
+  /// retrieves all of a users new tweets since last login
+  Future<List<KronoTweet>> requestNewTweets(var userInfo) async {
+    var tweets = new List<KronoTweet>();
+
+    String sinceID = userInfo['sinceID'];
+
+    final _twitterOauth = new twitterApi(
+        consumerKey: 'JZScfVJ2TnkzVHy7lS7XHGU1z',
+        consumerSecret: 'fk9BSlBe6mDnioJeoIc7thAQeODgnbEBZAJoBsuPVGYG8PmMQW',
+        token: userInfo['token'],
+        tokenSecret: userInfo['secret']);
+
+    var twitterRequest = _twitterOauth.getTwitterRequest("GET", "statuses/user_timeline.json",
+        options: {
+          "screen_name": userInfo['username'],
+          "count" : '200',
+          "since_id" : sinceID
+        });
+
+    List<KronoTweet> firstTweets= await _callTweets(twitterRequest,0);
+    tweets.addAll(firstTweets);
+
+    //to store in db to get new tweets
+    String twitterSinceID = firstTweets[0].getPostID().toString();
+
+    List<KronoTweet> nextTweets = firstTweets;
+
+    while(nextTweets.length == 200) {
+      String twitterMaxID = nextTweets[nextTweets.length - 1].getPostID().toString();
+
+      twitterRequest =
+          _twitterOauth.getTwitterRequest("GET", "statuses/user_timeline.json",
+              options: {
+                "screen_name": userInfo['username'],
+                "count": '200',
+                "since_id": sinceID,
+                "max_id" : twitterMaxID
+              });
+
+      nextTweets = await _callTweets(twitterRequest, 0);
+      tweets.addAll(nextTweets);
+    }
+
+    return tweets;
+  }
+
+/// helper function to return a list of tweets for a certain api call
+  Future<List<KronoTweet>> _callTweets(var twitterRequest, int start) async {
+    List<KronoTweet> tweets = new List();
+
+    var res = await twitterRequest;
+    if(res.statusCode != 200) return null;
+    var tweetResponse = JSON.jsonDecode(res.body);
+    for (var i = start; i < tweetResponse.length; i++) {
+      tweets.add(new KronoTweet(TweetUI.Tweet.fromJson(tweetResponse[i])));
+    }
+
+    return tweets;
+  }
 }
+
