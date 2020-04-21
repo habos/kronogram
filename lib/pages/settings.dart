@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kronogram/UI_pages/user_pages/user_page.dart';
 import 'package:kronogram/UI_pages/values/colors.dart';
+import 'package:kronogram/pages/profile_page.dart';
 import 'package:kronogram/pages/root_page.dart';
 import 'package:kronogram/services/authentication.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
@@ -33,6 +34,9 @@ class SettingsPage extends StatefulWidget {
 
   void onLogoutPressed(BuildContext context) => Navigator.push(
       context, MaterialPageRoute(builder: (context) => RootPage()));
+
+  void onChangePressed(BuildContext context) => Navigator.push(
+    context, MaterialPageRoute(builder: (context) => ProfilePage(userId: userId, logoutCallback: logoutCallback,)));
 }
 
 class _SettingsPageState extends State<SettingsPage> {
@@ -313,6 +317,24 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
+  Widget showChangeButton() {
+    return new Padding(
+        padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
+        child: SizedBox(
+          height: 40.0,
+          child: new RaisedButton(
+            elevation: 5.0,
+            shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(30.0)),
+            color: AppColors.randomButton2,
+            child: new Text('Update Profile',
+                style: new TextStyle(
+                    fontSize: 20.0, color: AppColors.randomButtonText2)),
+            onPressed: () => widget.onChangePressed(context),
+          ),
+        ));
+  }
+
   //Build Components
   @override
   Widget build(BuildContext context) {
@@ -327,6 +349,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       FacebookButton(),
                       TwitterButton(),
                       InstagramButton(),
+                      showChangeButton(),
                       showLogoutButton(),
                       showBackButton(),
                     ],
