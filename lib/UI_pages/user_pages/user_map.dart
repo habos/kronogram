@@ -2,6 +2,18 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:kronogram/UI_pages/values/values.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+
+import 'package:kronogram/models/krono_fb_post.dart';
+import 'package:kronogram/models/krono_insta_post.dart';
+import 'package:kronogram/models/krono_post.dart';
+import 'package:kronogram/models/krono_tweet.dart';
+import 'package:kronogram/models/sm_platform.dart';
+import 'package:kronogram/services/globals.dart';
+import 'package:kronogram/utils/date_utils.dart';
+import 'package:kronogram/widgets/post_view.dart';
+
+
 //import 'package:flutter_map/flutter_map.dart';
 //import 'package:latlong/latlong.dart';
 
@@ -21,13 +33,41 @@ class UserMap extends StatefulWidget{
 class _UserMapState extends State<UserMap> {
   //Completer<GoogleMapController> _controller = Completer();
   //final LatLng _center = const LatLng(45.521563, -122.677433);
-
+  List<KronoPost> postLocations = List();
   GoogleMapController mapController;
 
   final LatLng _center = const LatLng(45.521563, -122.677433);
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
+  }
+
+
+
+
+  void getPosts() async{
+
+    Map twitterUser = await db.getTwitterInfo(widget.userId);
+    List<KronoTweet> tweets = await APIcaller.requestTweets(twitterUser);
+    for (KronoTweet tweet in tweets) {
+      if(tweet.getLocation()!=null){
+        postLocations.add(tweet);
+      }
+
+    }
+
+    Map facebookUser = await db.getFacebookInfo(widget.userId);
+    List<KronoFacebookPost> posts = await APIcaller.requestFbPosts(facebookUser);
+    for (KronoFacebookPost post in posts) {
+      if(post.getLocation()!=null){
+        postLocations.add(post);
+      }
+    }
+
+    postLocations.sort((a, b) => a.getCreationTime().compareTo(b.getCreationTime()) * -1);
+    setState(() {
+
+    });
   }
 
 /*
@@ -55,7 +95,44 @@ class _UserMapState extends State<UserMap> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    getPosts();
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        child: ListView.builder(
+            padding: const EdgeInsets.all(8),
+            itemCount: postLocations.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Container(
+                child: Row(
+                  children: <Widget>[
+                    Text(
+                        'DATE: ' + getDateString(postLocations[index].getCreationTime()) + ' : '
+                    ),
+                    if (postLocations[index].getLocation()!= null)
+                      Text(
+                        //timelinePosts[index].getLocation()).toString(),
+                          ((postLocations[index].getLocation()).latitude)
+                              .toString() + ' ' +
+                              ((postLocations[index].getLocation()).longitude)
+                                  .toString()
+
+                      ),
+
+
+                  ],
+                ),
+
+
+              );
+            })
+    );
+  }
+
+
+  /*
 
   @override
   Widget build(BuildContext context) {
@@ -100,6 +177,7 @@ class _UserMapState extends State<UserMap> {
                 height: 400.0
             ),
           ),
+
              Container(
                child: Column(
                  children: <Widget>[
@@ -121,9 +199,30 @@ class _UserMapState extends State<UserMap> {
                          backgroundColor: AppColors.voidBackground6,
                        ),
                      ],
-                   )
+                   ),
+                    /*
+                    Container(
+                      child:ListView.builder(
+                        padding: const EdgeInsets.all(8),
+                        itemCount: timelinePosts.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(
+                            child: Row(
+                            children: <Widget>[
+                              Text(
+                                'LOCATION '+ index.toString() + ' : '
+                              ),
+                              Text(
+                              (timelinePosts[index].getLocation()).toString(),
+                              )
+                              ],
+                            ),
 
 
+                          );
+                        })
+                    )
+*/
                  ],
 
                )
@@ -134,9 +233,10 @@ class _UserMapState extends State<UserMap> {
 
 
 
-
     );
   }
+
+   */
   Future<void> _viewAll() async {
     mapController.animateCamera(CameraUpdate.newCameraPosition(
         (CameraPosition(
