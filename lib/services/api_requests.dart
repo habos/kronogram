@@ -4,6 +4,7 @@ import 'package:kronogram/models/krono_fb_post.dart';
 import 'package:kronogram/models/krono_insta_post.dart';
 import 'package:kronogram/models/krono_tweet.dart';
 import 'package:http/http.dart' as http;
+import 'package:kronogram/models/location.dart';
 import 'dart:convert' as JSON;
 import 'package:kronogram/models/post.dart';
 import 'package:tweet_ui/models/api/tweet.dart' as TweetUI;
@@ -16,8 +17,6 @@ abstract class APIrequests {
 }
 
 class APIcalls extends APIrequests {
-  String twitterMaxID = '0';
-  String fbNext = '0';
 
   Future<List<KronoInstaPost>> requestInstaPosts(var userInfo) async {
     if (userInfo == null) return null;
@@ -42,16 +41,16 @@ class APIcalls extends APIrequests {
 
     final token = userInfo['token'];
     final graphResponse = await http.get(
-        'https://graph.facebook.com/me/?fields=posts{id,created_time,name,message,place,attachments{media{image},type,subattachments}}&access_token=$token');
+        'https://graph.facebook.com/me/?fields=posts{id,created_time,name,message,place{location{latitude,longitude}},attachments{media{image},type,subattachments}}&access_token=$token');
     if(graphResponse.statusCode != 200) return null;
     final jsonPostHistory = JSON.jsonDecode(graphResponse.body);
     for (var jsonPost in jsonPostHistory['posts']['data']) {
       FacebookPostData fbPost =
           new FacebookPostData.fromJson(jsonPost, userInfo['userId']);
-      posts.add(new KronoFacebookPost(fbPost));
-    }
+      FacebookLocationData location = jsonPost['place'] == null ? null : FacebookLocationData.fromJson(jsonPost['place']['location']);
 
-    fbNext = jsonPostHistory['posts']['paging']['next'];
+      posts.add(new KronoFacebookPost(fbPost,location));
+    }
 
     return posts;
   }
@@ -72,13 +71,14 @@ class APIcalls extends APIrequests {
         });
 
     var res = await twitterRequest;
-    if(res.statusCode != 200) {twitterMaxID = null; return null;}
+    if(res.statusCode != 200) {return null;}
     var tweetResponse = JSON.jsonDecode(res.body);
     for (var i = 0; i < tweetResponse.length; i++) {
-      tweets.add(new KronoTweet(TweetUI.Tweet.fromJson(tweetResponse[i])));
+      TwitterLocationData location;
+      if(tweetResponse[i]['coordinates'] != null || tweetResponse[i]['place'] != null) location = new TwitterLocationData.fromJson(tweetResponse[i]);
+      else location = null;
+      tweets.add(new KronoTweet(TweetUI.Tweet.fromJson(tweetResponse[i]), location));
     }
-
-    twitterMaxID = tweetResponse[tweetResponse.length - 1]['id_str'];
 
     return tweets;
   }
@@ -99,7 +99,9 @@ class APIcalls extends APIrequests {
     for (var jsonPost in jsonPostHistory['posts']['data']) {
       FacebookPostData fbPost =
       new FacebookPostData.fromJson(jsonPost, userInfo['userId']);
-      posts.add(new KronoFacebookPost(fbPost));
+      FacebookLocationData location = jsonPost['place'] == null ? null : FacebookLocationData.fromJson(jsonPost['place']['location']);
+
+      posts.add(new KronoFacebookPost(fbPost,location));
     }
 
     var fbNext = jsonPostHistory['posts']['paging']['next'];
@@ -109,14 +111,16 @@ class APIcalls extends APIrequests {
       var json = JSON.jsonDecode(res.body);
       for(var jsonPost in json['posts']['data']) {
         FacebookPostData fbPost = new FacebookPostData.fromJson(jsonPost, userInfo['userId']);
-        posts.add(new KronoFacebookPost(fbPost));
+        FacebookLocationData location = jsonPost['place'] == null ? null : FacebookLocationData.fromJson(jsonPost['place']['location']);
+
+        posts.add(new KronoFacebookPost(fbPost,location));
       }
 
       fbNext = jsonPostHistory['posts']['paging']['next'];
     }
 
     //store in database to base new calls off of
-    var timestamp = new DateTime.now().millisecondsSinceEpoch.toString();
+    var timestamp = new DateTime.now().toUtc().millisecondsSinceEpoch.toString();
 
     return posts;
   }
@@ -125,7 +129,7 @@ class APIcalls extends APIrequests {
   Future<List<KronoFacebookPost>> requestNewFbPosts(var userInfo) async {
     var posts = new List<KronoFacebookPost>();
     //store in db for next new call
-    var currentTimestamp = new DateTime.now().millisecondsSinceEpoch.toString();
+    var currentTimestamp = new DateTime.now().toUtc().millisecondsSinceEpoch.toString();
     //pull from userInfo in database
     var prevTimestamp = userInfo['timestamp'];
 
@@ -139,7 +143,9 @@ class APIcalls extends APIrequests {
     for(var jsonPost in jsonPostHistory['posts']['data']) {
       FacebookPostData fbPost =
       new FacebookPostData.fromJson(jsonPost, userInfo['userId']);
-      posts.add(new KronoFacebookPost(fbPost));
+      FacebookLocationData location = jsonPost['place'] == null ? null : FacebookLocationData.fromJson(jsonPost['place']['location']);
+
+      posts.add(new KronoFacebookPost(fbPost,location));
     }
 
     var fbNext = jsonPostHistory['posts']['paging']['next'];
@@ -149,7 +155,9 @@ class APIcalls extends APIrequests {
       var json = JSON.jsonDecode(res.body);
       for(var jsonPost in json['posts']['data']) {
         FacebookPostData fbPost = new FacebookPostData.fromJson(jsonPost, userInfo['userId']);
-        posts.add(new KronoFacebookPost(fbPost));
+        FacebookLocationData location = jsonPost['place'] == null ? null : FacebookLocationData.fromJson(jsonPost['place']['location']);
+
+        posts.add(new KronoFacebookPost(fbPost,location));
       }
 
       fbNext = jsonPostHistory['posts']['paging']['next'];
@@ -254,7 +262,10 @@ class APIcalls extends APIrequests {
     if(res.statusCode != 200) return null;
     var tweetResponse = JSON.jsonDecode(res.body);
     for (var i = start; i < tweetResponse.length; i++) {
-      tweets.add(new KronoTweet(TweetUI.Tweet.fromJson(tweetResponse[i])));
+      TwitterLocationData location;
+      if(tweetResponse[i]['coordinates'] != null || tweetResponse[i]['place'] != null) location = new TwitterLocationData.fromJson(tweetResponse[i]);
+      else location = null;
+      tweets.add(new KronoTweet(TweetUI.Tweet.fromJson(tweetResponse[i]), location));
     }
 
     return tweets;

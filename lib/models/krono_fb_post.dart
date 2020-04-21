@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:kronogram/models/krono_post.dart';
+import 'package:kronogram/models/location.dart';
 import 'package:kronogram/models/sm_platform.dart';
 import 'package:kronogram/models/post.dart';
 import 'package:kronogram/widgets/facebook_post_view.dart';
 
 class KronoFacebookPost implements KronoPost {
   final FacebookPostData _fbPostData;
+  final FacebookLocationData _fbLocation;
 
-  KronoFacebookPost(this._fbPostData);
+  KronoFacebookPost(this._fbPostData, [this._fbLocation]);
 
   @override
   Widget createPostWidget() {
@@ -29,6 +31,11 @@ class KronoFacebookPost implements KronoPost {
     return int.parse(_fbPostData.id);
   }
 
+  @override
+  Location getLocation() {
+    return _fbLocation;
+  }
+
   String userId;
   DateTime createdAt;
   String caption;
@@ -41,7 +48,8 @@ class KronoFacebookPost implements KronoPost {
         'caption': _fbPostData.getCaption(),
         'postId': _fbPostData.getID(),
         'title': _fbPostData.getTitle(),
-        'media': _fbPostData.getPostMedia()
+        'media': _fbPostData.getPostMedia(),
+        'location' : _fbLocation
       };
 
   static KronoFacebookPost fromJson(Map<String, dynamic> json) {
@@ -52,6 +60,9 @@ class KronoFacebookPost implements KronoPost {
     data.id = json['postId'];
     data.title = json['title'];
     data.media = json['media'];
-    return KronoFacebookPost(data);
+    FacebookLocationData location = new FacebookLocationData();
+    location.latitude = json['location']['latitude'];
+    location.longitude = json['location']['longitude'];
+    return KronoFacebookPost(data, location);
   }
 }

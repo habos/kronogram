@@ -34,7 +34,8 @@ class _FacebookPageState extends State<FacebookPage> {
     for (var jsonPost in profile['posts']['data']) {
       FacebookPostData fbPost =
           new FacebookPostData.fromJson(jsonPost, widget.userId);
-      posts.add(new KronoFacebookPost(fbPost));
+
+//      posts.add(new KronoFacebookPost(fbPost));
     }
 
     setState(() {

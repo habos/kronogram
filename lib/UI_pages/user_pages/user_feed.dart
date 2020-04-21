@@ -53,8 +53,6 @@ class _UserFeedState extends State<UserFeed> {
       }
     }
 
-    print(feedPosts.length);
-
     feedPosts.sort((a, b) => a['post'].getCreationTime().compareTo(b['post'].getCreationTime()) * -1);
     _loading = false;
     setState(() {
@@ -65,7 +63,6 @@ class _UserFeedState extends State<UserFeed> {
   @override
   void initState() {
     super.initState();
-    print(widget.userId);
     getAllPosts(widget.userId);
   }
 

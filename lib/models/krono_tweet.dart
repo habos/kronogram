@@ -5,17 +5,19 @@ import 'package:kronogram/styles/text_styles.dart';
 import 'package:kronogram/utils/date_utils.dart';
 import 'package:tweet_ui/models/api/tweet.dart';
 import 'package:tweet_ui/tweet_ui.dart';
+import 'package:kronogram/models/location.dart';
 
 /// KronoTweet wraps a [Tweet] object so that it
 /// fulfills the [KronoPost] interface
 class KronoTweet implements KronoPost {
   final Tweet _tweet;
   final DateTime _creationTime;
+  final TwitterLocationData _locationData;
 
   /// Constructs a KronoTweet object given a [Tweet] object
   /// The constructor also parses the createdAt field of
   /// the Tweet and stores it as a [DateTime] object
-  KronoTweet(this._tweet)
+  KronoTweet(this._tweet, [this._locationData])
       : _creationTime = parseTwitterCreationTime(_tweet.createdAt);
 
   /// Returns a [TweetView] Widget displaying the underlying tweet.
@@ -43,15 +45,24 @@ class KronoTweet implements KronoPost {
   }
 
   @override
+  Location getLocation() {
+    return _locationData;
+  }
+
+  @override
   Map<String, dynamic> toJson() => {
         'userId': _tweet.user.id,
         'createdAt': _creationTime,
         'caption': _tweet.text,
         'tweetData': _tweet,
+        'locationData' : _locationData
       };
 
   static KronoTweet fromJson(Map<String, dynamic> json) {
     Tweet tweet = json['tweetData'];
-    return KronoTweet(tweet);
+    TwitterLocationData location = new TwitterLocationData();
+    location.latitude = json['location']['latitude'];
+    location.longitude = json['location']['longitude'];
+    return KronoTweet(tweet, location);
   }
 }

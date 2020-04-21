@@ -71,5 +71,5 @@ DateTime parseInstagramCreationTime(String createdAt) {
 
 String getDateString(DateTime date) {
   String month = _numberToMonthMap[date.month.toString()];
-  return month + ' ' + date.day.toString() + ', ' + date.year.toString();
+  return month + ' ' + date.toLocal().day.toString() + ', ' + date.toLocal().year.toString();
 }
