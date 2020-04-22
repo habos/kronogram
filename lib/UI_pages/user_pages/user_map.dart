@@ -37,7 +37,8 @@ class _UserMapState extends State<UserMap> {
   GoogleMapController mapController;
   bool _loadingP = true;
   bool _loadingM = true;
-
+  var locCount =0;
+  String curLocDate ="NA";
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{}; // CLASS MEMBER, MAP OF MARKS
 
   final LatLng _center = const LatLng(45.521563, -122.677433);
@@ -250,7 +251,7 @@ void getPosts() async{
                   ),
 
                   constraints: BoxConstraints.expand(
-                      height: 400.0
+                      height: 500.0
                   ),
                 ),
 
@@ -260,22 +261,27 @@ void getPosts() async{
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text("Locations: ",
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                                color: Color.fromARGB(255, 0, 0, 0),
-                                fontWeight: FontWeight.w600,
-                                fontSize: 20
-                            ),
+                          FloatingActionButton.extended(
+                            onPressed: _viewlast,
+                            label: Text('LAST'),
+                            icon: Icon(Icons.pin_drop),
+                            backgroundColor: AppColors.voidBackground6,
                           ),
                           FloatingActionButton.extended(
-                            onPressed: _viewAll,
+                            onPressed: _viewALL,
                             label: Text('VIEW ALL'),
+                            //icon: Icon(Icons.public),
+                            backgroundColor: AppColors.voidBackground6,
+                          ),
+                          FloatingActionButton.extended(
+                            onPressed: _viewnext,
+                            label: Text('NEXT'),
                             icon: Icon(Icons.pin_drop),
                             backgroundColor: AppColors.voidBackground6,
                           ),
                         ],
                       ),
+
 
 
                     ],
@@ -394,13 +400,39 @@ void getPosts() async{
   }
 
    */
-
-  Future<void> _viewAll() async {
+  Future<void> _viewALL() async {
     mapController.animateCamera(CameraUpdate.newCameraPosition(
         (CameraPosition(
-        target: LatLng((postLocations[1].getLocation()).latitude, (postLocations[1].getLocation()).longitude),
-        zoom: 13.5,))));
+          target: LatLng((postLocations[locCount].getLocation()).latitude, (postLocations[locCount].getLocation()).longitude),
+          zoom: 3,))));
   }
+  Future<void> _viewnext() async {
+    locCount++;
+    if (locCount > postLocations.length){
+      locCount=0;
+    }
+    curLocDate = getDateString(postLocations[locCount].getCreationTime());
+
+    mapController.animateCamera(CameraUpdate.newCameraPosition(
+        (CameraPosition(
+        target: LatLng((postLocations[locCount].getLocation()).latitude, (postLocations[locCount].getLocation()).longitude),
+        zoom: 13.5,))));
+    mapController.showMarkerInfoWindow(MarkerId(getDateString(postLocations[locCount].getCreationTime())));
+  }
+  Future<void> _viewlast() async {
+    locCount--;
+    if (locCount <0 ){
+      locCount=postLocations.length;
+    }
+    curLocDate = getDateString(postLocations[locCount].getCreationTime());
+
+    mapController.animateCamera(CameraUpdate.newCameraPosition(
+        (CameraPosition(
+          target: LatLng((postLocations[locCount].getLocation()).latitude, (postLocations[locCount].getLocation()).longitude),
+          zoom: 13.5,))));
+    mapController.showMarkerInfoWindow(MarkerId(getDateString(postLocations[locCount].getCreationTime())));
+  }
+
 }
 class locationsTemp{
   locationsTemp({
