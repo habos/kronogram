@@ -215,7 +215,7 @@ void getPosts() async{
     else {
       if (_loadingM) {
         createMarkers();
-        if(postLocations.length ==0) {
+        if(postLocations.isEmpty) {
           return Container(
             color: AppColors.primaryBackground,
             child: Text(
