@@ -357,6 +357,22 @@ class Database implements BaseDatabase {
     return {'status' : exists, 'relationshipID' : relationshipId};
   }
 
+  Future<bool> checkFollowing(String userID, String friendID) async {
+    Map users = _orderUsersRelationship(userID, friendID);
+    String low = users['low'];
+    String user1 = users['user1'];
+    String user2 = users['user2'];
+    Map exists = await relationshipExists(user1, user2);
+    int status = exists['status'];
+    String relationshipID = exists['relationshipID'];
+
+    if(status == 0) return false;
+    else if(status == 3) return true;
+    else if(low == 'user' && status == 1) return true;
+    else if(low == 'friend' && status == 2) return true;
+    else return false;
+  }
+
   /// userID unfollows friendID and removes/updates relationship in database
   Future<void> unfollowFriend(String userID, String friendID) async {
     print('unfollowing ...');

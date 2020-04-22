@@ -34,9 +34,8 @@ class _UserPageState extends State<UserPage>{
   List<Widget> makeList() {
     return [
       UserFeed(userId: widget.userId),
-      Timeline(userId: widget.userId),
       UserMap(userId: widget.userId ),
-      UserProfile(userId: widget.userId)
+      UserProfile(userId: widget.userId, viewId: widget.userId,)
     ];
   }
 
@@ -74,10 +73,6 @@ class _UserPageState extends State<UserPage>{
             icon: Icon(Icons.calendar_today),
             title: Text('TODAY'),
 
-          ),
-          new BottomNavigationBarItem(
-            icon: Icon(Icons.storage),
-            title: Text('TIMELINE'),
           ),
           new BottomNavigationBarItem(
               icon: Icon(Icons.public),
