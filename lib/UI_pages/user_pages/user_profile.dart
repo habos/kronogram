@@ -27,46 +27,50 @@ class _UserProfileState extends State<UserProfile> {
   String otherUserName;
   bool loading = true;
 
-  void getUserFollowingIDs(String userID) async {
-    userFollowingIDs = await db.getFollowingIDs(userID);
-  }
 
-  void getFollowingUsernames(String userID) async {
+  Future<void> getFollowingUsernames(String userID) async {
     followingIDs = await db.getFollowingIDs(userID);
     for(var id in followingIDs) {
       String username = await db.getUsername(id);
       followingUsernames.add(username);
     }
-    setState(() {
-      loading = false;
-    });
   }
 
-  void getFollowersUsernames(String userID) async {
+  Future<void> getFollowersUsernames(String userID) async {
     followerIDs = await db.getFollowersIDsAndStatus(userID);
     for(var user in followerIDs) {
       String username = await db.getUsername(user['userID']);
       followerUsernames.add(username);
     }
+  }
+
+  Future<void> getUserFollowingIDs(String userID) async {
+    userFollowingIDs = await db.getFollowingIDs(userID);
+    return;
+  }
+
+  void getAllLists() async {
+    followingUsernames = new List();
+    followerUsernames = new List();
+    await getUserFollowingIDs(widget.userId);
+    await getFollowingUsernames(widget.viewId);
+    await getFollowersUsernames(widget.viewId);
     setState(() {
       loading = false;
     });
+    return;
   }
 
   @override
   void initState() {
     // TODO: implement initState
     loading = true;
-    followingUsernames = new List();
-    followerUsernames = new List();
-    getFollowingUsernames(widget.viewId);
-    getFollowersUsernames(widget.viewId);
-    getUserFollowingIDs(widget.userId);
     getOtherUserName();
+    getAllLists();
     super.initState();
   }
 
-  void getOtherUserName() async {
+  Future<void> getOtherUserName() async {
     if(widget.viewId != widget.userId) otherUserName = await db.getUsername(widget.viewId);
   }
 
@@ -116,6 +120,7 @@ class _UserProfileState extends State<UserProfile> {
       return Container(
       );
     }
+
     else if(followingUsernames.length == 0) {
       return Container(
         child: Text(
@@ -127,6 +132,7 @@ class _UserProfileState extends State<UserProfile> {
         ),
       );
     }
+
     else {
       return Container(
         child: ListView.builder(
@@ -280,10 +286,7 @@ class _UserProfileState extends State<UserProfile> {
     await db.unfollowFriend(widget.userId, friendID);
     setState(() {
       loading = true;
-      followingUsernames = new List();
-      followerUsernames = new List();
-      getFollowingUsernames(widget.viewId);
-      getFollowersUsernames(widget.viewId);
+      getAllLists();
     });
   }
 
@@ -291,10 +294,7 @@ class _UserProfileState extends State<UserProfile> {
     await db.followFriend(widget.userId, friendID);
     setState(() {
       loading = true;
-      followingUsernames = new List();
-      followerUsernames = new List();
-      getFollowingUsernames(widget.viewId);
-      getFollowersUsernames(widget.viewId);
+      getAllLists();
     });
   }
   
