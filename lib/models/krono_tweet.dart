@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kronogram/UI_pages/values/colors.dart';
 import 'package:kronogram/models/krono_post.dart';
 import 'package:kronogram/models/sm_platform.dart';
 import 'package:kronogram/styles/text_styles.dart';
@@ -23,7 +24,13 @@ class KronoTweet implements KronoPost {
   /// Returns a [TweetView] Widget displaying the underlying tweet.
   @override
   Widget createPostWidget() {
-  return TweetView.fromTweet(_tweet, textStyle: defaultTweetTextStyle);
+  return Container(
+      padding: EdgeInsets.fromLTRB(3, 3, 3, 3),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
+        color: AppColors.primaryBackground,
+      ),
+      child: TweetView.fromTweet(_tweet, textStyle: defaultTweetTextStyle));
   }
 
   /// Returns a [DateTime] object representing the time this tweet

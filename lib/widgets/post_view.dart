@@ -32,12 +32,18 @@ class postView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    Color platformBorderColor;
+    String platform = EnumToString.parseCamelCase(_post.getPlatform());
+    if(platform == 'Facebook') platformBorderColor = AppColors.facebookColor;
+    else if(platform == 'Twitter') platformBorderColor = AppColors.twitterColor;
+    else if(platform == 'Instagram') platformBorderColor = AppColors.instagramColor;
+    else platformBorderColor = Colors.white;
     return Container(
-      margin: EdgeInsets.only(left: 10, right: 10),
+      margin: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
       decoration: BoxDecoration(
-        color: AppColors.primaryBackground,
+        color: platformBorderColor,
         borderRadius: Radii.k10pxRadius,
+        border: Border.all(color: platformBorderColor, width: 2),
       ),
       child: Column(
         children: [ Row(
@@ -48,7 +54,7 @@ class postView extends StatelessWidget {
               height: 20,
               margin: EdgeInsets.only(left: 10, top: 10),
               child: Text(
-                EnumToString.parseCamelCase(_post.getPlatform()),
+                platform,
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   color: Color.fromARGB(255, 0, 0, 0),
@@ -74,7 +80,7 @@ class postView extends StatelessWidget {
             )
           ],
         ),
-          _post.createPostWidget()
+          _post.createPostWidget(),
         ],
       ),
     );
