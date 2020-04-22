@@ -23,15 +23,16 @@ class _UserFeedState extends State<UserFeed> {
   bool _loading = true;
 //  List<KronoPost> feedPosts = List();
   List<Map<String, dynamic>> feedPosts = List();
-  DateTime today = new DateTime.now();
+  DateTime today = new DateTime.now().toUtc();
 
-  void getAllPosts(var userID) async {
+  void getPosts(var userID) async {
     String username = await db.getUsername(userID);
     Map instaUser = await db.getInstagramInfo(userID);
     List<KronoInstaPost> instaPosts = await APIcaller.requestInstaPosts(instaUser);
     if(instaPosts != null) {
       for(KronoInstaPost post in instaPosts) {
-        if(post.getCreationTime().month == today.month && post.getCreationTime().day == today.day) {
+        DateTime postTime = post.getCreationTime().toUtc();
+        if(postTime.month == today.month && postTime.day == today.day) {
           feedPosts.add({'post' : post, 'username' : username});
         }
       }
@@ -40,7 +41,8 @@ class _UserFeedState extends State<UserFeed> {
     Map facebookUser = await db.getFacebookInfo(userID);
     List<KronoFacebookPost> posts = await APIcaller.requestFbPosts(facebookUser);
     for(KronoFacebookPost post in posts) {
-      if(post.getCreationTime().month == today.month && post.getCreationTime().day == today.day) {
+      DateTime postTime = post.getCreationTime().toUtc();
+      if(postTime.month == today.month && postTime.day == today.day) {
         feedPosts.add({'post' : post, 'username' : username});
       }
     }
@@ -48,7 +50,8 @@ class _UserFeedState extends State<UserFeed> {
     Map twitterUser = await db.getTwitterInfo(userID);
     List<KronoTweet> tweets = await APIcaller.requestTweets(twitterUser);
     for(KronoTweet tweet in tweets) {
-      if(tweet.getCreationTime().month == today.month && tweet.getCreationTime().day == today.day) {
+      DateTime postTime = tweet.getCreationTime().toUtc();
+      if(postTime.month == today.month && postTime.day == today.day) {
         feedPosts.add({'post' : tweet, 'username' : username});
       }
     }
@@ -60,10 +63,20 @@ class _UserFeedState extends State<UserFeed> {
     });
   }
 
+  void getAllUsersPosts(String userID) async {
+    //get user's posts
+    getPosts(userID);
+    //get friends' posts
+    List<String> friends = await db.getFriendsIDs(userID);
+    for(String friend in friends) {
+      getPosts(friend);
+    }
+  }
+
   @override
   void initState() {
     super.initState();
-    getAllPosts(widget.userId);
+    getAllUsersPosts(widget.userId);
   }
 
   Widget progress() {
@@ -153,7 +166,7 @@ class _UserFeedState extends State<UserFeed> {
                         Text(
                           (today
                               .difference(feedPosts[index]['post']
-                              .getCreationTime())
+                              .getCreationTime().toUtc())
                               .inDays ~/ 365).toString() + ' years ago today',
                           style: TextStyle(
                             color: Color.fromARGB(255, 0, 0, 0),

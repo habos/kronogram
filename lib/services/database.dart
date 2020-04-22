@@ -47,16 +47,18 @@ class Database implements BaseDatabase {
         .setData({fieldName: value}, merge: true);
   }
 
-  Future<QuerySnapshot> getUsernames(){
-    return _firestore.collection(_usersCollectionName).where(_usernameField).getDocuments();
+  Future<QuerySnapshot> getUsernames() {
+    return _firestore.collection(_usersCollectionName)
+        .where(_usernameField)
+        .getDocuments();
   }
 
   CollectionReference getUserTimelineSummary(String userID) {
     return getUserDocumentRef(userID).collection(_timelineSummaryField);
   }
 
-  Future<void> addToUserTimelineSummary(
-      String userID, int postID, DateTime creationTime, String platform) {
+  Future<void> addToUserTimelineSummary(String userID, int postID,
+      DateTime creationTime, String platform) {
     return _firestore
         .collection(_usersCollectionName)
         .document(userID)
@@ -169,6 +171,7 @@ class Database implements BaseDatabase {
     var snapshot = await getUserDocumentSnapshot(userID);
     return snapshot.data.remove(_twitterInfoField);
   }
+
   /*
   Map that is stored in database
   Map<String, dynamic> toMap() {
@@ -211,5 +214,36 @@ class Database implements BaseDatabase {
 
   Future<void> setInstagramInfo(String userID, Map info) async {
     return setFieldInUsers(userID, _instagramInfoField, info);
+  }
+
+  Future<List> getFriendsIDs(String userID) async {
+    List<String> friendIDs = new List();
+    await _firestore.collection('relationships')
+        .where('user1_id', isEqualTo: userID)
+        .where('status', whereIn: [0, 2])
+        .getDocuments()
+        .then((QuerySnapshot snapshot) {
+      snapshot.documents.forEach((doc) {
+        print(doc.data);
+        friendIDs.add(doc.data['user2_id']);
+      });
+    });
+    await _firestore.collection('relationships')
+        .where('user2_id', isEqualTo: userID)
+        .where('status', whereIn: [1, 2])
+        .getDocuments()
+        .then((QuerySnapshot snapshot) {
+      snapshot.documents.forEach((doc) {
+        print(doc.data);
+        friendIDs.add(doc.data['user1_id']);
+      });
+    });
+
+    print(friendIDs.length);
+    for(String id in friendIDs) {
+      String name = await getUsername(id);
+      print(name);
+    }
+    return friendIDs;
   }
 }
