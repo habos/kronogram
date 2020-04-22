@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:kronogram/models/location.dart';
 import 'dart:convert' as JSON;
 import 'package:kronogram/models/post.dart';
+import 'package:kronogram/utils/date_utils.dart';
 import 'package:tweet_ui/models/api/tweet.dart' as TweetUI;
 import 'package:twitter_api/twitter_api.dart';
 
@@ -50,7 +51,6 @@ class APIcalls extends APIrequests {
       FacebookPostData fbPost =
           new FacebookPostData.fromJson(jsonPost, userInfo['userId']);
       FacebookLocationData location = jsonPost['place'] == null ? null : FacebookLocationData.fromJson(jsonPost['place']['location']);
-
       posts.add(new KronoFacebookPost(fbPost,location));
     }
 
