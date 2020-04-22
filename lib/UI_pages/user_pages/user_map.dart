@@ -121,7 +121,7 @@ void getPosts() async{
 
     setState(() {
       markers[markerId] = marker;
-      print(markerId);
+      //print(markerId);
     });
 
   }
@@ -215,7 +215,23 @@ void getPosts() async{
     else {
       if (_loadingM) {
         createMarkers();
-        return progress();
+        if(postLocations.length ==0) {
+          return Container(
+            color: AppColors.primaryBackground,
+            child: Text(
+              "There are no locations available",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  fontWeight: FontWeight.w600,
+                  fontSize: 20
+              ),
+            ),
+          );
+        }
+        else{
+          return progress();
+        }
       }
       else {
         if (postLocations.length == 0) {
