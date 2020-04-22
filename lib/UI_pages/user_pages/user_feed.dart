@@ -23,7 +23,7 @@ class _UserFeedState extends State<UserFeed> {
   bool _loading = true;
 //  List<KronoPost> feedPosts = List();
   List<Map<String, dynamic>> feedPosts = List();
-  DateTime today = new DateTime.now().toUtc();
+  DateTime today = new DateTime.now();
 
   @override
   void dispose() {
@@ -37,7 +37,7 @@ class _UserFeedState extends State<UserFeed> {
     List<KronoInstaPost> instaPosts = await APIcaller.requestInstaPosts(instaUser);
     if(instaPosts != null) {
       for(KronoInstaPost post in instaPosts) {
-        DateTime postTime = post.getCreationTime().toUtc();
+        DateTime postTime = post.getCreationTime().toLocal();
         if(postTime.month == today.month && postTime.day == today.day) {
           feedPosts.add({'post' : post, 'username' : username});
         }
@@ -48,7 +48,7 @@ class _UserFeedState extends State<UserFeed> {
     List<KronoFacebookPost> posts = await APIcaller.requestFbPosts(facebookUser);
     if(posts != null) {
       for (KronoFacebookPost post in posts) {
-        DateTime postTime = post.getCreationTime().toUtc();
+        DateTime postTime = post.getCreationTime().toLocal();
         if (postTime.month == today.month && postTime.day == today.day) {
           feedPosts.add({'post': post, 'username': username});
         }
@@ -59,14 +59,14 @@ class _UserFeedState extends State<UserFeed> {
     List<KronoTweet> tweets = await APIcaller.requestTweets(twitterUser);
     if(tweets != null) {
       for (KronoTweet tweet in tweets) {
-        DateTime postTime = tweet.getCreationTime().toUtc();
+        DateTime postTime = tweet.getCreationTime().toLocal();
         if (postTime.month == today.month && postTime.day == today.day) {
           feedPosts.add({'post': tweet, 'username': username});
         }
       }
     }
 
-    feedPosts.sort((a, b) => a['post'].getCreationTime().compareTo(b['post'].getCreationTime()) * -1);
+    feedPosts.sort((a, b) => a['post'].getCreationTime().toLocal().compareTo(b['post'].getCreationTime().toLocal()) * -1);
     setState(() {
       _loading = false;
     });
@@ -176,7 +176,7 @@ class _UserFeedState extends State<UserFeed> {
                         Text(
                           (today
                               .difference(feedPosts[index]['post']
-                              .getCreationTime().toUtc())
+                              .getCreationTime().toLocal())
                               .inDays ~/ 365).toString() + ' years ago today',
                           style: TextStyle(
                             color: Color.fromARGB(255, 0, 0, 0),

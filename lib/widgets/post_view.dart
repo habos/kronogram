@@ -69,7 +69,7 @@ class postView extends StatelessWidget {
               height: 20,
               margin: EdgeInsets.only(left: 10, top: 10, right: 10),
               child: Text(
-                getDateString(_post.getCreationTime()),
+                getDateString(_post.getCreationTime().toLocal()),
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   color: Color.fromARGB(255, 0, 0, 0),
