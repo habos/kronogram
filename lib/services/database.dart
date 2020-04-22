@@ -30,6 +30,7 @@ abstract class BaseDatabase {
 class Database implements BaseDatabase {
   final Firestore _firestore = Firestore.instance;
   final String _usersCollectionName = "users";
+  final String _relationshipsCollectionName = "relationships";
   final String _fbPostsCollectionName = "facebookPosts";
   final String _tweetsCollectionName = "twitterPosts";
   final String _igPostsCollectionName = "instagramPosts";
@@ -216,11 +217,21 @@ class Database implements BaseDatabase {
     return setFieldInUsers(userID, _instagramInfoField, info);
   }
 
-  Future<List> getFriendsIDs(String userID) async {
+  /* relationship status codes
+  1 : user1 follows user2
+  2 : user2 follows user1
+  3 : both users follow each other
+
+  0 -> no relationship
+   */
+
+  /// get a list of IDs of users that userID follows
+  Future<List> getFollowingIDs(String userID) async {
+    print('getting following');
     List<String> friendIDs = new List();
-    await _firestore.collection('relationships')
+    await _firestore.collection(_relationshipsCollectionName)
         .where('user1_id', isEqualTo: userID)
-        .where('status', whereIn: [0, 2])
+        .where('status', whereIn: [1, 3])
         .getDocuments()
         .then((QuerySnapshot snapshot) {
       snapshot.documents.forEach((doc) {
@@ -228,9 +239,9 @@ class Database implements BaseDatabase {
         friendIDs.add(doc.data['user2_id']);
       });
     });
-    await _firestore.collection('relationships')
+    await _firestore.collection(_relationshipsCollectionName)
         .where('user2_id', isEqualTo: userID)
-        .where('status', whereIn: [1, 2])
+        .where('status', whereIn: [2, 3])
         .getDocuments()
         .then((QuerySnapshot snapshot) {
       snapshot.documents.forEach((doc) {
@@ -246,4 +257,164 @@ class Database implements BaseDatabase {
     }
     return friendIDs;
   }
+
+  Future<List> getFollowersIDs(String userID) async {
+    print('getting followers ...');
+    List<String> friendIDs = new List();
+    await _firestore.collection(_relationshipsCollectionName)
+        .where('user1_id', isEqualTo: userID)
+        .where('status', whereIn: [2, 3])
+        .getDocuments()
+        .then((QuerySnapshot snapshot) {
+      snapshot.documents.forEach((doc) {
+        print(doc.data);
+        friendIDs.add(doc.data['user2_id']);
+      });
+    });
+    await _firestore.collection(_relationshipsCollectionName)
+        .where('user2_id', isEqualTo: userID)
+        .where('status', whereIn: [1, 3])
+        .getDocuments()
+        .then((QuerySnapshot snapshot) {
+      snapshot.documents.forEach((doc) {
+        print(doc.data);
+        friendIDs.add(doc.data['user1_id']);
+      });
+    });
+
+    return friendIDs;
+  }
+
+  Future<List> getFollowersIDsAndStatus(String userID) async {
+    print('getting followers ...');
+    List<Map<String,dynamic>> friendIDs = new List();
+    await _firestore.collection(_relationshipsCollectionName)
+        .where('user1_id', isEqualTo: userID)
+        .where('status', whereIn: [2, 3])
+        .getDocuments()
+        .then((QuerySnapshot snapshot) {
+      snapshot.documents.forEach((doc) {
+        print(doc.data);
+        friendIDs.add({'userID':doc.data['user2_id'], 'status': doc.data['status']});
+      });
+    });
+    await _firestore.collection(_relationshipsCollectionName)
+        .where('user2_id', isEqualTo: userID)
+        .where('status', whereIn: [1, 3])
+        .getDocuments()
+        .then((QuerySnapshot snapshot) {
+      snapshot.documents.forEach((doc) {
+        print(doc.data);
+        friendIDs.add({'userID':doc.data['user1_id'], 'status': doc.data['status']});
+      });
+    });
+
+    return friendIDs;
+  }
+
+  /// userID follows friendID and adds/updates relationship in database
+  Future<void> followFriend(String userID, String friendID) async {
+    Map users = _orderUsersRelationship(userID, friendID);
+    String low = users['low'];
+    String user1 = users['user1'];
+    String user2 = users['user2'];
+    Map exists = await relationshipExists(user1, user2);
+    int status = exists['status'];
+    String relationshipID = exists['relationshipID'];
+
+    //a relationship already exists so friendID must already follow userID
+    //set the code to 3 so they both follow each other
+    if(status > 0) await updateRelationship(relationshipID, 3);
+    else {
+      if(low == 'user') await createRelationship(user1, user2, 1);
+      else await createRelationship(user1, user2, 2);
+    }
+
+  }
+
+  /// checks if existing relationship between two users
+  Future<Map<String, dynamic>> relationshipExists(String user1, String user2) async {
+    int exists;
+    String relationshipId;
+    await _firestore.collection(_relationshipsCollectionName)
+        .where('user1_id',isEqualTo: user1)
+        .where('user2_id', isEqualTo: user2)
+        .getDocuments()
+        .then((QuerySnapshot snapshot) {
+          if(snapshot.documents.length > 0)  {
+            print(snapshot.documents[0].documentID);
+            exists = snapshot.documents[0].data['status'];
+            relationshipId = snapshot.documents[0].documentID;
+          }
+          else {
+            exists = 0;
+            relationshipId = null;
+          }
+    });
+
+    print('status: $exists, relationshipID: $relationshipId');
+
+    return {'status' : exists, 'relationshipID' : relationshipId};
+  }
+
+  /// userID unfollows friendID and removes/updates relationship in database
+  Future<void> unfollowFriend(String userID, String friendID) async {
+    print('unfollowing ...');
+    Map users = _orderUsersRelationship(userID, friendID);
+    String low = users['low'];
+    String user1 = users['user1'];
+    String user2 = users['user2'];
+    Map exists = await relationshipExists(user1, user2);
+    int status = exists['status'];
+    String relationshipID = exists['relationshipID'];
+
+    if(status == 0) {
+      print('error ... no relationship found');
+      return;
+    }
+
+    if(low == 'user') {
+      if(status == 3) await updateRelationship(relationshipID, 2);
+      else await removeRelationship(relationshipID);
+    }
+    else {
+      if(status == 3) await updateRelationship(relationshipID, 1);
+      else await removeRelationship(relationshipID);
+    }
+
+  }
+
+  /// create new relationship in db
+  Future<void> createRelationship(String user1, String user2, int code) async {
+    print('creating ...');
+    return _firestore.collection(_relationshipsCollectionName).document()
+        .setData({'user1_id' : user1, 'user2_id' : user2, 'status' : code});
+  }
+
+  /// remove relationship from db
+  Future<void> removeRelationship(String relationshipId) async {
+    print('removing ...');
+    return _firestore.collection(_relationshipsCollectionName)
+        .document(relationshipId)
+        .delete();
+  }
+
+  Future<void> updateRelationship(String relationshipID, int code) async {
+    print('updating ...');
+    return _firestore.collection(_relationshipsCollectionName)
+        .document(relationshipID)
+        .updateData({'status':code});
+  }
+
+  /// returns a map of id1 and id2, where id1 < id2
+  Map<String, String> _orderUsersRelationship(String userId, String friendId) {
+    int result = userId.compareTo(friendId);
+    if(result < 0) {
+      return {'low' : 'user', 'user1' : userId, 'user2' : friendId};
+    }
+    else {
+      return {'low' : 'friend', 'user1' : friendId, 'user2' : userId};
+    }
+  }
+
 }

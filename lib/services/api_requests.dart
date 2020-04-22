@@ -37,6 +37,8 @@ class APIcalls extends APIrequests {
   }
 
   Future<List<KronoFacebookPost>> requestFbPosts(var userInfo) async {
+    if(userInfo == null) return null;
+
     var posts = new List<KronoFacebookPost>();
 
     final token = userInfo['token'];
@@ -56,6 +58,8 @@ class APIcalls extends APIrequests {
   }
 
   Future<List<KronoTweet>> requestTweets(var userInfo) async {
+    if(userInfo == null) return null;
+
     var tweets = new List<KronoTweet>();
 
     final _twitterOauth = new twitterApi(
