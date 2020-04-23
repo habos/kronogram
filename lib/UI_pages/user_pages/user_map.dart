@@ -104,7 +104,7 @@ void getPosts() async{
 
     setState(() {
       // adding a new marker to map
-      //_loadingM=false;
+      _loadingM=false;
     });
   }
 
@@ -278,16 +278,58 @@ void getPosts() async{
       else {
         if (postLocations.length == 0) {
           return Container(
-            color: AppColors.primaryBackground,
-            child: Text(
-              "There are no locations available",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  fontWeight: FontWeight.w600,
-                  fontSize: 20
-              ),
-            ),
+              padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 5.0),
+              color: AppColors.primaryBackground,
+              child: Container(
+                alignment: Alignment.center,
+                decoration: new BoxDecoration(
+                  color: Colors.white70,
+                ),
+                child: Container(
+                  decoration: new BoxDecoration(
+                      color: AppColors.voidBackground10,
+                      borderRadius: new BorderRadius.circular(10.0)
+                  ),
+                  width: 300.0,
+                  height: 200.0,
+                  alignment: AlignmentDirectional.center,
+                  child: new Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Container(
+                        margin: const EdgeInsets.only(top: 25.0),
+                        child: new Center(
+                          child: new Text(
+                            "None Of Your Posts Contain Locations",
+                            textAlign: TextAlign.center,
+                            style: new TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.normal,
+                                fontSize: 15
+                            ),
+                          ),
+                        ),
+                      ),
+                      new Container(
+                        margin: const EdgeInsets.only(top: 25.0),
+                        child: new Center(
+                          child: new Text(
+                            "Geo-tag Your Posts and They Will Show Up Here!",
+                            maxLines: 2,
+                            textAlign: TextAlign.center,
+                            style: new TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
           );
         }
         else {
