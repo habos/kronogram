@@ -104,7 +104,7 @@ void getPosts() async{
 
     setState(() {
       // adding a new marker to map
-      _loadingM=false;
+//      _loadingM=false;
     });
   }
 
@@ -202,9 +202,9 @@ void getPosts() async{
   @override
   void initState() {
     // TODO: implement initState
-    super.initState();
     getPosts();
     createMarkers();
+    super.initState();
   }
 
   @override
