@@ -147,7 +147,7 @@ class Detail extends StatelessWidget {
               icon: Icon(Icons.arrow_back),
               onPressed: () => Navigator.of(context).pop(),
             ),
-            Text(),
+            Text("test"),
           ],
         ),
       ),

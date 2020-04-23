@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:kronogram/UI_pages/values/colors.dart';
+import 'package:kronogram/UI_pages/values/radii.dart';
 import 'package:kronogram/models/media.dart';
 import 'package:kronogram/models/post.dart';
 import 'package:video_player/video_player.dart';
@@ -60,7 +61,11 @@ class FacebookPostView extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
-      color: AppColors.primaryBackground,
+      padding: EdgeInsets.fromLTRB(3, 3, 3, 3),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
+          color: AppColors.primaryBackground,
+        ),
       child: Column(
         children: <Widget>[
           postView(),

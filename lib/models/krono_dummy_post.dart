@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kronogram/models/krono_post.dart';
+import 'package:kronogram/models/location.dart';
 import 'package:kronogram/models/sm_platform.dart';
 
 /// Dummy class for UI testing purposes.
@@ -26,6 +27,11 @@ class KronoDummyPost implements KronoPost {
   @override
   int getPostID() {
     return 1;
+  }
+
+  @override
+  Location getLocation() {
+    return null;
   }
 
   @override

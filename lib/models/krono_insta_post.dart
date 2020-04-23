@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kronogram/models/insta_post_data.dart';
 import 'package:kronogram/models/krono_post.dart';
+import 'package:kronogram/models/location.dart';
 import 'package:kronogram/models/sm_platform.dart';
 import 'package:kronogram/widgets/instagram_post_view.dart';
 
@@ -35,6 +36,11 @@ class KronoInstaPost implements KronoPost {
   @override
   int getPostID() {
     return _instaPost.getID();
+  }
+
+  @override
+  Location getLocation() {
+    return null;
   }
 
   @override

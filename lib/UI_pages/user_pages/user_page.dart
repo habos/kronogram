@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kronogram/UI_pages/user_pages/user_profile.dart';
 import 'package:kronogram/services/authentication.dart';
 import 'package:kronogram/UI_pages/values/values.dart';
 import 'package:kronogram/services/globals.dart' as globals;
@@ -33,8 +34,8 @@ class _UserPageState extends State<UserPage>{
   List<Widget> makeList() {
     return [
       UserFeed(userId: widget.userId),
-      Timeline(userId: widget.userId),
-      UserMap(userId: widget.userId )
+      UserMap(userId: widget.userId ),
+      UserProfile(userId: widget.userId, viewId: widget.userId,)
     ];
   }
 
@@ -74,12 +75,12 @@ class _UserPageState extends State<UserPage>{
 
           ),
           new BottomNavigationBarItem(
-            icon: Icon(Icons.storage),
-            title: Text('TIMELINE'),
-          ),
-          new BottomNavigationBarItem(
               icon: Icon(Icons.public),
               title: Text('MAP')
+          ),
+          new BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle),
+              title: Text('PROFILE')
           )
         ],
       ),

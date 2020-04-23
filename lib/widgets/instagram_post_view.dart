@@ -56,7 +56,11 @@ class InstagramPostView extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
-      color: AppColors.primaryBackground,
+      padding: EdgeInsets.fromLTRB(3, 3, 3, 3),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
+          color: AppColors.primaryBackground,
+        ),
       child: Column(
         children: <Widget>[
           postView(),

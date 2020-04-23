@@ -25,13 +25,20 @@ class _UserFeedState extends State<UserFeed> {
   List<Map<String, dynamic>> feedPosts = List();
   DateTime today = new DateTime.now();
 
-  void getAllPosts(var userID) async {
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  void getPosts(var userID) async {
     String username = await db.getUsername(userID);
     Map instaUser = await db.getInstagramInfo(userID);
     List<KronoInstaPost> instaPosts = await APIcaller.requestInstaPosts(instaUser);
     if(instaPosts != null) {
       for(KronoInstaPost post in instaPosts) {
-        if(post.getCreationTime().month == today.month && post.getCreationTime().day == today.day) {
+        DateTime postTime = post.getCreationTime().toLocal();
+        if(postTime.month == today.month && postTime.day == today.day) {
           feedPosts.add({'post' : post, 'username' : username});
         }
       }
@@ -39,105 +46,118 @@ class _UserFeedState extends State<UserFeed> {
 
     Map facebookUser = await db.getFacebookInfo(userID);
     List<KronoFacebookPost> posts = await APIcaller.requestFbPosts(facebookUser);
-    for(KronoFacebookPost post in posts) {
-      if(post.getCreationTime().month == today.month && post.getCreationTime().day == today.day) {
-        feedPosts.add({'post' : post, 'username' : username});
+    if(posts != null) {
+      for (KronoFacebookPost post in posts) {
+        DateTime postTime = post.getCreationTime().toLocal();
+        if (postTime.month == today.month && postTime.day == today.day) {
+          feedPosts.add({'post': post, 'username': username});
+        }
       }
     }
 
     Map twitterUser = await db.getTwitterInfo(userID);
     List<KronoTweet> tweets = await APIcaller.requestTweets(twitterUser);
-    for(KronoTweet tweet in tweets) {
-      if(tweet.getCreationTime().month == today.month && tweet.getCreationTime().day == today.day) {
-        feedPosts.add({'post' : tweet, 'username' : username});
+    if(tweets != null) {
+      for (KronoTweet tweet in tweets) {
+        DateTime postTime = tweet.getCreationTime().toLocal();
+        if (postTime.month == today.month && postTime.day == today.day) {
+          feedPosts.add({'post': tweet, 'username': username});
+        }
       }
     }
 
-    print(feedPosts.length);
-
-    feedPosts.sort((a, b) => a['post'].getCreationTime().compareTo(b['post'].getCreationTime()) * -1);
-    _loading = false;
+    feedPosts.sort((a, b) => a['post'].getCreationTime().toLocal().compareTo(b['post'].getCreationTime().toLocal()) * -1);
     setState(() {
       _loading = false;
     });
   }
 
+  void getAllUsersPosts(String userID) async {
+    //get user's posts
+    await getPosts(userID);
+    //get friends' posts
+    List<String> friends = await db.getFollowingIDs(userID);
+    for(String friend in friends) {
+      getPosts(friend);
+    }
+  }
+
   @override
   void initState() {
     super.initState();
-    print(widget.userId);
-    getAllPosts(widget.userId);
+    getAllUsersPosts(widget.userId);
   }
 
   Widget progress() {
-    return new Container(
-      child: new Stack(
-        children: <Widget>[
-          new Container(
-            alignment: AlignmentDirectional.center,
-            decoration: new BoxDecoration(
-              color: Colors.white70,
-            ),
-            child: new Container(
-              decoration: new BoxDecoration(
-                  color: AppColors.voidBackground10,
-                  borderRadius: new BorderRadius.circular(10.0)
-              ),
-              width: 300.0,
-              height: 200.0,
+    if(_loading) {
+      return new Container(
+        child: new Stack(
+          children: <Widget>[
+            new Container(
               alignment: AlignmentDirectional.center,
-              child: new Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  new Center(
-                    child: new SizedBox(
-                      height: 50.0,
-                      width: 50.0,
-                      child: new CircularProgressIndicator(
-                        value: null,
-                        strokeWidth: 7.0,
-                        valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
-                      ),
-                    ),
-                  ),
-                  new Container(
-                    margin: const EdgeInsets.only(top: 25.0),
-                    child: new Center(
-                      child: new Text(
-                        "loading...",
-                        style: new TextStyle(
-                            color: Colors.white
+              decoration: new BoxDecoration(
+                color: Colors.white70,
+              ),
+              child: new Container(
+                decoration: new BoxDecoration(
+                    color: AppColors.voidBackground10,
+                    borderRadius: new BorderRadius.circular(10.0)
+                ),
+                width: 300.0,
+                height: 200.0,
+                alignment: AlignmentDirectional.center,
+                child: new Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new Center(
+                      child: new SizedBox(
+                        height: 50.0,
+                        width: 50.0,
+                        child: new CircularProgressIndicator(
+                          value: null,
+                          strokeWidth: 7.0,
+                          valueColor: new AlwaysStoppedAnimation<Color>(Colors
+                              .white),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                    new Container(
+                      margin: const EdgeInsets.only(top: 25.0),
+                      child: new Center(
+                        child: new Text(
+                          "loading...",
+                          style: new TextStyle(
+                              color: Colors.white
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
+    }
+    else return Container();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    if (_loading) {
-      return progress();
-    }
+  Widget showPosts() {
+    if(_loading) return Container();
     else {
       if (feedPosts.length == 0) {
         return Container(
+          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 5.0),
           color: AppColors.primaryBackground,
           child: Text(
             "There are no posts from this day in history.",
             textAlign: TextAlign.center,
             style: TextStyle(
                 color: Color.fromARGB(255, 0, 0, 0),
-                fontWeight: FontWeight.w600,
-                fontSize: 20
+                fontWeight: FontWeight.normal,
+                fontSize: 20,
             ),
           ),
         );
@@ -156,7 +176,7 @@ class _UserFeedState extends State<UserFeed> {
                         Text(
                           (today
                               .difference(feedPosts[index]['post']
-                              .getCreationTime())
+                              .getCreationTime().toLocal())
                               .inDays ~/ 365).toString() + ' years ago today',
                           style: TextStyle(
                             color: Color.fromARGB(255, 0, 0, 0),
@@ -181,6 +201,17 @@ class _UserFeedState extends State<UserFeed> {
         );
       }
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Stack(
+      children: <Widget>[
+        showPosts(),
+        progress()
+      ],
+    );
   }
 
 }
