@@ -1,61 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="aaf46779-6b49-4573-bb8d-43fea78787e3" name="Default Changelist" comment="Merge branch 'staging'&#10;&#10;# Conflicts:&#10;#&#9;android/app/src/main/AndroidManifest.xml&#10;#&#9;lib/UI_pages/display_posts/display_posts.dart&#10;#&#9;lib/UI_pages/my_app_bar/my_app_bar.dart&#10;#&#9;lib/UI_pages/user_current_date_widget/user_current_date_widget.dart&#10;#&#9;lib/UI_pages/user_map_widget/user_map_widget.dart&#10;#&#9;lib/UI_pages/user_pages/user_current_date.dart&#10;#&#9;lib/UI_pages/user_pages/user_feed.dart&#10;#&#9;lib/UI_pages/user_pages/user_page.dart&#10;#&#9;lib/UI_pages/user_pages/user_test_post.dart&#10;#&#9;lib/UI_pages/user_pages/user_timeline.dart&#10;#&#9;lib/UI_pages/user_timeline_widget/user_timeline_widget.dart&#10;#&#9;lib/UI_pages/values/colors.dart&#10;#&#9;lib/main.dart&#10;#&#9;lib/pages/first_time_login.dart&#10;#&#9;lib/pages/login_signup_page.dart&#10;#&#9;lib/pages/root_page.dart&#10;#&#9;lib/pages/test_fb.dart&#10;#&#9;lib/pages/test_instagram.dart&#10;#&#9;lib/pages/test_twitter_requests.dart&#10;#&#9;lib/services/authentication.dart&#10;#&#9;lib/services/database.dart&#10;#&#9;pubspec.lock&#10;#&#9;pubspec.yaml">
-      <change afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/UI_pages/display_posts/display_posts.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/UI_pages/my_app_bar/my_app_bar.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/UI_pages/user_current_date_widget/user_current_date_widget.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/UI_pages/user_map_widget/user_map_widget.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/UI_pages/user_pages/user_current_date.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/UI_pages/user_pages/user_feed.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/UI_pages/user_pages/user_map.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/UI_pages/user_pages/user_page.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/UI_pages/user_pages/user_profile.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/UI_pages/user_pages/user_test_post.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/UI_pages/user_pages/user_timeline.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/UI_pages/user_timeline_widget/user_timeline_widget.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/UI_pages/values/colors.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/models/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/models/insta_post_data.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/models/krono_dummy_post.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/models/krono_fb_post.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/models/krono_insta_post.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/models/krono_post.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/models/krono_tweet.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/models/location.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/models/media.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/models/post.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/models/sm_platform.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/pages/first_time_login.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/pages/login_signup_page.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/pages/profile_page.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/pages/root_page.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/pages/search_page.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/pages/settings.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/pages/test_fb.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/pages/test_instagram.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/pages/test_twitter_requests.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/services/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/services/api_requests.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/services/authentication.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/services/database.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/services/globals.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/services/timeline_builder.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/styles/text_styles.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/utils/date_utils.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/widgets/facebook_post_view.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/widgets/instagram_post_view.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/widgets/post_view.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/api_calls_test.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/auth_test.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/database_test.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/date_utils_test.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/krono_post_test.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/remote_config_test.dart" afterDir="false" />
+    <list default="true" id="aaf46779-6b49-4573-bb8d-43fea78787e3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/.packages" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -364,7 +313,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587665456815</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Merge branch 'staging'&#10;&#10;# Conflicts:&#10;#&#9;android/app/src/main/AndroidManifest.xml&#10;#&#9;lib/UI_pages/display_posts/display_posts.dart&#10;#&#9;lib/UI_pages/my_app_bar/my_app_bar.dart&#10;#&#9;lib/UI_pages/user_current_date_widget/user_current_date_widget.dart&#10;#&#9;lib/UI_pages/user_map_widget/user_map_widget.dart&#10;#&#9;lib/UI_pages/user_pages/user_current_date.dart&#10;#&#9;lib/UI_pages/user_pages/user_feed.dart&#10;#&#9;lib/UI_pages/user_pages/user_page.dart&#10;#&#9;lib/UI_pages/user_pages/user_test_post.dart&#10;#&#9;lib/UI_pages/user_pages/user_timeline.dart&#10;#&#9;lib/UI_pages/user_timeline_widget/user_timeline_widget.dart&#10;#&#9;lib/UI_pages/values/colors.dart&#10;#&#9;lib/main.dart&#10;#&#9;lib/pages/first_time_login.dart&#10;#&#9;lib/pages/login_signup_page.dart&#10;#&#9;lib/pages/root_page.dart&#10;#&#9;lib/pages/test_fb.dart&#10;#&#9;lib/pages/test_instagram.dart&#10;#&#9;lib/pages/test_twitter_requests.dart&#10;#&#9;lib/services/authentication.dart&#10;#&#9;lib/services/database.dart&#10;#&#9;pubspec.lock&#10;#&#9;pubspec.yaml">
+      <created>1587665946976</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1587665946976</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -381,7 +337,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Finally got Instagram login working now need to fix the redirect url" />
     <MESSAGE value="Changing twitter info to be a map" />
     <MESSAGE value="Finished up the Instagram login" />
     <MESSAGE value="Finished up the Instagram login getting the access token and user into the database" />
@@ -406,7 +361,8 @@
     <MESSAGE value="Anna did all the work, just linked it to search" />
     <MESSAGE value="Changed up the search bar a bit" />
     <MESSAGE value="clear repo" />
-    <option name="LAST_COMMIT_MESSAGE" value="clear repo" />
+    <MESSAGE value="Merge branch 'staging'&#10;&#10;# Conflicts:&#10;#&#9;android/app/src/main/AndroidManifest.xml&#10;#&#9;lib/UI_pages/display_posts/display_posts.dart&#10;#&#9;lib/UI_pages/my_app_bar/my_app_bar.dart&#10;#&#9;lib/UI_pages/user_current_date_widget/user_current_date_widget.dart&#10;#&#9;lib/UI_pages/user_map_widget/user_map_widget.dart&#10;#&#9;lib/UI_pages/user_pages/user_current_date.dart&#10;#&#9;lib/UI_pages/user_pages/user_feed.dart&#10;#&#9;lib/UI_pages/user_pages/user_page.dart&#10;#&#9;lib/UI_pages/user_pages/user_test_post.dart&#10;#&#9;lib/UI_pages/user_pages/user_timeline.dart&#10;#&#9;lib/UI_pages/user_timeline_widget/user_timeline_widget.dart&#10;#&#9;lib/UI_pages/values/colors.dart&#10;#&#9;lib/main.dart&#10;#&#9;lib/pages/first_time_login.dart&#10;#&#9;lib/pages/login_signup_page.dart&#10;#&#9;lib/pages/root_page.dart&#10;#&#9;lib/pages/test_fb.dart&#10;#&#9;lib/pages/test_instagram.dart&#10;#&#9;lib/pages/test_twitter_requests.dart&#10;#&#9;lib/services/authentication.dart&#10;#&#9;lib/services/database.dart&#10;#&#9;pubspec.lock&#10;#&#9;pubspec.yaml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'staging'&#10;&#10;# Conflicts:&#10;#&#9;android/app/src/main/AndroidManifest.xml&#10;#&#9;lib/UI_pages/display_posts/display_posts.dart&#10;#&#9;lib/UI_pages/my_app_bar/my_app_bar.dart&#10;#&#9;lib/UI_pages/user_current_date_widget/user_current_date_widget.dart&#10;#&#9;lib/UI_pages/user_map_widget/user_map_widget.dart&#10;#&#9;lib/UI_pages/user_pages/user_current_date.dart&#10;#&#9;lib/UI_pages/user_pages/user_feed.dart&#10;#&#9;lib/UI_pages/user_pages/user_page.dart&#10;#&#9;lib/UI_pages/user_pages/user_test_post.dart&#10;#&#9;lib/UI_pages/user_pages/user_timeline.dart&#10;#&#9;lib/UI_pages/user_timeline_widget/user_timeline_widget.dart&#10;#&#9;lib/UI_pages/values/colors.dart&#10;#&#9;lib/main.dart&#10;#&#9;lib/pages/first_time_login.dart&#10;#&#9;lib/pages/login_signup_page.dart&#10;#&#9;lib/pages/root_page.dart&#10;#&#9;lib/pages/test_fb.dart&#10;#&#9;lib/pages/test_instagram.dart&#10;#&#9;lib/pages/test_twitter_requests.dart&#10;#&#9;lib/services/authentication.dart&#10;#&#9;lib/services/database.dart&#10;#&#9;pubspec.lock&#10;#&#9;pubspec.yaml" />
   </component>
   <component name="masterDetails">
     <states>
