@@ -202,9 +202,10 @@ void getPosts() async{
   @override
   void initState() {
     // TODO: implement initState
+    super.initState();
     getPosts();
     createMarkers();
-    super.initState();
+
   }
 
   @override
