@@ -33,14 +33,18 @@ class _TimelineState extends State<Timeline>{
 
     Map twitterUser = await db.getTwitterInfo(widget.userId);
     List<KronoTweet> tweets = await APIcaller.requestTweets(twitterUser);
-    for (KronoTweet tweet in tweets) {
-      timelinePosts.add(tweet);
+    if (tweets != null) {
+      for (KronoTweet tweet in tweets) {
+        timelinePosts.add(tweet);
+      }
     }
 
     Map facebookUser = await db.getFacebookInfo(widget.userId);
     List<KronoFacebookPost> posts = await APIcaller.requestFbPosts(facebookUser);
-    for (KronoFacebookPost post in posts) {
-      timelinePosts.add(post);
+    if (posts != null) {
+      for (KronoFacebookPost post in posts) {
+        timelinePosts.add(post);
+      }
     }
 
     timelinePosts.sort((a, b) => a.getCreationTime().compareTo(b.getCreationTime()) * -1);
