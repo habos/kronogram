@@ -18,7 +18,7 @@ class InstagramPostView extends StatelessWidget {
 
   VideoPlayerController getVideoPlayerController(InstaMedia media) {
     var controller = VideoPlayerController.network(media.url);
-    controller.initialize();
+    controller.setLooping(true);
     return controller;
   }
 
@@ -44,9 +44,42 @@ class InstagramPostView extends StatelessWidget {
           return singleImage(med);
         }
         VideoPlayerController controller = getVideoPlayerController(med);
-        return AspectRatio(
-            aspectRatio: controller.value.aspectRatio,
-            child: VideoPlayer(controller));
+        Future<void> initFuture = controller.initialize();
+        return Scaffold(
+            body: FutureBuilder(
+              future: initFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                // If the VideoPlayerController has finished initialization, use
+                // the data it provides to limit the aspect ratio of the video.
+                return AspectRatio(
+                aspectRatio: controller.value.aspectRatio,
+                // Use the VideoPlayer widget to display the video.
+                child: VideoPlayer(controller),
+                );
+               } else {
+              // If the VideoPlayerController is still initializing, show a
+              // loading spinner.
+              return Center(child: CircularProgressIndicator());
+            }
+          }),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              // Wrap the play or pause in a call to `setState`. This ensures the
+              // correct icon is shown.
+
+                // If the video is playing, pause it.
+                if (controller.value.isPlaying) {
+                  controller.pause();
+                } else {
+                  // If the video is paused, play it.
+                  controller.play();
+                }
+
+            },
+            // Display the correct icon depending on the state of the player.
+          )
+        );
       }).toList(),
       enableInfiniteScroll: false,
     );
