@@ -145,16 +145,18 @@ class _UserProfileState extends State<UserProfile> {
                   children: <Widget>[
                     Row(
                       children: <Widget>[
-                        Text(
-                          '@' + followingUsernames[index],
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.normal,
+                        FlatButton(
+                          child: Text(
+                            '@' + followingUsernames[index],
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.normal,
+                            ),
                           ),
+                          onPressed: () => onViewPressed(context, followingIDs[index]),
                         ),
                         showFollowUnfollowButton(followingIDs[index]),
-                        showViewButton(followingIDs[index]),
                       ],
                     )
                   ],
@@ -194,13 +196,16 @@ class _UserProfileState extends State<UserProfile> {
                   children: <Widget>[
                     Row(
                       children: <Widget>[
-                        Text(
-                          '@' + followerUsernames[index],
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.normal,
+                        FlatButton(
+                          child: Text(
+                            '@' + followerUsernames[index],
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.normal,
+                            ),
                           ),
+                          onPressed: () => onViewPressed(context, followerIDs[index]['userID']),
                         ),
                         showFollowUnfollowButton(followerIDs[index]['userID'])
                       ],
