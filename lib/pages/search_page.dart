@@ -75,10 +75,26 @@ class _SearchPageState extends State<SearchPage> {
           listPadding: EdgeInsets.symmetric(horizontal: 20),
           onSearch: _searchList,
           searchBarController: _searchBarController,
-          placeHolder: Text("placeholder"),
+          placeHolder: Hero(
+            tag: 'hero',
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(100, 0.0, 0.0, 0.0),
+              child: CircleAvatar(
+                backgroundColor: Colors.transparent,
+                radius: 90,
+                child: Image.asset('assets/images/logo.png'),
+              ),
+            ),
+          ),
           cancellationWidget: Text("Cancel"),
-          emptyWidget: Text("empty"),
+          emptyWidget: Text(
+            'No results',
+            textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
           header: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               RaisedButton(
                 child: Text("Sort"),
@@ -92,13 +108,6 @@ class _SearchPageState extends State<SearchPage> {
                 child: Text("Desort"),
                 onPressed: () {
                   _searchBarController.removeSort();
-                },
-              ),
-              RaisedButton(
-                child: Text("Replay"),
-                onPressed: () {
-                  isReplay = !isReplay;
-                  _searchBarController.replayLastSearch();
                 },
               ),
               RaisedButton(
