@@ -314,7 +314,7 @@ class Database implements BaseDatabase {
 
   /// userID follows friendID and adds/updates relationship in database
   Future<void> followFriend(String userID, String friendID) async {
-    Map users = _orderUsersRelationship(userID, friendID);
+    Map users = orderUsersRelationship(userID, friendID);
     String low = users['low'];
     String user1 = users['user1'];
     String user2 = users['user2'];
@@ -358,7 +358,7 @@ class Database implements BaseDatabase {
   }
 
   Future<bool> checkFollowing(String userID, String friendID) async {
-    Map users = _orderUsersRelationship(userID, friendID);
+    Map users = orderUsersRelationship(userID, friendID);
     String low = users['low'];
     String user1 = users['user1'];
     String user2 = users['user2'];
@@ -376,7 +376,7 @@ class Database implements BaseDatabase {
   /// userID unfollows friendID and removes/updates relationship in database
   Future<void> unfollowFriend(String userID, String friendID) async {
     print('unfollowing ...');
-    Map users = _orderUsersRelationship(userID, friendID);
+    Map users = orderUsersRelationship(userID, friendID);
     String low = users['low'];
     String user1 = users['user1'];
     String user2 = users['user2'];
@@ -422,8 +422,22 @@ class Database implements BaseDatabase {
         .updateData({'status':code});
   }
 
+  Future<DocumentSnapshot> getRelationship(String id1, String id2) async {
+    Map users = orderUsersRelationship(id1, id2);
+    String low = users['low'];
+    String user1 = users['user1'];
+    String user2 = users['user2'];
+    Map exists = await relationshipExists(user1, user2);
+    int status = exists['status'];
+    String relationshipID = exists['relationshipID'];
+
+    return await _firestore.collection(_relationshipsCollectionName)
+        .document(relationshipID)
+        .get();
+  }
+
   /// returns a map of id1 and id2, where id1 < id2
-  Map<String, String> _orderUsersRelationship(String userId, String friendId) {
+  Map<String, String> orderUsersRelationship(String userId, String friendId) {
     int result = userId.compareTo(friendId);
     if(result < 0) {
       return {'low' : 'user', 'user1' : userId, 'user2' : friendId};
