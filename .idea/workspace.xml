@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="aaf46779-6b49-4573-bb8d-43fea78787e3" name="Default Changelist" comment="Merge branch 'staging'&#10;&#10;# Conflicts:&#10;#&#9;android/app/src/main/AndroidManifest.xml&#10;#&#9;lib/UI_pages/display_posts/display_posts.dart&#10;#&#9;lib/UI_pages/my_app_bar/my_app_bar.dart&#10;#&#9;lib/UI_pages/user_current_date_widget/user_current_date_widget.dart&#10;#&#9;lib/UI_pages/user_map_widget/user_map_widget.dart&#10;#&#9;lib/UI_pages/user_pages/user_current_date.dart&#10;#&#9;lib/UI_pages/user_pages/user_feed.dart&#10;#&#9;lib/UI_pages/user_pages/user_page.dart&#10;#&#9;lib/UI_pages/user_pages/user_test_post.dart&#10;#&#9;lib/UI_pages/user_pages/user_timeline.dart&#10;#&#9;lib/UI_pages/user_timeline_widget/user_timeline_widget.dart&#10;#&#9;lib/UI_pages/values/colors.dart&#10;#&#9;lib/main.dart&#10;#&#9;lib/pages/first_time_login.dart&#10;#&#9;lib/pages/login_signup_page.dart&#10;#&#9;lib/pages/root_page.dart&#10;#&#9;lib/pages/test_fb.dart&#10;#&#9;lib/pages/test_instagram.dart&#10;#&#9;lib/pages/test_twitter_requests.dart&#10;#&#9;lib/services/authentication.dart&#10;#&#9;lib/services/database.dart&#10;#&#9;pubspec.lock&#10;#&#9;pubspec.yaml">
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/UI_pages/display_posts/display_posts.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/UI_pages/my_app_bar/my_app_bar.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/UI_pages/user_current_date_widget/user_current_date_widget.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/UI_pages/user_map_widget/user_map_widget.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/UI_pages/user_pages/user_current_date.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/UI_pages/user_pages/user_feed.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/UI_pages/user_pages/user_map.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/UI_pages/user_pages/user_page.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/UI_pages/user_pages/user_profile.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/UI_pages/user_pages/user_test_post.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/UI_pages/user_pages/user_timeline.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/UI_pages/user_timeline_widget/user_timeline_widget.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/UI_pages/values/colors.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/models/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/models/insta_post_data.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/models/krono_dummy_post.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/models/krono_fb_post.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/models/krono_insta_post.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/models/krono_post.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/models/krono_tweet.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/models/location.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/models/media.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/models/post.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/models/sm_platform.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/pages/first_time_login.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/pages/login_signup_page.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/pages/profile_page.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/pages/root_page.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/pages/search_page.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/pages/settings.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/pages/test_fb.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/pages/test_instagram.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/pages/test_twitter_requests.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/services/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/services/api_requests.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/services/authentication.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/services/database.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/services/globals.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/services/timeline_builder.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/styles/text_styles.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/utils/date_utils.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/widgets/facebook_post_view.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/widgets/instagram_post_view.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/widgets/post_view.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/api_calls_test.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/auth_test.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/database_test.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/date_utils_test.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/krono_post_test.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/remote_config_test.dart" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_3_API_29" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1YisO44tS86XSdhtzzPFzNf2JVZ" />
+  <component name="PropertiesComponent">
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="dart.analysis.tool.window.force.activate" value="false" />
+    <property name="io.flutter.reload.alreadyRun" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/android" />
+    <property name="project.structure.last.edited" value="Global Libraries" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Flutter.main.dart">
+    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
+      <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Test user login and logout" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Test user login and logout" />
+      <option name="testFile" value="$PROJECT_DIR$/test/auth_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="getTwitterLogin should return a TwitterLogin object" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="getTwitterLogin should return a TwitterLogin object" />
+      <option name="testFile" value="$PROJECT_DIR$/test/remote_config_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="getValue should return the correct test string" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="getValue should return the correct test string" />
+      <option name="testFile" value="$PROJECT_DIR$/test/remote_config_test.dart" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Flutter Test.getValue should return the correct test string" />
+        <item itemvalue="Flutter Test.Test user login and logout" />
+        <item itemvalue="Flutter Test.getTwitterLogin should return a TwitterLogin object" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="aaf46779-6b49-4573-bb8d-43fea78787e3" name="Default Changelist" comment="" />
+      <created>1581100750122</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1581100750122</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Starting to test db functionality">
+      <created>1581303062586</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1581303062587</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added username field to sign up experience">
+      <created>1581718623553</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1581718623553</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added username icon">
+      <created>1581718822587</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1581718822587</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Show username when typing">
+      <created>1581719017553</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1581719017553</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added Instagram login although it is not working completely">
+      <created>1581991374242</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1581991374242</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added scope">
+      <created>1581993159961</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1581993159961</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Changing url for instagram login">
+      <created>1581994594946</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1581994594946</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Finally got Instagram login working now need to fix the redirect url">
+      <created>1582055677159</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1582055677160</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Changing twitter info to be a map">
+      <created>1582057021802</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1582057021802</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Finished up the Instagram login">
+      <created>1582067524738</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1582067524738</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Finished up the Instagram login getting the access token and user into the database">
+      <created>1582231273246</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1582231273246</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Store Facebook user token in database">
+      <created>1582496099490</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1582496099490</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Put app secrets into remote config">
+      <created>1582664894233</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1582664894233</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Forgot to delete some test code">
+      <created>1582664991752</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1582664991752</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Merge branch 'staging'&#10;&#10;# Conflicts:&#10;#&#9;lib/services/database.dart&#10;#   Fixed">
+      <created>1582824619532</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1582824619532</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Connecting frontend to backend">
+      <created>1583867445804</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1583867445805</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Adding new buttons, global library and other features">
+      <created>1585699853542</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1585699853542</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Fixing up the top app bar">
+      <created>1585770444309</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1585770444309</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Getting rid of unneeded objects">
+      <created>1585772724825</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1585772724825</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Merged harrysUIbranch with staging">
+      <created>1585777763595</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1585777763596</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Temperory fix for app bar">
+      <created>1585779445404</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1585779445405</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Permanent fix for app bar">
+      <created>1585781093030</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1585781093030</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Adding timeline base">
+      <created>1585843946323</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1585843946323</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Merge branch 'staging' of https://github.com/habos/kronogram into staging&#10;&#10;# Conflicts:&#10;#&#9;lib/UI_pages/user_pages/user_page.dart">
+      <created>1585844109160</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1585844109160</updated>
+    </task>
+    <task id="LOCAL-00025" summary="UserId to userTimeline">
+      <created>1585845148942</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1585845148942</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Added remote config test">
+      <created>1585847716980</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1585847716980</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Both my tests don't work, here is a back button for search though">
+      <created>1585852755309</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1585852755309</updated>
+    </task>
+    <task id="LOCAL-00028" summary="stashing">
+      <created>1587620145285</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1587620145285</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Merge branch 'staging' of https://github.com/habos/kronogram into staging&#10;&#10;# Conflicts:&#10;#&#9;lib/services/database.dart">
+      <created>1587620402750</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1587620402750</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Anna did all the work, just linked it to search">
+      <created>1587654625751</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1587654625752</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Changed up the search bar a bit">
+      <created>1587665112943</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1587665112943</updated>
+    </task>
+    <task id="LOCAL-00032" summary="clear repo">
+      <created>1587665456815</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1587665456815</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Finally got Instagram login working now need to fix the redirect url" />
+    <MESSAGE value="Changing twitter info to be a map" />
+    <MESSAGE value="Finished up the Instagram login" />
+    <MESSAGE value="Finished up the Instagram login getting the access token and user into the database" />
+    <MESSAGE value="Store Facebook user token in database" />
+    <MESSAGE value="Put app secrets into remote config" />
+    <MESSAGE value="Forgot to delete some test code" />
+    <MESSAGE value="Merge branch 'staging'&#10;&#10;# Conflicts:&#10;#&#9;lib/services/database.dart&#10;#   Fixed" />
+    <MESSAGE value="Connecting frontend to backend" />
+    <MESSAGE value="Adding new buttons, global library and other features" />
+    <MESSAGE value="Fixing up the top app bar" />
+    <MESSAGE value="Getting rid of unneeded objects" />
+    <MESSAGE value="Merged harrysUIbranch with staging" />
+    <MESSAGE value="Temperory fix for app bar" />
+    <MESSAGE value="Permanent fix for app bar" />
+    <MESSAGE value="Adding timeline base" />
+    <MESSAGE value="Merge branch 'staging' of https://github.com/habos/kronogram into staging&#10;&#10;# Conflicts:&#10;#&#9;lib/UI_pages/user_pages/user_page.dart" />
+    <MESSAGE value="UserId to userTimeline" />
+    <MESSAGE value="Added remote config test" />
+    <MESSAGE value="Both my tests don't work, here is a back button for search though" />
+    <MESSAGE value="stashing" />
+    <MESSAGE value="Merge branch 'staging' of https://github.com/habos/kronogram into staging&#10;&#10;# Conflicts:&#10;#&#9;lib/services/database.dart" />
+    <MESSAGE value="Anna did all the work, just linked it to search" />
+    <MESSAGE value="Changed up the search bar a bit" />
+    <MESSAGE value="clear repo" />
+    <option name="LAST_COMMIT_MESSAGE" value="clear repo" />
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>kronogram</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Dart Packages</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

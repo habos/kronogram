@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/android.iml" filepath="$PROJECT_DIR$/android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore-0.13.2/android/cloud_firestore.iml" filepath="C:/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore-0.13.2/android/cloud_firestore.iml" />
+      <module fileurl="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore_web-0.1.0+1/android/cloud_firestore_web.iml" filepath="C:/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore_web-0.1.0+1/android/cloud_firestore_web.iml" />
+      <module fileurl="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth-0.15.4/android/firebase_auth.iml" filepath="C:/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth-0.15.4/android/firebase_auth.iml" />
+      <module fileurl="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth_web-0.1.2/android/firebase_auth_web.iml" filepath="C:/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth_web-0.1.2/android/firebase_auth_web.iml" />
+      <module fileurl="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-0.4.3+3/android/firebase_core.iml" filepath="C:/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-0.4.3+3/android/firebase_core.iml" />
+      <module fileurl="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-0.1.1+2/android/firebase_core_web.iml" filepath="C:/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-0.1.1+2/android/firebase_core_web.iml" />
+      <module fileurl="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_database-3.1.1/android/firebase_database.iml" filepath="C:/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_database-3.1.1/android/firebase_database.iml" />
+      <module fileurl="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_facebook_login-1.2.0/android/flutter_facebook_login.iml" filepath="C:/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_facebook_login-1.2.0/android/flutter_facebook_login.iml" />
+      <module fileurl="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_twitter_login-1.1.0/android/flutter_twitter_login.iml" filepath="C:/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_twitter_login-1.1.0/android/flutter_twitter_login.iml" />
+      <module fileurl="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_webview_plugin-0.3.10+1/android/flutter_webview_plugin.iml" filepath="C:/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_webview_plugin-0.3.10+1/android/flutter_webview_plugin.iml" />
+    </modules>
+  </component>
+</project>
