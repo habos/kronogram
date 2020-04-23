@@ -54,21 +54,24 @@ void getPosts() async{
 
     Map twitterUser = await db.getTwitterInfo(widget.userId);
     List<KronoTweet> tweets = await APIcaller.requestTweets(twitterUser);
-    for (KronoTweet tweet in tweets) {
-      if(tweet.getLocation()!=null){
-        postLocations.add(tweet);
-        //initMarker(tweet, tweet.getCreationTime());
+    if (tweets != null) {
+      for (KronoTweet tweet in tweets) {
+        if (tweet.getLocation() != null) {
+          postLocations.add(tweet);
+          //initMarker(tweet, tweet.getCreationTime());
 
+        }
       }
-
     }
 
     Map facebookUser = await db.getFacebookInfo(widget.userId);
     List<KronoFacebookPost> posts = await APIcaller.requestFbPosts(facebookUser);
-    for (KronoFacebookPost post in posts) {
-      if(post.getLocation()!=null){
-        postLocations.add(post);
-        //initMarker(post, post.getCreationTime());
+    if (posts != null) {
+      for (KronoFacebookPost post in posts) {
+        if (post.getLocation() != null) {
+          postLocations.add(post);
+          //initMarker(post, post.getCreationTime());
+        }
       }
     }
 
