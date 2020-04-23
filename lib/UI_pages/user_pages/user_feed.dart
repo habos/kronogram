@@ -151,15 +151,55 @@ class _UserFeedState extends State<UserFeed> {
         return Container(
           padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 5.0),
           color: AppColors.primaryBackground,
-          child: Text(
-            "There are no posts from this day in history.",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                color: Color.fromARGB(255, 0, 0, 0),
-                fontWeight: FontWeight.normal,
-                fontSize: 20,
+          child: Container(
+            alignment: Alignment.center,
+            decoration: new BoxDecoration(
+              color: Colors.white70,
             ),
-          ),
+            child: Container(
+              decoration: new BoxDecoration(
+                  color: AppColors.voidBackground10,
+                  borderRadius: new BorderRadius.circular(10.0)
+              ),
+              width: 300.0,
+              height: 200.0,
+              alignment: AlignmentDirectional.center,
+              child: new Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  new Container(
+                    margin: const EdgeInsets.only(top: 25.0),
+                    child: new Center(
+                      child: new Text(
+                        "There Are No Memories For Today 🙁",
+                        textAlign: TextAlign.center,
+                        style: new TextStyle(
+                            color: Colors.white,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 15
+                        ),
+                      ),
+                    ),
+                  ),
+                  new Container(
+                    margin: const EdgeInsets.only(top: 25.0),
+                    child: new Center(
+                      child: new Text(
+                        "Go Make Some New Ones!",
+                        textAlign: TextAlign.center,
+                        style: new TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
         );
       }
       else {
