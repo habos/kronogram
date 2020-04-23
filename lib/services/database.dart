@@ -48,6 +48,7 @@ class Database implements BaseDatabase {
   }
 
   Future<QuerySnapshot> getUsernames(){
+    var colReference = _firestore.collection(_usersCollectionName);
     return _firestore.collection(_usersCollectionName).where(_usernameField).getDocuments();
   }
 

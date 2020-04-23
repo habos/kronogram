@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 
 class SearchUser {
   final String title;
-
-  SearchUser(this.title);
+  final String docID;
+  SearchUser(this.title, this.docID);
 }
 
 class SearchPage extends StatefulWidget {
@@ -40,7 +40,7 @@ class _SearchPageState extends State<SearchPage> {
     QuerySnapshot allUsers = await widget.db.getUsernames();
     setState(() {
       allUsers.documents.forEach((item){
-        usernames.add(SearchUser(item.data.remove('username')));
+        usernames.add(SearchUser(item.data.remove('username'), item.documentID));
       });
     });
   }
@@ -57,7 +57,7 @@ class _SearchPageState extends State<SearchPage> {
 
     for (int i = 0; i < usernames.length-1; i++) {
       if (usernames[i].title.contains(_searchText) && usernames[i].title != null) {
-        filteredList.add(SearchUser(usernames[i].title));
+        filteredList.add(SearchUser(usernames[i].title, usernames[i].docID));
       }
     }
 
@@ -125,7 +125,7 @@ class _SearchPageState extends State<SearchPage> {
               child: ListTile(
                 title: Text(post.title),
                 onTap: () {
-                  print(index);
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => Detail()));
                 },
               ),
             );
@@ -147,7 +147,7 @@ class Detail extends StatelessWidget {
               icon: Icon(Icons.arrow_back),
               onPressed: () => Navigator.of(context).pop(),
             ),
-            Text("Detail"),
+            Text(),
           ],
         ),
       ),

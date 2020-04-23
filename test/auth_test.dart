@@ -10,14 +10,14 @@ class mockAuth extends Mock implements Auth{
 }
 
 class mockResult extends Mock implements AuthResult{
-
+  Map<String, dynamic> data = new Map();
 }
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   group('Auth, ', () {
     test('Test user login and logout', () async {
-      Auth auth = new Auth();
+      Auth auth = mockAuth();
       AuthResult uid1 = await auth.signUp('email1@email.com', 'password');
       AuthResult uid2 = await auth.signUp('email2@email.com', 'password2');
       AuthResult uid1In = await auth.signIn('email1@email.com', 'password');
