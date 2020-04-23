@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:kronogram/UI_pages/user_pages/user_page.dart';
+import 'package:kronogram/UI_pages/user_pages/user_profile.dart';
 import 'package:kronogram/services/globals.dart' as globals;
 import 'package:kronogram/services/database.dart';
 
@@ -125,7 +126,7 @@ class _SearchPageState extends State<SearchPage> {
               child: ListTile(
                 title: Text(post.title),
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => Detail()));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => UserProfile(userId: widget.userId, viewId: post.docID)));
                 },
               ),
             );
