@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kronogram/UI_pages/user_pages/user_map.dart';
 import 'package:kronogram/UI_pages/user_pages/user_timeline.dart';
 import 'package:kronogram/UI_pages/values/colors.dart';
 import 'package:kronogram/services/globals.dart';
@@ -88,31 +89,65 @@ class _UserProfileState extends State<UserProfile> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          leading: widget.viewId == widget.userId ? Container() : null,
-          backgroundColor: AppColors.appBarBackground,
-          bottom: TabBar(
-            tabs: <Widget>[
-              Tab(icon: Icon(Icons.timeline), text: 'TIMELINE',),
-              Tab(icon: Icon(Icons.people), text: 'FOLLOWING',),
-              Tab(icon: Icon(Icons.people_outline), text: 'FOLLOWERS',),
-            ],
-            indicatorColor: Colors.white,
+    if(widget.viewId != widget.userId) {
+      return DefaultTabController(
+        length: 4,
+        child: Scaffold(
+          appBar: AppBar(
+            leading: widget.viewId == widget.userId ? Container() : null,
+            backgroundColor: AppColors.appBarBackground,
+            bottom: TabBar(
+              tabs: <Widget>[
+                Tab(icon: Icon(Icons.timeline), text: 'TIMELINE',),
+                Tab(icon: Icon(Icons.public), text: 'MAP',),
+                Tab(icon: Icon(Icons.people), text: 'FOLLOWING',),
+                Tab(icon: Icon(Icons.people_outline), text: 'FOLLOWERS',),
+              ],
+              indicatorColor: Colors.white,
+                labelStyle: TextStyle(
+                    fontSize: 10
+                ),
+            ),
+            title: showUserTitle(),
           ),
-          title: showUserTitle(),
+          body: TabBarView(
+            children: <Widget>[
+              Timeline(userId: widget.viewId),
+              UserMap(userId: widget.viewId,),
+              followingTab(),
+              followersTab(),
+            ],
+          ),
         ),
-        body: TabBarView(
-          children: <Widget>[
-            Timeline(userId: widget.viewId),
-            followingTab(),
-            followersTab(),
-          ],
+      );
+    }
+    else {
+      return DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+            leading: widget.viewId == widget.userId ? Container() : null,
+            backgroundColor: AppColors.appBarBackground,
+            bottom: TabBar(
+              tabs: <Widget>[
+                Tab(icon: Icon(Icons.timeline), text: 'TIMELINE',),
+                Tab(icon: Icon(Icons.people), text: 'FOLLOWING',),
+                Tab(icon: Icon(Icons.people_outline), text: 'FOLLOWERS',),
+              ],
+              indicatorColor: Colors.white,
+            ),
+            title: showUserTitle(),
+          ),
+          body: TabBarView(
+            children: <Widget>[
+              Timeline(userId: widget.viewId),
+              followingTab(),
+              followersTab(),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    }
   }
 
   Widget followingTab() {
