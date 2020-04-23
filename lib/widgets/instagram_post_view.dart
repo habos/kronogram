@@ -38,15 +38,15 @@ class InstagramPostView extends StatelessWidget {
 
   Widget albumCarousel() {
     return CarouselSlider(
-      height: 400.0,
+      height: 280.0,
       items: _media.map((med) {
         if (med.type == "IMAGE") {
           return singleImage(med);
         }
         VideoPlayerController controller = getVideoPlayerController(med);
         Future<void> initFuture = controller.initialize();
-        return Scaffold(
-            body: FutureBuilder(
+        return Stack(
+            children: <Widget>[FutureBuilder(
               future: initFuture,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
@@ -63,7 +63,7 @@ class InstagramPostView extends StatelessWidget {
               return Center(child: CircularProgressIndicator());
             }
           }),
-          floatingActionButton: FloatingActionButton(
+          FloatingActionButton(
             onPressed: () {
               // Wrap the play or pause in a call to `setState`. This ensures the
               // correct icon is shown.
@@ -77,9 +77,10 @@ class InstagramPostView extends StatelessWidget {
                 }
 
             },
+            child: Icon(Icons.play_arrow)
             // Display the correct icon depending on the state of the player.
           )
-        );
+        ]);
       }).toList(),
       enableInfiniteScroll: false,
     );
