@@ -664,8 +664,8 @@
 			}
 
 			ul.actions.vertical li {
-				display: block;
-				padding: 1em 0 0 0;
+				display: table;
+				padding: 0 auto;
 			}
 
 				ul.actions.vertical li:first-child {
@@ -713,6 +713,10 @@
 	dl {
 		margin: 0 0 2em 0;
 	}
+
+li.spaced {
+    margin: 0 0 3em 0;
+}
 
 /* Table */
 
@@ -864,6 +868,7 @@
 		input[type="button"].big,
 		.button.big {
 			font-size: 1.35em;
+            margin: 0 2em 0 0;
 		}
 
 		input[type="submit"].alt,
