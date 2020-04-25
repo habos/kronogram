@@ -50,7 +50,7 @@ class _UserMapState extends State<UserMap> {
 
 
 
-void getPosts() async{
+Future<void> getPosts() async{
 
     Map twitterUser = await db.getTwitterInfo(widget.userId);
     List<KronoTweet> tweets = await APIcaller.requestTweets(twitterUser);
@@ -107,7 +107,7 @@ void getPosts() async{
 
     setState(() {
       // adding a new marker to map
-//      _loadingM=false;
+      _loadingM=false;
     });
   }
 
@@ -201,14 +201,18 @@ void getPosts() async{
   }
  */
 
+  Future<void> getPostsAndMarkers() async{
+    await getPosts();
+    createMarkers();
+  }
 
   @override
   void initState() {
     // TODO: implement initState
+//    getPosts();
+//    createMarkers();
+    getPostsAndMarkers();
     super.initState();
-    getPosts();
-    createMarkers();
-
   }
 
   @override
@@ -218,7 +222,7 @@ void getPosts() async{
     }
     else {
       if (_loadingM) {
-        createMarkers();
+//        createMarkers();
         if(postLocations.isEmpty) {
           return Container(
               padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 5.0),
